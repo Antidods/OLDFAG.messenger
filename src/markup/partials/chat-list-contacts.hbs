@@ -1,5 +1,5 @@
 {{#each users}}
-    <div class="chat-list-item">
+    <button class="chat-list-item">
         {{#if avatar-url}}
             <img src="{{avatar-url}}" alt="" class="chat-list-item__avatar">
         {{else}}
@@ -13,6 +13,6 @@
             <span class="chat-list-item__date">{{message-last-date}}</span>
             <span class="chat-list-item__unread">{{message-unread}}</span>
         </div>
-    </div>
+    </button>
 {{/each}}
 

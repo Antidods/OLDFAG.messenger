@@ -2,7 +2,6 @@
 @import "scroll-decorate";
 
 
-
 body {
   margin: 0;
 }
@@ -144,6 +143,9 @@ main {
     }
 
     &__contacts {
+      margin: 2px;
+      padding: 0;
+      list-style: none;
       flex-grow: 1;
       overflow-y: scroll;
       box-sizing: border-box;
@@ -175,20 +177,26 @@ main {
         flex-direction: column;
         height: 90%;
         flex-grow: 7;
+        align-items: start;
+        justify-content: start;
 
       }
 
       &__message-from {
         @extend %press-start-2p;
+        font-size: 9px;
         height: 30%;
         position: relative;
         margin-bottom: 5px;
+        overflow: hidden;
       }
 
       &__message-text {
         @extend %post-pixel-7;
         height: 60%;
         overflow: hidden;
+        display: flex;
+        align-items: start;
 
       }
 
@@ -199,7 +207,7 @@ main {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        align-items: center;
+        align-items: end;
       }
 
       &__date {
