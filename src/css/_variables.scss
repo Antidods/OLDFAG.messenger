@@ -1,0 +1,89 @@
+// colors
+$surface: #c0c0c0;
+$field: #ffffff;
+$button-face: #dfdfdf;
+$field-chat: linear-gradient(215.45deg, #74bee5 -14.25%, #ffffff 24.32%);
+
+
+//fonts
+@font-face {
+  font-family: 'Press Start 2P';
+  src: url(../fonts/PressStart2P-Regular.ttf);
+}
+
+%press-start-2p {
+  font-family: 'Press Start 2P';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 12px;
+}
+
+@font-face {
+  font-family: 'Post Pixel-7';
+  src: url(../fonts/post_pixel-7.ttf);
+}
+
+%post-pixel-7 {
+  font-family: 'Post Pixel-7';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+}
+
+
+// borders
+%out-window-border {
+  border: 0;
+  box-shadow: inset -1px -1px 0px #1e1e1e, inset 1px 1px 0px #dfdfdf,
+  inset -2px -2px 0px #808080, inset 2px 2px 0px #ffffff;
+}
+
+%in-window-border {
+  border: 0;
+  box-shadow: inset 1px 1px 0 #1e1e1e, inset -1px -1px 0px #dfdfdf,
+  inset 2px 2px 0px #808080, inset -2px -2px 0px #ffffff;
+}
+
+%out-window-border-min {
+  border: 0;
+  box-shadow: inset 1px 1px 0 #dfdfdf, inset -1px -1px 0px #808080;
+}
+
+%in-window-border-min {
+  border: 0;
+  box-shadow: inset 1px 1px 0 #808080, inset -1px -1px 0px #f4f4f4;
+}
+
+
+// components
+
+%button {
+  @extend %out-window-border;
+  background: $surface;
+
+  &:active {
+    @extend %in-window-border;
+
+  }
+}
+
+%window-manager-button {
+  @extend %button;
+  box-sizing: border-box;
+  min-width: 16px;
+  height: 14px;
+  margin: 0;
+  background: $surface;
+}
+
+%colored-horizontal-spacer {
+  background-image: url(../img/4-color-line.svg);
+  background-size: cover;
+}
+
+%window {
+  @extend %out-window-border;
+  background: $surface;
+}

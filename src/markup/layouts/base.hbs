@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ru">
+{{#block "head"}}
+    <head>
+        <meta charset="UTF-8"/>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+
+        {{#block "title"}}
+            <title>{{title}}</title>
+        {{/block}}
+
+        {{#block "styles"}}
+            {{#each stylesheets}}
+                <link href="{{this}}" rel="stylesheet"/>
+            {{/each}}
+        {{/block}}
+    </head>
+{{/block}}
+
+{{#block "body"}}
+    <body>
+    <div class="wrapper">
+        <div class="window">
+            {{#block "header"}}
+                {{> header}}
+            {{/block}}
+
+            {{#block "main"}}
+                {{>main}}
+            {{/block}}
+
+            {{#block "footer"}}
+                {{> footer}}
+            {{/block}}
+
+            {{#block "scripts"}}
+                {{#each scripts}}
+                    <script defer src="{{this}}"></script>
+                {{/each}}
+            {{/block}}
+
+        </div>
+    </div>
+    </body>
+{{/block}}
+</html>

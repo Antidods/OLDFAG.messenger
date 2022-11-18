@@ -1,0 +1,38 @@
+<main>
+    <div class="chat-list">
+        <div class="chat-list__action-panel">
+            <button class="chat-list__button chat-list__button_add">добавить</button>
+            <button class="chat-list__button chat-list__button_dell">удалить</button>
+            <button class="chat-list__button chat-list__button_search">искать</button>
+        </div>
+        <div class="chat-list__spacer"></div>
+        <div class="chat-list__contacts">
+            {{>chat-list-contacts}}
+        </div>
+    </div>
+    <div class="chat">
+        <div class="chat-text-block">
+            <div class="chat-text-block__top-bar">
+                <div class="chat-text-block__companion">
+                    <img src="/src/img/companion-avatar.png" alt="аватар" class="chat-text-block__companion-avatar">
+                    <span class="chat-text-block__companion-name">Контакт</span>
+                </div>
+                <div class="chat-text-block__user">
+                    <span class="chat-text-block__user-name">Andrey Streltsov</span>
+                    <button class="chat-text-block__button chat-text-block__button_setting"></button>
+                    <button class="chat-text-block__button chat-text-block__button_exit"></button>
+                </div>
+                <div class="chat-text-block__spacer"></div>
+            </div>
+        </div>
+        <div class="chat-send-block">
+            <button class="chat-send-block__clip"></button>
+            <input class="chat-send-block__textarea" id="message" placeholder="Ваше сообщение ..."
+                   type="text">
+            <button class="chat-send-block__send">
+                <span>отправить</span>
+            </button>
+        </div>
+    </div>
+</main>
+
