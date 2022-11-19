@@ -1,16 +1,17 @@
 'use strict';
 
-const WINDOW = document.querySelector('.window');
-const buttonFullscreen = document.querySelector(
-  '.window__manager_maximize'
+const WINDOW = document.getElementById('main-window');
+const buttonFullScreen = document.getElementById(
+  'main-window-maximize'
 );
-buttonFullscreen.addEventListener('click', () => {
-  WINDOW.classList.toggle('fullscreen');
+const buttonClose = document.getElementById(
+  'main-window-close'
+);
+
+buttonFullScreen.addEventListener('click', () => {
+  WINDOW.classList.toggle('full-screen');
 });
 
-const buttonClose = document.querySelector(
-  '.window__manager_close'
-);
 buttonClose.addEventListener('click', () => {
   WINDOW.classList.add('hidden');
 });

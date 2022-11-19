@@ -21,7 +21,7 @@
 {{#block "body"}}
     <body>
     <div class="wrapper">
-        <div class="window">
+        <div class="main-window" id="main-window">
             {{#block "header"}}
                 {{> header}}
             {{/block}}
@@ -40,6 +40,9 @@
                 {{/each}}
             {{/block}}
 
+        </div>
+        <div class="modal-window hidden" >
+            {{>modal-window}}
         </div>
     </div>
     </body>
