@@ -10,10 +10,15 @@
 
 .button {
   @extend %button;
+  @extend %press-start-2p;
+  text-decoration: none;
+  color: #1e1e1e;
   height: 35px;
   width: 140px;
-  @extend %press-start-2p;
   font-size: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 

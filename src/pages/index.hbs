@@ -1,8 +1,8 @@
 ---
 stylesheets:
-- ../css/index.scss
+- ../css/login.scss
 
-title: "oldfug.messenger"
+title: "Вход"
 
 scripts:
 - ../../index.js
@@ -10,8 +10,33 @@ scripts:
 
 ---
 
-{{#extend "base"}}
-    {{#content "div"}}
 
+
+{{#extend "base-modal"}}
+    {{#content "body"}}
+        <div class="wrapper">
+            <div class="main-window main-window_login-form">
+                <header class="main-window__top-line">
+                    <h1>{{title}}</h1>
+                    <div class="main-window__manager">
+                        <button class="main-window__manager_close" id="main-window-close"></button>
+                    </div>
+                </header>
+                <main class="container_column_center" style="padding: 40px">
+                    <img src="../img/LOGO.svg" alt="LOGO" class="logo">
+                    <form class="login-form container_column_start">
+                        <label for="login-form__login" class="login-form__field-label">Логин</label>
+                        <input type="text" class="login-form__field-text" id="login-form__login">
+                        <label for="login-form__password" class="login-form__field-label">Пароль</label>
+                        <input type="password" class="login-form__field-text" id="login-form__password">
+                        <div class="container_row_between" style="width: 300px">
+                            <a class="button" href="registration.hbs" >Регистрация</a>
+                            <a class="button" href="chat.hbs">Вход</a>
+                        </div>
+                    </form>
+                </main>
+            </div>
+        </div>
     {{/content}}
+
 {{/extend}}

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "working project on the middle frontend developer course at yandex practicum",
   "scripts": {
-    "dev": "parcel src/pages/login.hbs & src/pages/registration.hbs --no-cache",
+    "dev": "parcel src/pages/index.hbs --no-cache",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Andrey Streltsov",

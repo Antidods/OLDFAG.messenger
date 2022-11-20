@@ -13,16 +13,16 @@ scripts:
 {{#extend "base-modal"}}
     {{#content "body"}}
         <div class="wrapper">
-            <div class="main-window" style="width: 400px; height: 500px">
+            <div class="main-window" >
                 <header class="main-window__top-line">
                     <h1>{{title}}</h1>
                     <div class="main-window__manager">
                         <button class="main-window__manager_close" id="main-window-close"></button>
                     </div>
                 </header>
-                <main class="container_column_start">
+                <main class="container_column_start" style="padding: 40px">
                     <img src="../img/LOGO.svg" alt="LOGO" class="logo">
-                    <form class="login-form container_column_start" action="index.html">
+                    <form class="login-form container_column_start">
                         <label for="login-form__login" class="login-form__field-label">Логин</label>
                         <input type="text" class="login-form__field-text" >
                         <label for="login-form__email" class="login-form__field-label">Почта</label>
@@ -32,7 +32,7 @@ scripts:
                         <label for="login-form__login" class="login-form__field-label">Повторите пароль</label>
                         <input type="password" class="login-form__field-text">
                         <div class="container_row_end" style="width: 300px">
-                            <button class="button" type="submit" >Регистрация</button>
+                            <a class="button" href="chat.hbs">Регистрация</a>
                         </div>
                     </form>
                 </main>
