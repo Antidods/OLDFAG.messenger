@@ -1,0 +1,42 @@
+---
+stylesheets:
+- ../css/login.scss
+
+title: "Вход"
+
+scripts:
+- ../../index.js
+
+
+---
+
+
+
+{{#extend "base-modal"}}
+    {{#content "body"}}
+        <div class="wrapper">
+            <div class="main-window main-window_login-form">
+                <header class="main-window__top-line">
+                    <h1>{{title}}</h1>
+                    <div class="main-window__manager">
+                        <button class="main-window__manager_close" id="main-window-close"></button>
+                    </div>
+                </header>
+                <main class="container_column_center" style="padding: 40px">
+                    <img src="../img/LOGO.svg" alt="LOGO" class="logo">
+                    <form class="login-form container_column_start" action="index.html">
+                        <label for="login-form__login" class="login-form__field-label">Логин</label>
+                        <input type="text" class="login-form__field-text">
+                        <label for="login-form__login" class="login-form__field-label">Пароль</label>
+                        <input type="password" class="login-form__field-text">
+                        <div class="container_row_between" style="width: 300px">
+                            <button class="button" type="button" onclick="window.location.href = 'registration.html';">Регистрация</button>
+                            <button class="button" type="submit" >Вход</button>
+                        </div>
+                    </form>
+                </main>
+            </div>
+        </div>
+    {{/content}}
+
+{{/extend}}

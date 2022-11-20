@@ -59,31 +59,3 @@ $field-chat: linear-gradient(215.45deg, #74bee5 -14.25%, #ffffff 24.32%);
 
 // components
 
-%button {
-  @extend %out-window-border;
-  background: $surface;
-
-  &:active {
-    @extend %in-window-border;
-
-  }
-}
-
-%window-manager-button {
-  @extend %button;
-  box-sizing: border-box;
-  min-width: 16px;
-  height: 14px;
-  margin: 0;
-  background: $surface;
-}
-
-%colored-horizontal-spacer {
-  background-image: url(../img/4-color-line.svg);
-  background-size: cover;
-}
-
-%window {
-  @extend %out-window-border;
-  background: $surface;
-}

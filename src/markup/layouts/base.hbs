@@ -1,21 +1,7 @@
 <!doctype html>
 <html lang="ru">
 {{#block "head"}}
-    <head>
-        <meta charset="UTF-8"/>
-        <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
-        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-
-        {{#block "title"}}
-            <title>{{title}}</title>
-        {{/block}}
-
-        {{#block "styles"}}
-            {{#each stylesheets}}
-                <link href="{{this}}" rel="stylesheet"/>
-            {{/each}}
-        {{/block}}
-    </head>
+    {{> head}}
 {{/block}}
 
 {{#block "body"}}
@@ -41,10 +27,12 @@
             {{/block}}
 
         </div>
-        <div class="modal-window hidden" >
-            {{>modal-window}}
-        </div>
+
     </div>
+    {{#block "div"}}
+
+    {{/block}}
     </body>
 {{/block}}
 </html>
+

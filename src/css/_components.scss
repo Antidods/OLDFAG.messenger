@@ -1,0 +1,116 @@
+%button {
+  @extend %out-window-border;
+  background: $surface;
+
+  &:active {
+    @extend %in-window-border;
+
+  }
+}
+
+.button {
+  @extend %button;
+  height: 35px;
+  width: 140px;
+  @extend %press-start-2p;
+  font-size: 9px;
+}
+
+
+%window-manager-button {
+  @extend %button;
+  box-sizing: border-box;
+  min-width: 16px;
+  height: 14px;
+  margin: 0;
+  background: $surface;
+}
+
+%colored-horizontal-spacer {
+  background-image: url(../img/4-color-line.svg);
+  background-size: cover;
+}
+
+%window {
+  @extend %out-window-border;
+  background: $surface;
+  filter: drop-shadow(5px 5px 8px rgba(0, 0, 0, 0.25));
+}
+
+%button-close {
+  @extend %window-manager-button;
+  background-image: url(../icon/close.svg);
+  background-repeat: no-repeat;
+  background-position: top 3px left 4px;
+}
+
+%button-minimize {
+  @extend %window-manager-button;
+  background-image: url(../icon/minimize.svg);
+  background-repeat: no-repeat;
+  background-position: top 9px left 5px;
+}
+
+%button-maximize {
+  @extend %window-manager-button;
+  background-image: url(../icon/maximize.svg);
+  background-repeat: no-repeat;
+  background-position: top 2px left 3px;
+}
+
+.container {
+
+  &_column_start {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+  }
+
+  &_column_center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &_column_end {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+  }
+
+  &_column_between {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:  space-between;
+  }
+
+  &_row_start {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+  }
+
+  &_row_center {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  &_row_end {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+  }
+  &_row_between {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

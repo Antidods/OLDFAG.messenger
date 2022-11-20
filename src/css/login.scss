@@ -1,0 +1,48 @@
+@import "index";
+
+
+.main-window {
+
+  &_login-form {
+    align-items: center;
+  }
+
+  &__top-line {
+
+    width: 98%;
+
+    height: 23px;
+
+  }
+
+  &__manager {
+    &_close {
+      margin-right: 5px;
+    }
+  }
+}
+
+.login-form {
+  width: 300px;
+  height: 90%;
+  align-items: start;
+
+  &__field-text {
+    width: 98%;
+    height: 25px;
+    margin-bottom: 30px;
+    @extend %in-window-border;
+  }
+  &__field-label {
+    @extend %press-start-2p;
+    font-size: 9px;
+  }
+}
+
+
+.logo {
+    width: 163px;
+    height: 62px;
+    margin-bottom: 20px;
+}
+
