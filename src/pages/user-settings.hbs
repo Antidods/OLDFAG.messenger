@@ -1,0 +1,76 @@
+---
+stylesheets:
+- ../css/index.scss
+- ../css/user-settings.scss
+
+title: "oldfag.messenger"
+
+scripts:
+- ../../index.js
+
+to-talk-to-name: Имя собеседника
+
+modal-window-name: Настройки профиля
+
+user-login: andrey1990
+user-mail: andrey@mail.ru
+user-tell: +79275562963
+user-name: Андрей
+user-surname: Стрельцов
+name-to-chat: Andrey_St
+user-chat-name: Андрей
+
+---
+
+{{#extend "base-modal"}}
+    {{#content "modal"}}
+        <div class="main-window user-settings">
+            <div class="main-window__top-line">
+                <h2>{{modal-window-name}}</h2>
+                <div class="main-window__manager">
+                    <a class="main-window__manager_close" href="chat.hbs"></a>
+                </div>
+            </div>
+            <div class="container_column_center" style="padding: 0 100px 20px">
+                <img src="../img/avatar-substitute.svg" alt="avatar" class="user-settings__avatar">
+                <div class="container_row_between" style="width: 300px">
+                    <button class="button user-settings__button">изменить данные</button>
+                    <button class="button user-settings__button">изменить пароль</button>
+                    <button class="button user-settings__button">изменить аватар</button>
+                </div>
+                <form class="container_column_start" style="width: 100%; margin-bottom: 20px">
+                    <label for="user-settings__login" class="user-settings__field-label">Логин</label>
+                    <input type="text" class="user-settings__field-text" id="user-settings__login" disabled
+                           value="{{user-login}}">
+
+                    <label for="user-settings__mail" class="user-settings__field-label">Почта</label>
+                    <input type="text" class="user-settings__field-text" id="user-settings__mail" disabled
+                           value="{{user-mail}}">
+
+                    <label for="user-settings__tell" class="user-settings__field-label">Телефон</label>
+                    <input type="text" class="user-settings__field-text" id="user-settings__tell" disabled
+                           value="{{user-tell}}">
+
+                    <label for="user-settings__name" class="user-settings__field-label">Имя</label>
+                    <input type="text" class="user-settings__field-text" id="user-settings__name" disabled
+                           value="{{user-name}}">
+
+                    <label for="user-settings__surname" class="user-settings__field-label">Фамилия</label>
+                    <input type="text" class="user-settings__field-text" id="user-settings__surname" disabled
+                           value="{{user-surname}}">
+
+                    <label for="user-settings__chat-name" class="user-settings__field-label">Имя в чате</label>
+                    <input type="text" class="user-settings__field-text" id="user-settings__chat-name" disabled
+                           value="{{user-chat-name}}">
+                </form>
+
+                <div class="container_row_center">
+                    <a class="user-settings__button button" href="chat.hbs">Отмена</a>
+                    <a class="user-settings__button button" href="chat.hbs">Сохранить</a>
+                </div>
+
+            </div>
+        </div>
+
+    {{/content}}
+{{/extend}}

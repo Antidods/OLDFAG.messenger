@@ -1,7 +1,5 @@
 @import "variables";
-@import "scroll-decorate";
 @import "components";
-
 
 body {
   margin: 0;
@@ -41,7 +39,7 @@ body {
     box-sizing: border-box;
   }
 
-  &__top-line > h1 {
+  &__top-line > h1, &__top-line > h2 {
     @extend %press-start-2p;
     color: #ffffff;
     margin: 0 20px;
@@ -150,7 +148,7 @@ main {
     }
 
     .chat-list-item {
-
+      width: 100%;
       height: 60px;
       background: rgba(217, 217, 217, 0.3);
       border-width: 0 0 1px 0;
@@ -183,7 +181,6 @@ main {
         @extend %press-start-2p;
         font-size: 9px;
         height: 30%;
-        position: relative;
         margin-bottom: 5px;
         overflow: hidden;
       }
@@ -194,6 +191,7 @@ main {
         overflow: hidden;
         display: flex;
         align-items: start;
+        justify-content: start;
 
       }
 
@@ -411,4 +409,20 @@ main {
   display: none;
 }
 
-
+.modal-cover {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  overflow: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center; /* см. ниже */
+  align-items: center;
+  z-index: 99;
+  padding:30px 0;
+  background: rgba(0,0,0,0.15)
+}
