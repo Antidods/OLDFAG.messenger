@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "working project on the middle frontend developer course at yandex practicum",
   "scripts": {
-    "start": "parcel build ./src/pages/index.hbs & node ./server.js ",
+    "start": "parcel build ./src/pages/index.hbs & node ./server.js",
     "dev": "parcel src/pages/index.hbs --no-cache --open",
     "build": "parcel build ./src/pages/index.hbs"
   },

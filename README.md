@@ -9,3 +9,5 @@
 * Сборка - npm build
 
 [Макет в Figma](https://www.figma.com/file/eshsChHOpHyQ3qm0fKEVKp/OLDFAG.messandger?t=XtNw5VLq4rM2qWxp-6)
+
+[Проект на Netlify](https://earnest-scone-dc05e4.netlify.app/)
