@@ -25,19 +25,21 @@ scripts:
                 </header>
                 <main class="container_column_center" style="padding: 40px">
                     <img src="../img/LOGO.svg" alt="LOGO" class="logo">
-                    <form class="login-form container_column_start">
-                        <label for="login-form__login" class="login-form__field-label">Логин</label>
-                        <input type="text" class="login-form__field-text" id="login-form__login">
-                        <label for="login-form__password" class="login-form__field-label">Пароль</label>
-                        <input type="password" class="login-form__field-text" id="login-form__password">
+                    <form class="login-form container_column_start" action="chat.html">
+                        <label for="login" class="login-form__field-label">Логин</label>
+                        <input type="text" class="login-form__field-text" id="login">
+                        <label for="password" class="login-form__field-label">Пароль</label>
+                        <input type="password" class="login-form__field-text" id="password">
                         <div class="container_row_between" style="width: 300px">
                             <a class="button" href="registration.hbs" >Регистрация</a>
-                            <a class="button" href="chat.hbs">Вход</a>
+                            <button class="button" type="submit">Вход</button>
+                            <!--Костыль, чтобы Parcel билдил страницу chat.hbs-->
+                            <a href="chat.hbs" hidden></a>
                         </div>
                     </form>
                 </main>
             </div>
         </div>
-    {{/content}}
 
+    {{/content}}
 {{/extend}}
