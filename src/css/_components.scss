@@ -100,12 +100,14 @@
     align-items: center;
     justify-content: center;
   }
+
   &_row_end {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: end;
   }
+
   &_row_between {
     display: flex;
     flex-direction: row;
