@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ru">
+{{#block "head"}}
+    {{> head}}
+{{/block}}
+
+{{#block "body"}}
+    <body>
+    <div class="wrapper">
+        <div class="main-window main-window_chat" id="main-window">
+            {{#block "header"}}
+                {{> header}}
+            {{/block}}
+
+            {{#block "main"}}
+                {{>main}}
+            {{/block}}
+
+            {{#block "footer"}}
+                {{> footer}}
+            {{/block}}
+        </div>
+    </div>
+    {{#block "scripts"}}
+        {{#each scripts}}
+            <script defer src="{{this}}"></script>
+        {{/each}}
+    {{/block}}
+
+    <div class="modal-cover">
+
+        {{#block "modal"}}
+        {{/block}}
+
+    </div>
+    <div class="modal-cover">
+
+        {{#block "second-modal"}}
+        {{/block}}
+
+    </div>
+    </body>
+{{/block}}
+</html>

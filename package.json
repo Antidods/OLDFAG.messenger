@@ -1,0 +1,27 @@
+{
+  "name": "middle.messenger.praktikum.yandex",
+  "version": "1.0.0",
+  "description": "working project on the middle frontend developer course at yandex practicum",
+  "scripts": {
+    "start": "parcel build ./src/pages/index.hbs & node ./server.js",
+    "dev": "parcel src/pages/index.hbs --no-cache --open",
+    "build": "parcel build ./src/pages/index.hbs"
+  },
+  "author": "Andrey Streltsov",
+  "license": "MIT",
+  "devDependencies": {
+    "@anikin/parcel-transformer-handlebars": "1.0.9",
+    "@anikin/parcel-transformer-handlebars-precompile": "1.0.1",
+    "@parcel/transformer-sass": "2.8.0",
+    "parcel": "2.8.0",
+    "scss": "0.2.4"
+  },
+  "dependencies": {
+    "express": "4.18.2",
+    "handlebars": "4.7.7"
+  },
+  "engines": {
+    "node": "16.13.1"
+  }
+}
+
