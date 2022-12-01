@@ -3,17 +3,14 @@
 .user-settings {
   min-width: 500px;
 
-
   &__avatar {
     margin: 20px;
     width: 120px;
     height: 120px;
-
   }
 
   &__button {
     font-size: 8px;
-
   }
 
   &__button:first-child {
@@ -26,6 +23,7 @@
 
   &__field-label {
     @extend %press-start-2p;
+
     font-size: 9px;
   }
 
@@ -37,8 +35,7 @@
     width: 98%;
     height: 25px;
     margin-bottom: 8px;
+
     @extend %in-window-border;
   }
-
-
 }

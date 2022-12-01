@@ -5,7 +5,8 @@
   "scripts": {
     "start": "parcel build ./src/pages/index.hbs & node ./server.js",
     "dev": "parcel src/pages/index.hbs --no-cache --open",
-    "build": "parcel build ./src/pages/index.hbs"
+    "build": "parcel build ./src/pages/index.hbs",
+    "lint": "eslint . --fix && npx stylelint \"**/*.scss\" --fix\n"
   },
   "author": "Andrey Streltsov",
   "license": "MIT",

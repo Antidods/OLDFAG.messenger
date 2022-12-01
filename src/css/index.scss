@@ -5,7 +5,6 @@ body {
   margin: 0;
 }
 
-
 .wrapper {
   background: #008080;
   margin: 0;
@@ -19,9 +18,10 @@ body {
 
 .main-window {
   @extend %window;
+
   display: flex;
   flex-direction: column;
-  filter: drop-shadow(10px 10px 6px rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(10px 10px 6px rgb(0 0 0 / 25%));
 
   &_chat {
     width: 1280px;
@@ -38,41 +38,45 @@ body {
     box-sizing: border-box;
   }
 
-  &__top-line > h1, &__top-line > h2 {
+  &__top-line > h1,
+  &__top-line > h2 {
     @extend %press-start-2p;
-    color: #ffffff;
+
+    color: #fff;
     margin: 0 20px;
     padding-top: 2px;
   }
-
 
   &__manager {
     display: flex;
 
     &_close {
       @extend %button-close;
+
       margin: 0 3px;
     }
 
     &_maximize {
       margin: 0 1px;
-      @extend %button-maximize
+
+      @extend %button-maximize;
     }
 
     &_minimize {
       @extend %button-minimize;
+
       margin: 0 1px;
     }
   }
 
   &__spacer {
     @extend %in-window-border-min;
+
     background: $surface;
     height: 20px;
     margin: 0 4px;
     box-sizing: border-box;
   }
-
 }
 
 main {
@@ -82,6 +86,7 @@ main {
 
   .chat-list {
     @extend %in-window-border;
+
     margin: 4px 0 0 5px;
     display: flex;
     flex-direction: column;
@@ -100,28 +105,28 @@ main {
 
     &__button {
       @extend %press-start-2p;
+
       font-size: 8px;
       border: 0;
       background: none;
       width: 60px;
       height: 52px;
-      margin: 10px 5px 5px 5px;
+      margin: 10px 5px 5px;
       box-sizing: border-box;
       display: flex;
       align-items: end;
       justify-content: center;
 
       &_add {
-        background-image: url(../img/chat-list-add.png);
-
+        background-image: url("../img/chat-list-add.png");
       }
 
       &_dell {
-        background-image: url(../img/chat-list-dell.png);
+        background-image: url("../img/chat-list-dell.png");
       }
 
       &_search {
-        background-image: url(../img/chat-list-search.png);
+        background-image: url("../img/chat-list-search.png");
       }
     }
 
@@ -131,6 +136,7 @@ main {
 
     &__spacer {
       @extend %colored-horizontal-spacer;
+
       min-height: 2px;
       margin: 2px 0;
       width: 100%;
@@ -143,14 +149,13 @@ main {
       flex-grow: 1;
       overflow-y: scroll;
       box-sizing: border-box;
-
     }
 
     .chat-list-item {
       width: 100%;
       height: 60px;
-      background: rgba(217, 217, 217, 0.3);
-      border-width: 0 0 1px 0;
+      background: rgb(217 217 217 / 30%);
+      border-width: 0 0 1px;
       border-style: dashed;
       border-color: #7b7b7b;
       overflow: hidden;
@@ -173,11 +178,11 @@ main {
         flex-grow: 7;
         align-items: start;
         justify-content: start;
-
       }
 
       &__message-from {
         @extend %press-start-2p;
+
         font-size: 9px;
         height: 30%;
         margin-bottom: 5px;
@@ -186,16 +191,17 @@ main {
 
       &__message-text {
         @extend %post-pixel-7;
+
         height: 60%;
         overflow: hidden;
         display: flex;
         align-items: start;
         justify-content: start;
-
       }
 
       &__information {
         @extend %press-start-2p;
+
         flex-grow: 1;
         height: 90%;
         display: flex;
@@ -206,11 +212,13 @@ main {
 
       &__date {
         @extend %press-start-2p;
+
         font-size: 8px;
       }
 
       &__unread {
         @extend %press-start-2p;
+
         font-size: 8px;
         display: flex;
         justify-content: center;
@@ -218,23 +226,20 @@ main {
       }
 
       &__unread::after {
-        content: '';
+        content: "";
         min-width: 15px;
         height: 15px;
-        background-image: url(../img/envelope.png);
+        background-image: url("../img/envelope.png");
         background-size: cover;
         display: flex;
         justify-content: center;
         align-items: center;
       }
-
     }
 
     .chat-list-item:hover {
-      background: linear-gradient(180deg, #F4F4F4 0%, #CDCDCD 118.38%);
-
+      background: linear-gradient(180deg, #f4f4f4 0%, #cdcdcd 118.38%);
     }
-
   }
 
   .chat {
@@ -242,12 +247,12 @@ main {
     flex-grow: 3;
     display: flex;
     flex-direction: column;
-
   }
 
   .chat-text-block {
     @extend %in-window-border;
-    background: linear-gradient(215.45deg, #74BEE5 -14.25%, #FFFFFF 24.32%);
+
+    background: linear-gradient(215.45deg, #74bee5 -14.25%, #fff 24.32%);
     min-height: 92%;
     display: flex;
     flex-grow: 1;
@@ -257,10 +262,9 @@ main {
       width: 100%;
       box-sizing: border-box;
       display: flex;
+      flex-flow: wrap;
       flex-direction: row;
       justify-content: end;
-      flex-wrap: wrap;
-
     }
 
     &__to-talk-to {
@@ -270,45 +274,37 @@ main {
       flex-direction: row;
       justify-content: start;
       align-items: end;
-
-
     }
 
     &__to-talk-to-avatar {
       width: 50px;
       height: 50px;
       margin: 10px 10px 0 30px;
-
     }
 
     &__to-talk-to-name {
       @extend %press-start-2p;
+
       height: 40px;
       display: flex;
       justify-content: start;
       align-items: start;
       margin: 0 0 0 15px;
-
-
     }
 
     &__user {
-
       height: 100%;
       width: 50%;
       display: flex;
       flex-direction: row;
       justify-content: end;
       align-items: end;
-
-
     }
 
     &__user-name {
       @extend %press-start-2p;
+
       margin: 10px 30px 17px 0;
-
-
     }
 
     &__button {
@@ -319,21 +315,20 @@ main {
       margin: 10px 30px 17px 0;
 
       &_setting {
-        background-image: url(../img/chat-text-block-user-setting.png);
-
+        background-image: url("../img/chat-text-block-user-setting.png");
       }
 
       &_exit {
-        background-image: url(../img/chat-text-block-user-exit.png);
+        background-image: url("../img/chat-text-block-user-exit.png");
       }
     }
 
     &__spacer {
       @extend %colored-horizontal-spacer;
+
       width: 45%;
       height: 2px;
     }
-
   }
 
   .chat-send-block {
@@ -345,10 +340,11 @@ main {
 
     &__clip {
       @extend %button;
+
       box-shadow: none;
       width: 40px;
       height: 35px;
-      background-image: url(../img/chat-send-block-clip.svg);
+      background-image: url("../img/chat-send-block-clip.svg");
       background-position: center;
       background-repeat: no-repeat;
       background-size: contain;
@@ -357,6 +353,7 @@ main {
     &__textarea {
       @extend %in-window-border;
       @extend %post-pixel-7;
+
       font-size: 14px;
       background: $field;
       width: 70%;
@@ -370,13 +367,13 @@ main {
     &__send {
       @extend %button;
       @extend %press-start-2p;
+
       font-size: 10px;
       width: 130px;
       height: 40px;
     }
   }
 }
-
 
 .status-bar {
   display: flex;
@@ -392,6 +389,7 @@ main {
 
   &__section {
     @extend %in-window-border-min;
+
     height: 25px;
     margin: 0 1px;
     flex-grow: 1;
@@ -423,5 +421,5 @@ main {
   align-items: center;
   z-index: 99;
   padding: 30px 0;
-  background: rgba(0, 0, 0, 0.15)
+  background: rgb(0 0 0 / 15%);
 }

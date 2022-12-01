@@ -1,17 +1,13 @@
 @import "variables";
 
 .main-window {
-
   &_login-form {
     align-items: center;
   }
 
   &__top-line {
-
     width: 98%;
-
     height: 23px;
-
   }
 
   &__manager {
@@ -27,22 +23,22 @@
   align-items: start;
 
   &__field-text {
+    @extend %in-window-border;
+
     width: 98%;
     height: 25px;
     margin-bottom: 30px;
-    @extend %in-window-border;
   }
 
   &__field-label {
     @extend %press-start-2p;
+
     font-size: 9px;
   }
 }
 
-
 .logo {
   width: 163px;
   height: 62px;
-  margin-bottom: 20px;
+  margin: 0 auto 20px;
 }
-
