@@ -1,0 +1,13 @@
+{
+	"extends": "airbnb-base", // airbnb выбран за +5миллионов загрузок за последнюю неделю
+  "parser": "@typescript-eslint/parser",
+	"plugins": ["@typescript-eslint"],
+	"rules": {
+    	"max-len": [2, 120]
+  },
+
+  "env": {
+    "browser": "true",
+    "node": "true"
+  }
+}

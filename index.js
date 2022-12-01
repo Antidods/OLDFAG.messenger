@@ -1,11 +1,9 @@
-'use strict';
-
 const WINDOW = document.getElementById('main-window');
 const buttonFullScreen = document.getElementById(
-  'main-window-maximize'
+  'main-window-maximize',
 );
 const buttonClose = document.getElementById(
-  'main-window-close'
+  'main-window-close',
 );
 
 buttonFullScreen.addEventListener('click', () => {
