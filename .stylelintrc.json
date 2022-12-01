@@ -12,7 +12,6 @@
     "no-empty-source": true,
     "color-no-invalid-hex": true,
     "function-url-quotes": "always",
-    "no-descending-specificity": ["selectors-within-list"]
-
+    "no-descending-specificity": null
   }
 }
