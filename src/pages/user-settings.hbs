@@ -36,38 +36,38 @@ user-chat-name: Андрей
                 <div class="container_row_between" style="width: 300px">
                     <button class="button user-settings__button">изменить данные</button>
                     <button class="button user-settings__button">изменить пароль</button>
-                    <button class="button user-settings__button">изменить аватар</button>
+                    <button class="button user-settings__button" id="avatar">изменить аватар</button>
                 </div>
-                <form class="container_column_start" style="width: 100%; margin-bottom: 20px">
-                    <label for="user-settings__login" class="user-settings__field-label">Логин</label>
-                    <input type="text" class="user-settings__field-text" id="user-settings__login" disabled
+                <form class="container_column_start" style="width: 100%; margin-bottom: 20px" action="chat.html">
+                    <label for="login" class="user-settings__field-label">Логин</label>
+                    <input type="text" class="user-settings__field-text" id="login" disabled
                            value="{{user-login}}">
 
-                    <label for="user-settings__mail" class="user-settings__field-label">Почта</label>
-                    <input type="text" class="user-settings__field-text" id="user-settings__mail" disabled
+                    <label for="email" class="user-settings__field-label">Почта</label>
+                    <input type="text" class="user-settings__field-text" id="email" disabled
                            value="{{user-mail}}">
 
-                    <label for="user-settings__tell" class="user-settings__field-label">Телефон</label>
-                    <input type="text" class="user-settings__field-text" id="user-settings__tell" disabled
+                    <label for="phone" class="user-settings__field-label">Телефон</label>
+                    <input type="text" class="user-settings__field-text" id="phone" disabled
                            value="{{user-tell}}">
 
-                    <label for="user-settings__name" class="user-settings__field-label">Имя</label>
-                    <input type="text" class="user-settings__field-text" id="user-settings__name" disabled
+                    <label for="first_name" class="user-settings__field-label">Имя</label>
+                    <input type="text" class="user-settings__field-text" id="first_name" disabled
                            value="{{user-name}}">
 
-                    <label for="user-settings__surname" class="user-settings__field-label">Фамилия</label>
-                    <input type="text" class="user-settings__field-text" id="user-settings__surname" disabled
+                    <label for="second_name" class="user-settings__field-label">Фамилия</label>
+                    <input type="text" class="user-settings__field-text" id="second_name" disabled
                            value="{{user-surname}}">
 
-                    <label for="user-settings__chat-name" class="user-settings__field-label">Имя в чате</label>
-                    <input type="text" class="user-settings__field-text" id="user-settings__chat-name" disabled
+                    <label for="display_name" class="user-settings__field-label">Имя в чате</label>
+                    <input type="text" class="user-settings__field-text" id="display_name" disabled
                            value="{{user-chat-name}}">
-                </form>
 
-                <div class="container_row_center">
-                    <a class="user-settings__button button" href="chat.hbs">Отмена</a>
-                    <a class="user-settings__button button" href="chat.hbs">Сохранить</a>
-                </div>
+                    <div class="container_row_center">
+                        <a class="user-settings__button button" href="chat.hbs">Отмена</a>
+                        <button class="user-settings__button button" type="submit">Сохранить</button>
+                    </div>
+                </form>
 
             </div>
         </div>
