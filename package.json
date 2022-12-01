@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "working project on the middle frontend developer course at yandex practicum",
   "scripts": {
-    "dev": "parcel src/pages/index.hbs --no-cache",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "parcel build ./src/pages/index.hbs & node ./server.js",
+    "dev": "parcel src/pages/index.hbs --no-cache --open",
+    "build": "parcel build ./src/pages/index.hbs"
   },
   "author": "Andrey Streltsov",
   "license": "MIT",
@@ -20,10 +21,11 @@
     "scss": "0.2.4",
     "stylelint": "14.15.0",
     "stylelint-config-standard": "29.0.0",
-    "stylelint-config-standard-scss": "^6.1.0",
+    "stylelint-config-standard-scss": "6.1.0",
     "stylelint-scss": "4.3.0"
   },
   "dependencies": {
-    "handlebars": "4.7.7"
+    "handlebars": "4.7.7",
+    "express": "4.18.2"
   }
 }
