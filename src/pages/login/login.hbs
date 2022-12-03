@@ -1,0 +1,21 @@
+<div class="main-window main-window_login-form">
+    <header class="main-window__top-line">
+        <h1>{{title}}</h1>
+        <div class="main-window__manager">
+            {{{button}}}
+        </div>
+    </header>
+    <main class="container_column_center" style="padding: 40px">
+        <img src="../../img/LOGO.svg" alt="LOGO" class="logo">
+        <form class="login-form container_column_start" action="chat.html">
+            <label for="login" class="login-form__field-label">Логин</label>
+            <input type="text" class="login-form__field-text" id="login">
+            <label for="password" class="login-form__field-label">Пароль</label>
+            <input type="password" class="login-form__field-text" id="password">
+            <div class="container_row_between" style="width: 300px">
+                <a class="button" href="registration.hbs">Регистрация</a>
+                <button class="button" type="submit">Вход</button>
+            </div>
+        </form>
+    </main>
+</div>
