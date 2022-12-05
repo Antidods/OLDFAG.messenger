@@ -1,7 +1,3 @@
-
-
-
-
 // const WINDOW = document.getElementById('main-window');
 // const buttonFullScreen = document.getElementById(
 //   'main-window-maximize',

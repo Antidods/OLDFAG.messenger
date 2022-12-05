@@ -1,5 +1,6 @@
 import {EventBus} from "./EventBus";
 import {nanoid} from 'nanoid';
+import Handlebars from 'handlebars';
 
 
 export type Props = {
@@ -17,7 +18,7 @@ class Block {
         FLOW_RENDER: "flow:render"
     } as const;
 
-    public id = nanoid(6);
+    private _id: string = nanoid(6);
     protected props: Props;
     public children: Children;
     private eventBus: () => EventBus;
@@ -25,7 +26,7 @@ class Block {
     // @ts-ignore
     private _meta: { props: P; tagName?: string };
 
-    protected constructor(propsWithChildren: Props, tagName?: string) {
+    public constructor(propsWithChildren: Props, tagName?: string) {
         const eventBus = new EventBus();
 
         const {props, children} = this._getChildrenAndProps(propsWithChildren);
@@ -75,10 +76,7 @@ class Block {
         eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
     }
 
-    private _createResources() {
-        const {tagName} = this._meta;
-        this._element = (this._meta.tagName) ? this._createDocumentElement(tagName) : new DocumentFragment();
-    }
+    private _createResources() {}
 
     private _init() {
         this._createResources();
@@ -113,7 +111,7 @@ class Block {
         return true;
     }
 
-    protected setProps = (nextProps: Props) => {
+    public setProps = (nextProps: Props) => {
         if (!nextProps) {
             return;
         }
@@ -126,48 +124,35 @@ class Block {
     }
 
     private _render() {
-        const fragment = this.render();
-        if (this._element.tagName) {
-            this._element!.innerHTML = '';
-            this._element!.append(fragment);
-        } else {
-            this._element = fragment.firstElementChild as HTMLElement;
-            const newElement = fragment.firstElementChild as HTMLElement;
-            this._element = newElement;
-        }
-
+        const template = this.render();
+        const fragment = this.compile(template, {
+            ...this.props,
+            children: this.children,
+        });
+        const newElement = fragment.firstElementChild as HTMLElement;
+        this._element?.replaceWith(newElement);
+        this._element = newElement;
         this._addEvents();
     }
 
-    protected compile(template: (context: any) => string, context: any) {
+    protected compile(template: string, context: any) {
         const contextAndStubs = {...context};
-
-        Object.entries(this.children).forEach(([name, component]) => {
-            contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
-        });
-
-        const html = template(contextAndStubs);
-
+        const compiled = Handlebars.compile(template);
         const temp = document.createElement('template');
-
-        temp.innerHTML = html;
-
-        Object.entries(this.children).forEach(([_, component]) => {
-            const stub = temp.content.querySelector(`[data-id="${component.id}"]`);
-
-            if (!stub) {
-                return;
-            }
-
-            component.getContent()?.append(...Array.from(stub.childNodes));
-
-            stub.replaceWith(component.getContent()!);
-        });
+        temp.innerHTML = compiled(contextAndStubs);
+        Object.entries(this.children)
+            .forEach(([, component]: [string, Block]) => {
+                const stub = temp.content.querySelector(`[data-id="${component._id}"]`);
+                if (!stub) {
+                    return;
+                }
+                stub.replaceWith(component.getContent());
+            });
         return temp.content;
     }
 
-    public render(): DocumentFragment {
-        return new DocumentFragment();
+    public render() {
+        return "";
     }
 
     public getContent() {
@@ -195,11 +180,7 @@ class Block {
         });
     }
 
-    private _createDocumentElement(tagName?: string) {
-        if (tagName) {
-            return document.createElement(tagName);
-        }
-    }
+
 
     show() {
         this.getContent()!.style.display = "block";

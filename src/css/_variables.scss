@@ -11,10 +11,10 @@ $field-chat: linear-gradient(215.45deg, #74bee5 -14.25%, #fff 24.32%);
 }
 
 %press-start-2p {
-  font-family: "Press Start 2P";
+  font-family: "Press Start 2P", ui-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 10px;
   line-height: 12px;
 }
 
@@ -24,7 +24,7 @@ $field-chat: linear-gradient(215.45deg, #74bee5 -14.25%, #fff 24.32%);
 }
 
 %post-pixel-7 {
-  font-family: "Post Pixel-7";
+  font-family: "Post Pixel-7", ui-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
