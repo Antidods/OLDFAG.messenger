@@ -2,7 +2,15 @@ import Block, {Props} from '../../utils/Block';
 
 export default class windowManager extends Block {
     constructor(props: Props) {
-        super(props);
+        super({
+            ...props,
+            events: {
+                click: (event: Event) => {
+                    props.onclick(this, props, event);
+                },
+            },
+
+        });
     }
 
 
