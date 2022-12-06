@@ -18,7 +18,7 @@ export default class button extends Block {
     render() {
 
         return `
-            <button class="{{class}}"  value="{{value}}" form="{{form}}">{{label}} </button>
+            <button class="{{class}}"  value="{{value}}" form="{{form}}" type="{{type}}">{{label}} </button>
         `
     };
 

@@ -4,8 +4,11 @@
   }
 
   &__top-line {
-    width: 98%;
-    height: 23px;
+    &_login-form {
+      width: 98%;
+      height: 23px;
+      align-items: center;
+    }
   }
 
   &__manager {

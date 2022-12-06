@@ -25,12 +25,17 @@ export default class chatListItem extends Block {
                     <img src="../img/to-talk-to-avatar.png" alt="" class="chat-list-item__avatar">
                 {{/if}}
                 <div class="chat-list-item__message">
-                    <span class="chat-list-item__message-from">{{@key}}</span>
+                    <span class="chat-list-item__message-from">{{name}}</span>
                     <span class="chat-list-item__message-text">{{messageText}}</span>
                 </div>
                 <div class="chat-list-item__information">
                     <span class="chat-list-item__date">{{messageLastDate}}</span>
-                    <span class="chat-list-item__unread">{{messageUnread}}</span>
+                    {{#if messageUnread}}
+                        <span class="chat-list-item__unread">{{messageUnread}}</span>
+                    {{/if}}
+                    {{#if messageUnread}}
+                        <div class="chat-list-item__unread-after"></div>
+                    {{/if}}
                 </div>
             </button>
         `

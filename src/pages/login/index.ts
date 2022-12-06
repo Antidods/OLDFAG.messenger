@@ -20,7 +20,7 @@ export default class LoginPage extends Block {
         //language=hbs
         return `
             <div class="main-window main-window_login-form">
-                <header class="main-window__top-line">
+                <header class="main-window__top-line main-window__top-line_login-form">
                     <h1>{{title}}</h1>
                     {{{windowManager variation="close"}}}
                 </header>
@@ -39,16 +39,15 @@ export default class LoginPage extends Block {
                         <label for="password" class="login-form__field-label">Пароль</label>
                         <input type="password" class="login-form__field-text" id="password" required>
                         <div class="container_row_between" style="width: 300px">
-                            <a class="button" onclick="window.PAGES.selectPage(window.PAGES.registration)">Регистрация</a>
+                            <a class="button"
+                               onclick="window.PAGES.selectPage(window.PAGES.registration)">Регистрация</a>
                             {{{button class="button" label="Вход" form="loginForm" onclick=submit}}}
                         </div>
                     </form>
                 </main>
-            </div>`
-
+            </div>
+        `;
     }
-
-
 }
 
 

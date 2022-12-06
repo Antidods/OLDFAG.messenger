@@ -37,9 +37,11 @@ export default class Chat extends Block {
                         <div class="chat-list__contacts">
                             {{#each users}}
                                 {{{chatListItem
-                                    avatarUrl=users.avatarUrl
-                                    
-                                    
+                                        name=this.name
+                                        avatarUrl=this.avatarUrl
+                                        messageText=this.messageText
+                                        messageLastDate=this.messageLastDate
+                                        messageUnread=this.messageUnread
                                 }}}
                             {{/each}}
                         </div>
@@ -48,7 +50,8 @@ export default class Chat extends Block {
                         <div class="chat-text-block">
                             <div class="chat-text-block__top-bar">
                                 <div class="chat-text-block__to-talk-to">
-                                    <img src="../img/to-talk-to-avatar.png" alt="avatar" class="chat-text-block__to-talk-to-avatar">
+                                    <img src="{{toTalkAvatar}}" alt="avatar"
+                                         class="chat-text-block__to-talk-to-avatar">
                                     <span class="chat-text-block__to-talk-to-name">{{toTalkToName}}</span>
                                 </div>
                                 <div class="chat-text-block__user">
@@ -59,14 +62,19 @@ export default class Chat extends Block {
                                 <div class="chat-text-block__spacer"></div>
                             </div>
                         </div>
-                        <div class="chat-send-block">
+                        <form class="chat-send-block" onsubmit="return false">
                             <button class="chat-send-block__clip"></button>
-                            <input class="chat-send-block__textarea" id="message" placeholder="Ваше сообщение ..."
-                                   type="text">
+                            <input
+                                    class="chat-send-block__textarea"
+                                    id="message"
+                                    placeholder="Ваше сообщение ..."
+                                    type="text"
+                                    required
+                            >
                             <button class="chat-send-block__send">
                                 <span>отправить</span>
                             </button>
-                        </div>
+                        </form>
                     </div>
                 </main>
                 <footer>

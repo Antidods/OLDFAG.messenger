@@ -229,8 +229,8 @@ main {
         align-items: center;
       }
 
-      &__unread::after {
-        content: "";
+      &__unread-after {
+        //content: "";
         min-width: 15px;
         height: 15px;
         background-image: url("../img/envelope.png");
