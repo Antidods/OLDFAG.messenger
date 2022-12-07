@@ -24,7 +24,7 @@ export default class UserSettings extends Block {
                         </div>
                     </div>
                     <div class="container_column_center" style="padding: 0 100px 20px">
-                        <img src="../../img/avatar-substitute.svg" alt="avatar" class="user-settings__avatar">
+                        <img src="https://i.pravatar.cc/40" alt="avatar" class="user-settings__avatar">
                         <div class="container_row_between" style="width: 300px">
                             <button class="button user-settings__button">изменить данные</button>
                             <button class="button user-settings__button">изменить пароль</button>
