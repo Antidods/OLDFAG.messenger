@@ -1,26 +1,21 @@
-import Block, {Props} from '../../utils/Block';
+import Block, { Props } from '../../utils/Block';
 
+export default class Button extends Block {
+  constructor(props: Props) {
+    super({
+      ...props,
+      events: {
+        click: (event: Event) => {
+          props.onclick(this, props, event);
+        },
+      },
 
-export default class button extends Block {
-    constructor(props: Props) {
-        super({
-            ...props,
-            events: {
-                click: (event: Event) => {
-                    props.onclick(this, props, event);
-                },
-            },
+    });
+  }
 
-
-        });
-    }
-
-    render() {
-
-        return `
+  render() {
+    return `
             <button class="{{class}}"  value="{{value}}" form="{{form}}" type="{{type}}">{{label}} </button>
-        `
-    };
-
+        `;
+  }
 }
-

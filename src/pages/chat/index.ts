@@ -1,37 +1,62 @@
-import Block, {Props} from "../../utils/Block";
-
+import Block, { Props } from '../../utils/Block';
 
 export default class Chat extends Block {
-    constructor(props: Props) {
-        super({
-            ...props,
-            submit: () => {
-                const login: any = document.getElementById('login');
-                const password: any = document.getElementById('password');
-                console.log(login.value, password.value);
-                // @ts-ignore
-                window.PAGES.selectPage(window.PAGES.loginPage)
-            }
-        });
+  constructor(props: Props) {
+    super({
+      ...props,
+      submit: () => {
+        const login: any = document.getElementById('login');
+        const password: any = document.getElementById('password');
+        console.log(login.value, password.value);
+        // @ts-ignore
+        window.PAGES.selectPage(window.PAGES.loginPage);
+      },
+      userSettings: () => {
+        // @ts-ignore
+        window.PAGES.setModal(window.PAGES.userSettings);
+      },
+      error404: () => {
+        // @ts-ignore
+        window.PAGES.setModal(window.PAGES.error404);
+      },
+      error500: () => {
+        // @ts-ignore
+        window.PAGES.setModal(window.PAGES.error500);
+      },
+      toLogin: () => {
+        // @ts-ignore
+        window.PAGES.selectPage(window.PAGES.loginPage);
+      },
+    });
+  }
 
-    }
-
-    render() {
-        //language=hbs
-        return `
+  render() {
+    // language=hbs
+    return `
             <div class="main-window main-window_chat" id="main-window">
                 <div class="main-window__top-line">
                     <h1>{{title}}</h1>
                     {{{windowManager}}}
                 </div>
                 <div class="main-window__spacer"></div>
-
                 <main>
                     <div class="chat-list">
                         <div class="chat-list__action-panel">
-                            <a class="chat-list__button chat-list__button_add" href="#">добавить</a>
-                            <a class="chat-list__button chat-list__button_dell" href="#">удалить</a>
-                            <a class="chat-list__button chat-list__button_search" href="#">искать</a>
+                            {{{button
+                                    class="chat-list__button chat-list__button_add"
+                                    label="добавить"
+                                    onclick=error404
+                            }}}
+                            {{{button
+                                    class="chat-list__button chat-list__button_dell"
+                                    label="добавить"
+                                    onclick=error404
+                            }}}
+                            {{{button
+                                    class="chat-list__button chat-list__button_search"
+                                    label="добавить"
+                                    onclick=error404
+                            }}}
                         </div>
                         <div class="chat-list__spacer"></div>
                         <div class="chat-list__contacts">
@@ -56,8 +81,14 @@ export default class Chat extends Block {
                                 </div>
                                 <div class="chat-text-block__user">
                                     <span class="chat-text-block__user-name">{{userName}}{{userSurname}}</span>
-                                    <a class="chat-text-block__button chat-text-block__button_setting" href="#"></a>
-                                    <a class="chat-text-block__button chat-text-block__button_exit" href="#"></a>
+                                    {{{button
+                                            class="chat-text-block__button chat-text-block__button_setting"
+                                            onclick=userSettings
+                                    }}}
+                                    {{{button
+                                            class="chat-text-block__button chat-text-block__button_exit"
+                                            onclick=toLogin
+                                    }}}
                                 </div>
                                 <div class="chat-text-block__spacer"></div>
                             </div>
@@ -81,6 +112,6 @@ export default class Chat extends Block {
                     {{{statusBar}}}
                 </footer>
             </div>
-        `
-    }
+        `;
+  }
 }

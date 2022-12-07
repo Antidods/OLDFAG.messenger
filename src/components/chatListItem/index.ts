@@ -1,23 +1,21 @@
-import Block, {Props} from '../../utils/Block';
+import Block, { Props } from '../../utils/Block';
 
+export default class ChatListItem extends Block {
+  constructor(props: Props) {
+    super({
+      ...props,
+      events: {
+        click: (event: Event) => {
+          props.onclick(this, props, event);
+        },
+      },
 
-export default class chatListItem extends Block {
-    constructor(props: Props) {
-        super({
-            ...props,
-            events: {
-                click: (event: Event) => {
-                    props.onclick(this, props, event);
-                },
-            },
+    });
+  }
 
-
-        });
-    }
-
-    render() {
-        //language=hbs
-        return `
+  render() {
+    // language=hbs
+    return `
             <button class="chat-list-item">
                 {{#if avatarUrl}}
                     <img src="{{avatarUrl}}" alt="" class="chat-list-item__avatar">
@@ -38,8 +36,6 @@ export default class chatListItem extends Block {
                     {{/if}}
                 </div>
             </button>
-        `
-    };
-
+        `;
+  }
 }
-

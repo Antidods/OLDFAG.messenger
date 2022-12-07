@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "working project on the middle frontend developer course at yandex practicum",
   "scripts": {
-    "start": "parcel build src/old/pages/index.hbs & node ./server.js",
+    "start": "parcel build index.html & node ./server.js",
     "dev": "parcel index.html --no-cache --open",
-    "build": "parcel build src/old/pages/index.hbs",
+    "build": "parcel build index.html",
     "lint": "eslint . --fix && npx stylelint \"**/*.scss\" --fix\n"
   },
   "author": "Andrey Streltsov",
@@ -25,9 +25,10 @@
     "stylelint-config-standard-scss": "6.1.0",
     "stylelint-scss": "4.3.0",
     "ts-node": "10.9.1",
-    "typescript": "^4.9.3"
+    "typescript": "4.9.3"
   },
   "dependencies": {
+    "eslint-config-airbnb-typescript": "17.0.0",
     "express": "4.18.2",
     "handlebars": "4.7.7",
     "nanoid": "4.0.0"

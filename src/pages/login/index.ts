@@ -1,32 +1,29 @@
-import Block, {Props} from "../../utils/Block";
-
+import Block, { Props } from '../../utils/Block';
 
 export default class LoginPage extends Block {
-    constructor(props: Props) {
-        super({
-            ...props,
-            submit: () => {
-                const login: any = document.getElementById('login');
-                const password: any = document.getElementById('password');
-                console.log(login.value, password.value);
-                // @ts-ignore
-                window.PAGES.selectPage(window.PAGES.chat)
-            }
-        });
+  constructor(props: Props) {
+    super({
+      ...props,
+      submit: () => {
+        const login: any = document.getElementById('login');
+        const password: any = document.getElementById('password');
+        console.log(login.value, password.value);
+        // @ts-ignore
+        window.PAGES.selectPage(window.PAGES.chat);
+      },
+    });
+  }
 
-    }
-
-    render() {
-        //language=hbs
-        return `
+  render() {
+    // language=hbs
+    return `
             <div class="main-window main-window_login-form">
                 <header class="main-window__top-line main-window__top-line_login-form">
                     <h1>{{title}}</h1>
                     {{{windowManager variation="close"}}}
                 </header>
                 <main class="container_column_center" style="padding: 40px">
-                    <!--                        TODO: Вынести лого в css-->
-                    <img src="/src/img/LOGO.svg" alt="LOGO" class="logo">
+                    <div class="logo"></div>
                     <form
                             class="login-form container_column_start"
                             id="loginForm"
@@ -47,9 +44,5 @@ export default class LoginPage extends Block {
                 </main>
             </div>
         `;
-    }
+  }
 }
-
-
-
-

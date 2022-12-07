@@ -10,6 +10,7 @@
   justify-content: center;
   color: #e77431;
   font-weight: 900;
+  position: absolute;
 
   &__title {
     font-size: 90px;
@@ -24,6 +25,7 @@
   }
 
   &__link {
+    background: none;
     margin-top: 30px;
     text-decoration: none;
     color: #e77431;

@@ -1,42 +1,42 @@
-import Block, {Props} from "../../utils/Block";
+import Block, { Props } from '../../utils/Block';
 
 export default class Registration extends Block {
-    constructor(props: Props) {
-        super({
-            ...props,
-            submit: () => {
-                // @ts-ignore
-                const form: any = document.forms.regForm;
-                const regData: Record<string, any> = {
-                    login: form.elements.login.value,
-                    email: form.elements.email.value,
-                    first_name: form.elements.first_name.value,
-                    second_name: form.elements.second_name.value,
-                    phone: form.elements.phone.value,
-                    password: form.elements.password.value,
-                };
+  constructor(props: Props) {
+    super({
+      ...props,
+      submit: () => {
+        // @ts-ignore
+        const form: any = document.forms.regForm;
+        const regData: Record<string, any> = {
+          login: form.elements.login.value,
+          email: form.elements.email.value,
+          first_name: form.elements.first_name.value,
+          second_name: form.elements.second_name.value,
+          phone: form.elements.phone.value,
+          password: form.elements.password.value,
+        };
 
-                if(form.elements.password.value == form.elements.second_password.value) console.log('Пароли не совпадают');
+        if (form.elements.password.value === form.elements.second_password.value) console.log('Пароли не совпадают');
 
-                if (form.checkValidity() && form.elements.password.value == form.elements.second_password.value) {
-                    console.log(regData);
-                    // @ts-ignore
-                    window.PAGES.selectPage(window.PAGES.chat)
-                };
-            }
-        });
-    }
+        if (form.checkValidity() && form.elements.password.value === form.elements.second_password.value) {
+          console.log(regData);
+          // @ts-ignore
+          window.PAGES.selectPage(window.PAGES.chat);
+        }
+      },
+    });
+  }
 
-    render() {
-        //language=hbs
-        return `
+  render() {
+    // language=hbs
+    return `
             <div class="main-window">
                 <header class="main-window__top-line">
                     <h1>{{title}}</h1>
                     {{{windowManager variation="close"}}}
                 </header>
                 <main class="container_column_start" style="padding: 40px">
-                    <img src="../../img/LOGO.svg" alt="LOGO" class="logo">
+                    <div class="logo"></div>
                     <form
                             class="login-form container_column_start"
                             id="registrationForm"
@@ -118,10 +118,6 @@ export default class Registration extends Block {
                     </form>
                 </main>
             </div>
-        `
-    }
+        `;
+  }
 }
-
-
-
-

@@ -1,14 +1,13 @@
-import Block, {Props} from '../../utils/Block';
+import Block, { Props } from '../../utils/Block';
 
+export default class StatusBar extends Block {
+  constructor(props: Props) {
+    super({ ...props });
+  }
 
-export default class statusBar extends Block {
-    constructor(props: Props) {
-        super({...props});
-    }
-
-    render() {
-        //language=hbs
-        return `
+  render() {
+    // language=hbs
+    return `
             <div class="status-bar">
                 <div class="status-bar__container">
                     <div class="status-bar__section"></div>
@@ -17,7 +16,5 @@ export default class statusBar extends Block {
                 <div class="status-bar__section"></div>
             </div>
         `;
-    };
-
+  }
 }
-

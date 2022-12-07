@@ -1,38 +1,34 @@
-import Block from "./Block";
 import Handlebars from 'handlebars';
+import Block from './Block';
 
-import button from "../components/button";
-import windowManager from "../components/windowManager";
-import statusBar from "../components/statusBar";
-import chatListItem from "../components/chatListItem";
-
+import Button from '../components/button';
+import WindowManager from '../components/windowManager';
+import StatusBar from '../components/statusBar';
+import ChatListItem from '../components/chatListItem';
 
 function registerComponent(name: string, Component: typeof Block):void {
-    Handlebars.registerHelper(name, ({ data, hash }) => {
-        const component: any = new Component(hash);
-        if (!data.root.children) {
+  Handlebars.registerHelper(name, ({ data, hash }) => {
+    const component: any = new Component(hash);
+    if (!data.root.children) {
+      data.root.children = {};
+    }
 
-            data.root.children = {};
-        }
-
-        data.root.children[component._id] = component;
-        return `<div data-id="${component._id}"></div>`;
-    });
+    data.root.children[component._id] = component;
+    return `<div data-id="${component._id}"></div>`;
+  });
 }
 
 export const COMPONENTS = {
-    windowManager,
-    button,
-    statusBar,
-    chatListItem,
+  windowManager: WindowManager,
+  button: Button,
+  statusBar: StatusBar,
+  chatListItem: ChatListItem,
 
-}
+};
 
 export default function registrationAllComponents(): void {
-    Object.entries(COMPONENTS)
-        .map(([key, value]: [string, any]) => {
-            registerComponent(key, value);
-        });
+  Object.entries(COMPONENTS)
+    .map(([key, value]: [string, any]):void => {
+      registerComponent(key, value);
+    });
 }
-
-
