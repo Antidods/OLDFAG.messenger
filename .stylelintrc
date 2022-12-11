@@ -12,6 +12,7 @@
     "no-empty-source": true,
     "color-no-invalid-hex": true,
     "function-url-quotes": "always",
-    "no-descending-specificity": null
+    "no-descending-specificity": null,
+    "scss/double-slash-comment-whitespace-inside": null
   }
 }

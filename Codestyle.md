@@ -2154,7 +2154,7 @@
   }
   // хорошо
   function baz() {
-  ∙∙let name;
+    let name;
   }
   ```
 

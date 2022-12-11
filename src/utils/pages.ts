@@ -7,7 +7,7 @@ import ErrorPage from '../pages/error';
 
 registrationAllComponents();
 
-export const PAGES = {
+const PAGES = {
   selectPage(pageName: any): void {
     const root: any = document.querySelector('#app');
     root.innerHTML = '';
@@ -99,3 +99,5 @@ export const PAGES = {
     title: '500',
   }),
 };
+
+export default PAGES;
