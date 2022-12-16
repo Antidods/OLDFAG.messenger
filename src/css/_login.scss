@@ -1,0 +1,50 @@
+.main-window {
+  &_login-form {
+    align-items: center;
+  }
+
+  &__top-line {
+    &_login-form {
+      width: 98%;
+      height: 23px;
+      align-items: center;
+    }
+  }
+
+  &__manager {
+    &_close {
+      margin-right: 5px;
+    }
+  }
+}
+
+.login-form {
+  width: 300px;
+  height: 90%;
+  align-items: start;
+
+  &__field-text {
+    @extend %in-window-border;
+
+    width: 98%;
+    height: 25px;
+    margin-bottom: 15px;
+  }
+
+  &__field-label {
+    @extend %press-start-2p;
+    font-size: 9px;
+
+		&_no-valid{
+			color: red;
+			position: relative;
+			top:-12px;
+			margin: 0;
+			padding: 0;
+			min-height: 12px;
+
+
+		}
+
+  }
+}

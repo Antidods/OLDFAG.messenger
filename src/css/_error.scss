@@ -1,0 +1,35 @@
+.error {
+  background: #000;
+  margin: 0;
+  padding: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e77431;
+  font-weight: 900;
+  position: absolute;
+
+  &__title {
+    font-size: 90px;
+    line-height: 40px;
+    margin-bottom: 30px;
+  }
+
+  &__p {
+    font-size: 36px;
+    line-height: 51px;
+    margin: 5px;
+  }
+
+  &__link {
+    background: none;
+    margin-top: 30px;
+    text-decoration: none;
+    color: #e77431;
+    font-size: 20px;
+    line-height: 28px;
+  }
+}

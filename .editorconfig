@@ -1,0 +1,28 @@
+root = true
+
+[*]
+end_of_line = lf
+insert_final_newline = true
+indent_style = tab
+max_line_length = 100
+charset = utf-8
+
+
+
+[*.{js, ts}]
+
+indent_size = 2
+
+
+[*.{css, scss}]
+indent_size = 2
+tab_width = 2
+
+[*.json]
+indent_size = 2
+
+[*.min.*]
+indent_style = unset
+trim_trailing_whitespace = false
+insert_final_newline = unset
+
