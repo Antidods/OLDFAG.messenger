@@ -7,7 +7,7 @@ import ErrorPage from '../pages/error';
 
 registrationAllComponents();
 
-const PAGES = {
+const PAGES:any = {
   selectPage(pageName: any): void {
     const root: any = document.querySelector('#app');
     root.innerHTML = '';

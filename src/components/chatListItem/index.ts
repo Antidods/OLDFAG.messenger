@@ -18,9 +18,9 @@ export default class ChatListItem extends Block {
     return `
             <button class="chat-list-item">
                 {{#if avatarUrl}}
-                    <img src="{{avatarUrl}}" alt="" class="chat-list-item__avatar">
+                    <img src="{{avatarUrl}}" alt="аватар" class="chat-list-item__avatar">
                 {{else}}
-                    <img src="../img/to-talk-to-avatar.png" alt="" class="chat-list-item__avatar">
+                    <img src="../img/to-talk-to-avatar.png" alt="аватар" class="chat-list-item__avatar">
                 {{/if}}
                 <div class="chat-list-item__message">
                     <span class="chat-list-item__message-from">{{name}}</span>
