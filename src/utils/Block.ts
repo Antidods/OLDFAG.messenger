@@ -1,6 +1,7 @@
 import { nanoid } from 'nanoid';
 import Handlebars from 'handlebars';
 import EventBus from './EventBus';
+import isEqual from './isEqual';
 
 export type Props = {
 	[key: string]: any | Block;
@@ -29,7 +30,7 @@ class Block {
 	private _element: HTMLElement | null = null;
 
 	// @ts-ignore
-	private _meta: { props: P; tagName?: string };
+	private _meta: { props: Props; tagName?: string };
 
 	public constructor(propsWithChildren: Props, tagName?: string) {
 		const eventBus = new EventBus();
@@ -121,8 +122,8 @@ class Block {
 	}
 
 	// @ts-ignore
-	protected componentDidUpdate() {
-		return true;
+	protected componentDidUpdate(oldProps:Props|undefined, newProps:Props|undefined) {
+		return isEqual(oldProps, newProps);
 	}
 
 	// Функция изменения пропсов
