@@ -1,5 +1,7 @@
 import Block, { Props } from '../../utils/Block';
 import { checkFormValidity } from '../../utils/validator';
+import Router from '../../utils/Router';
+import { Link } from '../../components/link';
 
 export default class LoginPage extends Block {
 	constructor(props: Props) {
@@ -14,9 +16,19 @@ export default class LoginPage extends Block {
 				console.log(data);
 				if (logForm.dataset.valid === 'true') {
 					// @ts-ignore
-					window.PAGES.selectPage(window.PAGES.chat);
+					Router.go('/chat')
 				}
 			}
+
+
+		});
+	}
+
+	init() {
+		this.children.linkRegistartion = <Block>new Link({
+			label: 'Регистрация',
+			to: '/register',
+			class: 'button'
 		});
 	}
 
@@ -26,7 +38,7 @@ export default class LoginPage extends Block {
         <div class="main-window main-window_login-form">
             <header class="main-window__top-line main-window__top-line_login-form">
                 <h1>{{title}}</h1>
-                {{{windowManager variation="close"}}}
+                {{{windowManager variation="close" }}}
             </header>
             <main class="container_column_center" style="padding: 40px">
                 <div class="logo"></div>
@@ -53,8 +65,7 @@ export default class LoginPage extends Block {
 
                     }}}
                     <div class="container_row_between" style="width: 300px">
-                        <a class="button"
-                           onclick="window.PAGES.selectPage(window.PAGES.registration)">Регистрация</a>
+												{{{linkRegistartion}}}
                         {{{button class="button" label="Вход" form="loginForm" onclick=submit}}}
                     </div>
                 </form>
@@ -63,3 +74,7 @@ export default class LoginPage extends Block {
 		`;
 	}
 }
+
+
+// <a class="button"
+// onclick="window.PAGES.selectPage(window.PAGES.registration)">Регистрация</a>

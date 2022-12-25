@@ -3,7 +3,8 @@ import Block, { Props } from '../../utils/Block';
 export default class FormField extends Block {
 	constructor(props: Props) {
 		super({
-			...props
+			...props,
+
 		});
 	};
 

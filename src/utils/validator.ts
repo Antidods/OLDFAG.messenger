@@ -38,8 +38,7 @@ export const checkValueValidity = (type: string, value: string): { validateStatu
 		message: 'сообщение содержит недопустимые символы'
 	};
 
-	let validateStatus: boolean = false;
-	validateStatus = _pattern[type].test(value);
+	let validateStatus: boolean = _pattern[type].test(value);
 
 	const errorMessage = (validateStatus) ? undefined : _errorMessage[type];
 
@@ -67,7 +66,7 @@ export const checkFormValidity = (form: any): Record<string, string> => {
 			break;
 		}
 
-		if (item.dataset.valid === 'false' || !item.dataset.valid){
+		if (item.dataset.valid === 'false' || !item.dataset.valid) {
 			form.dataset.valid = 'false';
 			break;
 		}
@@ -77,14 +76,15 @@ export const checkFormValidity = (form: any): Record<string, string> => {
 	return _data;
 };
 
-export const checkElementValidity = (elem:any)=>{
-	const validStatus: boolean = checkValueValidity(elem.name, elem.value).validateStatus;
-	const errorMessage: string | unknown = checkValueValidity(elem.name, elem.value).errorMessage;
-	const sibling: HTMLElement | any = elem.nextElementSibling;
-	elem.dataset.valid = validStatus.toString();
-	if (!elem.value){
+export const checkElementValidity = (input: any) => {
+	const validStatus: boolean = checkValueValidity(input.name, input.value).validateStatus;
+	const errorMessage: string | unknown = checkValueValidity(input.name, input.value).errorMessage;
+	const sibling: HTMLElement | any = input.nextElementSibling;
+	input.dataset.valid = validStatus.toString();
+	if (!input.value) {
 		sibling.textContent = 'поле не должно быть пустым';
+
 	} else {
 		sibling.textContent = (errorMessage) ? errorMessage : '';
 	}
-}
+};

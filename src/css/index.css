@@ -108,6 +108,8 @@ main .chat-send-block__textarea, main .chat-text-block, main .chat-list, .login-
 
 main .chat-send-block__send, main .chat-send-block__clip, .main-window__manager_maximize, .main-window__manager_minimize, .main-window__manager_close, .button {
   background: #c0c0c0;
+  text-decoration: underline;
+  cursor: pointer;
 }
 .button {
   text-decoration: none;

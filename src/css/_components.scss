@@ -4,6 +4,8 @@
   @extend %out-window-border;
 
   background: $surface;
+	text-decoration: underline;
+	cursor: pointer;
 
   &:active {
     @extend %in-window-border;

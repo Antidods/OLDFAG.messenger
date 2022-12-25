@@ -5,7 +5,7 @@ type Options = {
   timeout?: number;
 };
 
-type HTTP = (url: string, options: Options) => Promise<unknown>;
+type HTTP = (path: string, options: Options) => Promise<unknown>;
 
 const METHODS: Record<string, string> = {
   GET: 'GET',
@@ -22,35 +22,42 @@ function queryStringify(data: any): string {
 }
 
 export default class HTTPTransport {
-  get: HTTP = (url, options = {}) => {
+	static API_URL = 'https://ya-praktikum.tech/api/v2';
+	protected endpoint: string;
+
+	constructor(endpoint: string) {
+		this.endpoint = `${HTTPTransport.API_URL}${endpoint}`;
+	}
+
+  public get: HTTP = (path, options = {}) => {
     const params = options.data ? queryStringify(options.data) : '';
-    return this.request(url + params, { ...options, method: METHODS.GET }, options.timeout);
+    return this.request(path + params, { ...options, method: METHODS.GET }, options.timeout);
   };
 
-  put: HTTP = (url, options = {}) => this.request(
-    url,
+  put: HTTP = (path, options = {}) => this.request(
+    path,
     { ...options, method: METHODS.PUT },
     options.timeout,
   );
 
-  post: HTTP = (url, options = {}) => this.request(
-    url,
+  post: HTTP = (path, options = {}) => this.request(
+    path,
     { ...options, method: METHODS.POST },
     options.timeout,
   );
 
-  delete: HTTP = (url, options = {}) => this.request(
-    url,
+  delete: HTTP = (path, options = {}) => this.request(
+    path,
     { ...options, method: METHODS.DELETE },
     options.timeout,
   );
 
-  private request = (url: string, options: any, timeout = 10000) => {
+  private request = (path: string, options: any, timeout = 10000) => {
     const { method, headers = {}, data = {} } = options;
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
-      xhr.open(method, url);
+      xhr.open(method, path);
 
       function setHeaders(headers: any) {
         for (const key in headers) {

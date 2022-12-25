@@ -9,10 +9,7 @@ import InputValidate from '../components/inputValidate';
 import FormField from '../components/formField';
 
 function registerComponent(name: string, Component: typeof Block): void {
-	Handlebars.registerHelper(name, ({
-																		 data,
-																		 hash
-																	 }) => {
+	Handlebars.registerHelper(name, ({ data, hash }) => {
 		// @ts-ignore
 		const component: any = new Component(hash);
 		if (!data.root.children) {

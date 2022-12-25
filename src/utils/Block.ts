@@ -18,6 +18,7 @@ class Block {
 	} as const;
 
 	private _id: string = nanoid(6);
+	public id = this._id;
 
 	protected props: Props;
 
@@ -25,12 +26,12 @@ class Block {
 
 	private eventBus: () => EventBus;
 
-	private _element: any = null;
+	private _element: HTMLElement | null = null;
 
 	// @ts-ignore
 	private _meta: { props: P; tagName?: string };
 
-	protected constructor(propsWithChildren: Props, tagName?: string) {
+	public constructor(propsWithChildren: Props, tagName?: string) {
 		const eventBus = new EventBus();
 
 		const { props, children } = this._getChildrenAndProps(propsWithChildren);
@@ -50,7 +51,7 @@ class Block {
 		eventBus.emit(Block.EVENTS.INIT);
 	}
 
-	// Функция для определения, что является компонентом
+	// Определяем, что является компонентом
 	private _getChildrenAndProps(childrenAndProps: Props): {
 		props: Props;
 		children: Children;
@@ -97,7 +98,7 @@ class Block {
 		this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
 	}
 
-	protected init() {}
+	public init() {}
 
 	private _componentDidMount() {
 		this.componentDidMount();
@@ -150,6 +151,9 @@ class Block {
 
 	protected compile(template: string, context: any) {
 		const contextAndStubs = { ...context };
+		Object.entries(this.children).forEach(([name, component]) => {
+			contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
+		});
 		const compiled = Handlebars.compile(template);
 		const temp = document.createElement('template');
 		temp.innerHTML = compiled(contextAndStubs);
@@ -158,7 +162,8 @@ class Block {
 			if (!stub) {
 				return;
 			}
-			stub.replaceWith(component.getContent());
+			component.getContent()?.append(...Array.from(stub.childNodes));
+			stub.replaceWith(component.getContent()!);
 		});
 		return temp.content;
 	}
