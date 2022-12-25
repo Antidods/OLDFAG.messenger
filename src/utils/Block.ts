@@ -121,7 +121,7 @@ class Block {
 	}
 
 	// @ts-ignore
-	protected componentDidUpdate(oldProps: Props, newProps: Props) {
+	protected componentDidUpdate() {
 		return true;
 	}
 
