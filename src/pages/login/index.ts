@@ -1,22 +1,22 @@
 import Block, { Props } from '../../utils/Block';
 import { checkFormValidity } from '../../utils/validator';
-import Router from '../../utils/Router';
 import { Link } from '../../components/link';
+import FormField from '../../components/formField';
+import AutchController from '../../controllers/AutchController';
+import {SigninData} from '../../api/AuthAPI';
 
 export default class LoginPage extends Block {
 	constructor(props: Props) {
 		super({
 			...props,
 			submit: () => {
+				// @ts-ignore
 				event!.preventDefault();
-				event!.stopPropagation();
 				// @ts-ignore
 				const logForm: any = document.forms.loginForm;
 				const data = checkFormValidity(logForm);
-				console.log(data);
 				if (logForm.dataset.valid === 'true') {
-					// @ts-ignore
-					Router.go('/chat')
+					AutchController.signin(data as SigninData);
 				}
 			}
 
@@ -30,6 +30,20 @@ export default class LoginPage extends Block {
 			to: '/register',
 			class: 'button'
 		});
+
+		this.children.login = <Block>new FormField({
+			type: 'text',
+			name: 'login',
+			label: 'Логин'
+		});
+
+		this.children.password = <Block>new FormField({
+			type: 'password',
+			name: 'password',
+			label: 'Пароль'
+		});
+
+
 	}
 
 	render() {
@@ -37,7 +51,7 @@ export default class LoginPage extends Block {
 		return `
         <div class="main-window main-window_login-form">
             <header class="main-window__top-line main-window__top-line_login-form">
-                <h1>{{title}}</h1>
+                <h1>Вход</h1>
                 {{{windowManager variation="close" }}}
             </header>
             <main class="container_column_center" style="padding: 40px">
@@ -48,24 +62,10 @@ export default class LoginPage extends Block {
                         name="loginForm"
                         data-valid="false"
                 >
-
-
-                    {{{formField
-                            type="text"
-                            name="login"
-                            label="Логин"
-
-
-                    }}}
-                    {{{formField
-                            type="password"
-                            name="password"
-                            label="Пароль"
-
-
-                    }}}
+                    {{{login}}}
+                    {{{password}}}
                     <div class="container_row_between" style="width: 300px">
-												{{{linkRegistartion}}}
+                        {{{linkRegistartion}}}
                         {{{button class="button" label="Вход" form="loginForm" onclick=submit}}}
                     </div>
                 </form>
@@ -75,6 +75,3 @@ export default class LoginPage extends Block {
 	}
 }
 
-
-// <a class="button"
-// onclick="window.PAGES.selectPage(window.PAGES.registration)">Регистрация</a>

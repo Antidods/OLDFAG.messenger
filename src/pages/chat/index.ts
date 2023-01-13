@@ -1,4 +1,7 @@
 import Block, { Props } from '../../utils/Block';
+import Button from '../../components/button';
+import AutchController from '../../controllers/AutchController';
+import router from '../../utils/Router';
 
 export default class Chat extends Block {
   constructor(props: Props) {
@@ -30,12 +33,26 @@ export default class Chat extends Block {
     });
   }
 
-  render() {
+	init() {
+
+		this.children.exitButton = new Button({
+			class: 'chat-text-block__button chat-text-block__button_exit button-img',
+			onclick: () => {
+				AutchController.logout();
+				router.go('/');
+			}
+
+		})
+
+
+	}
+
+	render() {
     // language=hbs
     return `
             <div class="main-window main-window_chat" id="main-window">
                 <div class="main-window__top-line">
-                    <h1>{{title}}</h1>
+                    <h1>OLDFAG.messenger</h1>
                     {{{windowManager}}}
                 </div>
                 <div class="main-window__spacer"></div>
@@ -85,10 +102,7 @@ export default class Chat extends Block {
                                             class="chat-text-block__button chat-text-block__button_setting"
                                             onclick=userSettings
                                     }}}
-                                    {{{button
-                                            class="chat-text-block__button chat-text-block__button_exit"
-                                            onclick=toLogin
-                                    }}}
+                                    {{{exitButton}}}
                                 </div>
                                 <div class="chat-text-block__spacer"></div>
                             </div>

@@ -17,7 +17,7 @@ export default class InputValidate extends Block {
 	};
 
 	render() {
-		//language=hbs
+		// language=hbs
 		return `
         <input
                 type="{{type}}"

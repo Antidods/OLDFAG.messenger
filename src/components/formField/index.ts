@@ -8,8 +8,9 @@ export default class FormField extends Block {
 		});
 	};
 
+
 	render() {
-		//language=hbs
+		// language=hbs
 		return `
         <div class='container_column_start' style='width: 100%'>
             <label for="{{name}}" class="login-form__field-label">{{label}}</label>

@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid';
 import Handlebars from 'handlebars';
 import EventBus from './EventBus';
-import isEqual from './isEqual';
+import { isEqual } from './helpers';
 
 export type Props = {
 	[key: string]: any | Block;
@@ -19,6 +19,7 @@ class Block {
 	} as const;
 
 	private _id: string = nanoid(6);
+
 	public id = this._id;
 
 	protected props: Props;

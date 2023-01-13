@@ -44,7 +44,7 @@ body {
 
 	&__top-line > h1,
 	&__top-line > h2 {
-		@extend %press-start-2p;
+		@extend %fontForHeaders;
 		color: #fff;
 		margin: 0 20px;
 		padding-top: 2px;
@@ -107,7 +107,7 @@ main {
 		}
 
 		&__button {
-			@extend %press-start-2p;
+			@extend %fontForHeaders;
 
 			font-size: 8px;
 			border: 0;
@@ -121,15 +121,15 @@ main {
 			justify-content: center;
 
 			&_add {
-				background-image: url("../img/chat-list-add.png");
+				background-image: url("../assets/img/chat-list-add.png");
 			}
 
 			&_dell {
-				background-image: url("../img/chat-list-dell.png");
+				background-image: url("../assets/img/chat-list-dell.png");
 			}
 
 			&_search {
-				background-image: url("../img/chat-list-search.png");
+				background-image: url("../assets/img/chat-list-search.png");
 			}
 		}
 
@@ -184,7 +184,7 @@ main {
 			}
 
 			&__message-from {
-				@extend %press-start-2p;
+				@extend %fontForHeaders;
 
 				font-size: 9px;
 				height: 30%;
@@ -193,7 +193,7 @@ main {
 			}
 
 			&__message-text {
-				@extend %post-pixel-7;
+				@extend %regularFont;
 
 				height: 60%;
 				overflow: hidden;
@@ -203,7 +203,7 @@ main {
 			}
 
 			&__information {
-				@extend %press-start-2p;
+				@extend %fontForHeaders;
 
 				flex-grow: 1;
 				height: 90%;
@@ -214,13 +214,13 @@ main {
 			}
 
 			&__date {
-				@extend %press-start-2p;
+				@extend %fontForHeaders;
 
 				font-size: 8px;
 			}
 
 			&__unread {
-				@extend %press-start-2p;
+				@extend %fontForHeaders;
 
 				font-size: 8px;
 				display: flex;
@@ -232,7 +232,7 @@ main {
 				//content: "";
 				min-width: 15px;
 				height: 15px;
-				background-image: url("../img/envelope.png");
+				background-image: url("../assets/img/envelope.png");
 				background-size: cover;
 				display: flex;
 				justify-content: center;
@@ -286,7 +286,7 @@ main {
 		}
 
 		&__to-talk-to-name {
-			@extend %press-start-2p;
+			@extend %fontForHeaders;
 
 			height: 40px;
 			display: flex;
@@ -305,7 +305,7 @@ main {
 		}
 
 		&__user-name {
-			@extend %press-start-2p;
+			@extend %fontForHeaders;
 
 			margin: 10px 30px 17px 0;
 		}
@@ -318,11 +318,11 @@ main {
 			margin: 10px 30px 17px 0;
 
 			&_setting {
-				background-image: url("../img/chat-text-block-user-setting.png");
+				background-image: url("../assets/img/chat-text-block-user-setting.png");
 			}
 
 			&_exit {
-				background-image: url("../img/chat-text-block-user-exit.png");
+				background-image: url("../assets/img/chat-text-block-user-exit.png");
 			}
 		}
 
@@ -347,7 +347,7 @@ main {
 			box-shadow: none;
 			width: 40px;
 			height: 35px;
-			background-image: url("../img/chat-send-block-clip.svg");
+			background-image: url("../assets/img/chat-send-block-clip.svg");
 			background-position: center;
 			background-repeat: no-repeat;
 			background-size: contain;
@@ -355,7 +355,7 @@ main {
 
 		&__textarea {
 			@extend %in-window-border;
-			@extend %post-pixel-7;
+			@extend %regularFont;
 
 			font-size: 14px;
 			background: $field;
@@ -369,7 +369,7 @@ main {
 
 		&__send {
 			@extend %button;
-			@extend %press-start-2p;
+			@extend %fontForHeaders;
 
 			font-size: 10px;
 			width: 130px;

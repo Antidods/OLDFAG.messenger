@@ -6,58 +6,55 @@ $field-chat: linear-gradient(215.45deg, #74bee5 -14.25%, #fff 24.32%);
 
 // fonts
 @font-face {
-  font-family: "Press Start 2P";
-  src: url("../fonts/PressStart2P-Regular.ttf");
+	font-family: "Press Start 2P";
+	src: url("../assets/fonts/PressStart2P-Regular.ttf");
 }
 
-%press-start-2p {
-  font-family: "Press Start 2P", ui-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 10px;
-  line-height: 12px;
+%fontForHeaders {
+	font-family: "Press Start 2P", ui-serif;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 10px;
+	line-height: 12px;
 }
 
 @font-face {
-  font-family: "Post Pixel-7";
-  src: url("../fonts/post_pixel-7.ttf");
+	font-family: "Post Pixel-7";
+	src: url("../assets/fonts/post_pixel-7.ttf");
 }
 
-%post-pixel-7 {
-  font-family: "Post Pixel-7", ui-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 15px;
+%regularFont {
+	font-family: "Post Pixel-7", ui-serif;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 12px;
+	line-height: 15px;
 }
 
 // borders
 %out-window-border {
-  border: 0;
-  box-shadow:
-    inset -1px -1px 0 #1e1e1e,
-    inset 1px 1px 0 #dfdfdf,
-    inset -2px -2px 0 #808080,
-    inset 2px 2px 0 #fff;
+	border: 0;
+	box-shadow: inset -1px -1px 0 #1e1e1e,
+	inset 1px 1px 0 #dfdfdf,
+	inset -2px -2px 0 #808080,
+	inset 2px 2px 0 #fff;
 }
 
 %in-window-border {
-  border: 0;
-  box-shadow:
-    inset 1px 1px 0 #1e1e1e,
-    inset -1px -1px 0 #dfdfdf,
-    inset 2px 2px 0 #808080,
-    inset -2px -2px 0 #fff;
+	border: 0;
+	box-shadow: inset 1px 1px 0 #1e1e1e,
+	inset -1px -1px 0 #dfdfdf,
+	inset 2px 2px 0 #808080,
+	inset -2px -2px 0 #fff;
 }
 
 %out-window-border-min {
-  border: 0;
-  box-shadow: inset 1px 1px 0 #dfdfdf, inset -1px -1px 0 #808080;
+	border: 0;
+	box-shadow: inset 1px 1px 0 #dfdfdf, inset -1px -1px 0 #808080;
 }
 
 %in-window-border-min {
-  border: 0;
-  box-shadow: inset 1px 1px 0 #808080, inset -1px -1px 0 #f4f4f4;
+	border: 0;
+	box-shadow: inset 1px 1px 0 #808080, inset -1px -1px 0 #f4f4f4;
 }
 
-// components

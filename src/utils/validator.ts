@@ -1,28 +1,28 @@
-export const checkValueValidity = (type: string, value: string): { validateStatus: boolean, errorMessage?: String } => {
+export const checkValueValidity = (type: string, value: string): { validateStatus: boolean, errorMessage?: string } => {
 	const _pattern: Record<string, RegExp> = {
 
-		//first_name, second_name — латиница или кириллица, первая буква должна быть заглавной,
+		// first_name, second_name — латиница или кириллица, первая буква должна быть заглавной,
 		// без пробелов и без цифр, нет спецсимволов (допустим только дефис).
 		first_name: /^[А-ЯA-Z][a-zA-Zа-яА-Я/-]{1,20}$/,
 		second_name: /^[А-ЯA-Z][a-zA-Zа-яА-Я/-]{1,20}$/,
 		display_name: /^[А-ЯA-Z][a-zA-Zа-яА-Я/-]{1,20}$/,
 
-		//login — от 3 до 20 символов, латиница, может содержать цифры, но не состоять из них,
+		// login — от 3 до 20 символов, латиница, может содержать цифры, но не состоять из них,
 		// без пробелов, без спецсимволов (допустимы дефис и нижнее подчёркивание).
 		login: /^[a-zA-Z][a-zA-Z0-9-_-]{3,20}$/,
 
-		//email — латиница, может включать цифры и спецсимволы вроде дефиса,
+		// email — латиница, может включать цифры и спецсимволы вроде дефиса,
 		// обязательно должна быть «собака» (@) и точка после неё, но перед точкой обязательно должны быть буквы.
 		email: /^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$/i,
 
-		//password — от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра.
+		// password — от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра.
 		password: /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6}/,
 		second_password: /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6}/,
 
-		//phone — от 10 до 15 символов, состоит из цифр, может начинаться с плюса.
+		// phone — от 10 до 15 символов, состоит из цифр, может начинаться с плюса.
 		phone: /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/,
 
-		//message — не должно быть пустым.
+		// message — не должно быть пустым.
 		message: /^\s*$/
 	};
 
@@ -38,7 +38,7 @@ export const checkValueValidity = (type: string, value: string): { validateStatu
 		message: 'сообщение содержит недопустимые символы'
 	};
 
-	let validateStatus: boolean = _pattern[type].test(value);
+	const validateStatus: boolean = _pattern[type].test(value);
 
 	const errorMessage = (validateStatus) ? undefined : _errorMessage[type];
 
@@ -46,19 +46,19 @@ export const checkValueValidity = (type: string, value: string): { validateStatu
 	return { validateStatus, errorMessage };
 };
 
-export const checkFormValidity = (form: any): Record<string, string> => {
-	const _data: Record<string, string> = {};
+export const checkFormValidity = (form: any): Object => {
+	const _data: any = {};
 	const formElements = form.elements;
 
-	for (let item of formElements) {
-		if (item.tagName !== 'INPUT') continue;
+	for (const item of formElements) {
+		if (item.tagName !== 'INPUT' || item.name === 'second_password') continue;
 		checkElementValidity(item);
 		_data[item.name] = item.value.toString();
 	}
 
 
 	form.dataset.valid = 'true';
-	for (let item of formElements) {
+	for (const item of formElements) {
 		if (item.tagName !== 'INPUT') continue;
 
 		if (item.name === 'second_password' && item.value !== formElements.password.value) {
@@ -73,18 +73,18 @@ export const checkFormValidity = (form: any): Record<string, string> => {
 
 	}
 
-	return _data;
+	return  _data ;
 };
 
 export const checkElementValidity = (input: any) => {
 	const validStatus: boolean = checkValueValidity(input.name, input.value).validateStatus;
-	const errorMessage: string | unknown = checkValueValidity(input.name, input.value).errorMessage;
+	const {errorMessage} = checkValueValidity(input.name, input.value);
 	const sibling: HTMLElement | any = input.nextElementSibling;
 	input.dataset.valid = validStatus.toString();
 	if (!input.value) {
 		sibling.textContent = 'поле не должно быть пустым';
 
 	} else {
-		sibling.textContent = (errorMessage) ? errorMessage : '';
+		sibling.textContent = (errorMessage) || '';
 	}
 };

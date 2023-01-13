@@ -1,5 +1,5 @@
 import Block from './Block';
-import isEqual from './isEqual';
+import { isEqual } from './helpers';
 
 function render(query: string, block: Block) {
 	const root = document.querySelector(query);
@@ -37,15 +37,18 @@ class Route {
 			this.block = new this.blockClass({});
 
 			render(this.query, this.block);
-			return;
+			
 		}
 	}
 }
 
 class Router {
 	private static __instance: Router;
+
 	private routes: Route[] = [];
+
 	private currentRoute: Route | null = null;
+
 	private history = window.history;
 
 	constructor(private readonly rootQuery: string) {

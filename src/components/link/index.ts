@@ -25,7 +25,7 @@ class BaseLink extends Block {
 	}
 
 	render() {
-		//language=hbs
+		// language=hbs
 		return `
         <span class="{{ class }}">{{ label }}</span>
 		`;

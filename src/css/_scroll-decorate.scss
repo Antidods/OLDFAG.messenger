@@ -11,7 +11,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  background-image: url("../icon/scrollbar-background.svg");
+  background-image: url("../assets/icon/scrollbar-background.svg");
 }
 
 ::-webkit-scrollbar-thumb {
@@ -29,20 +29,20 @@
 
 ::-webkit-scrollbar-button:vertical:start {
   height: 17px;
-  background-image: url("../icon/button-up.svg");
+  background-image: url("../assets/icon/button-up.svg");
 }
 
 ::-webkit-scrollbar-button:vertical:end {
   height: 17px;
-  background-image: url("../icon/button-down.svg");
+  background-image: url("../assets/icon/button-down.svg");
 }
 
 ::-webkit-scrollbar-button:horizontal:start {
   width: 16px;
-  background-image: url("../icon/button-left.svg");
+  background-image: url("../assets/icon/button-left.svg");
 }
 
 ::-webkit-scrollbar-button:horizontal:end {
   width: 16px;
-  background-image: url("../icon/button-right.svg");
+  background-image: url("../assets/icon/button-right.svg");
 }
