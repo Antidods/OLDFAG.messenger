@@ -10,11 +10,18 @@ export default class InputValidate extends Block {
 					checkElementValidity(this.element);
 				},
 				focus: () => {
-					checkElementValidity(this.element);
-				}
-			}
+					const input: Element | null = this.element;
+					let timeout: any;
+					input?.addEventListener('keypress', () => {
+						clearTimeout(timeout);
+						timeout = setTimeout(() => {
+							checkElementValidity(this.element);
+						}, 800);
+					});
+				},
+			},
 		});
-	};
+	}
 
 	render() {
 		// language=hbs
@@ -34,15 +41,10 @@ export default class InputValidate extends Block {
                 pattern="{{pattern}}"
             {{/if}}
                 data-valid=false
+            {{#if disabled}}
+                disabled
+            {{/if}}
         >
 		`;
 	}
 }
-
-
-
-
-
-
-
-

@@ -4,8 +4,8 @@
   @extend %out-window-border;
 
   background: $surface;
-	text-decoration: underline;
-	cursor: pointer;
+  text-decoration: underline;
+  cursor: pointer;
 
   &:active {
     @extend %in-window-border;
@@ -26,8 +26,8 @@
   justify-content: center;
 }
 
-.button-img{
-	cursor: pointer;
+.button-img {
+  cursor: pointer;
 }
 
 %window-manager-button {

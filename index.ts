@@ -1,59 +1,59 @@
-import PAGES from './src/utils/pages';
-import Router from './src/utils/Router';
 import LoginPage from './src/pages/login';
 import Registration from './src/pages/registration';
 import Chat from './src/pages/chat';
+import AuthController from './src/controllers/AuthController';
+import registrationAllComponents from './src/utils/registerComponents';
+import Profile from './src/pages/userSettings';
+import router from './src/utils/Router';
+import UserController from './src/controllers/UserController';
 
-// @ts-ignore
-window.PAGES = PAGES;
+registrationAllComponents();
 
 enum Routes {
 	Login = '/',
 	Register = '/register',
-	Chat = '/chat'
+	Chat = '/chat',
+	Profile = '/profile',
 }
 
-// window.addEventListener('DOMContentLoaded', async () => {
-// 	Router
-// 		.use(Routes.Index, LoginPage)
-// 		.use(Routes.Register, RegisterPage)
-// 		.use(Routes.Profile, ProfilePage)
-//
-// 	let isProtectedRoute = true;
-//
-// 	switch (window.location.pathname) {
-// 		case Routes.Index:
-// 		case Routes.Register:
-// 			isProtectedRoute = false;
-// 			break;
-// 	}
-//
-// 	try {
-// 		await AuthController.fetchUser();
-//
-// 		Router.start();
-//
-// 		if (!isProtectedRoute) {
-// 			Router.go(Routes.Profile)
-// 		}
-// 	} catch (e) {
-// 		Router.start();
-//
-// 		if (isProtectedRoute) {
-// 			Router.go(Routes.Index);
-// 		}
-// 	}
-//
-// });
-
-document.addEventListener('DOMContentLoaded', () => {
-	Router
+window.addEventListener('DOMContentLoaded', async () => {
+	router
 		.use(Routes.Login, LoginPage)
 		.use(Routes.Register, Registration)
 		.use(Routes.Chat, Chat)
-		.start();
+		.use(Routes.Profile, Profile);
+	router.start();
 
+	try {
+		await AuthController.fetchUser();
+		UserController.lockEditProfile(true);
+		router.go(Routes.Chat);
+	} catch (e) {
+		router.go(Routes.Login);
+	}
 
-	// @ts-ignore
-	// window.PAGES.selectPage(window.PAGES.loginPage);
+	// let isProtectedRoute = true;
+	//
+	// switch (window.location.pathname) {
+	// 	case Routes.Login:
+	// 	case Routes.Register:
+	// 		isProtectedRoute = false;
+	// 		break;
+	// }
+	//
+	// try {
+	// 	await AuthController.fetchUser();
+	//
+	// 	Router.start();
+	//
+	// 	if (!isProtectedRoute) {
+	// 		Router.go(Routes.Chat);
+	// 	}
+	// } catch (e) {
+	// 	Router.start();
+	//
+	// 	if (isProtectedRoute) {
+	// 		Router.go(Routes.Login);
+	// 	}
+	// }
 });

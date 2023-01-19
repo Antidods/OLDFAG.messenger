@@ -27,10 +27,9 @@ export const COMPONENTS = {
 	statusBar: StatusBar,
 	chatListItem: ChatListItem,
 	inputValidate: InputValidate,
-	formField: FormField
+	formField: FormField,
 };
 
 export default function registrationAllComponents(): void {
-	Object.entries(COMPONENTS)
-		.map(([key, value]: [string, any]) => registerComponent(key, value));
+	Object.entries(COMPONENTS).map(([key, value]: [string, any]) => registerComponent(key, value));
 }

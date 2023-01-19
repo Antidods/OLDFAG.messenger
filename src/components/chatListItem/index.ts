@@ -1,21 +1,22 @@
 import Block, { Props } from '../../utils/Block';
+// import MessagesController from '../../controllers/MessagesController';
 
 export default class ChatListItem extends Block {
-  constructor(props: Props) {
-    super({
-      ...props,
-      events: {
-        click: (event: Event) => {
-          props.onclick(this, props, event);
-        },
-      },
+	constructor(props: Props) {
+		super({
+			...props,
+			events: {
+				click: () => {
+					console.log('Click', this.props.name);
+					// MessagesController.connect();
+				},
+			},
+		});
+	}
 
-    });
-  }
-
-  render() {
-    // language=hbs
-    return `
+	render() {
+		// language=hbs
+		return `
             <button class="chat-list-item">
                 {{#if avatarUrl}}
                     <img src="{{avatarUrl}}" alt="аватар" class="chat-list-item__avatar">
@@ -37,5 +38,5 @@ export default class ChatListItem extends Block {
                 </div>
             </button>
         `;
-  }
+	}
 }

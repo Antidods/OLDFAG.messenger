@@ -2,7 +2,6 @@ import Block from '../utils/Block';
 import Router from '../utils/Router';
 
 export function withRouter(Component: any) {
-
 	// @ts-ignore
 	type Props = typeof Component extends typeof Block<infer P> ? P : any;
 

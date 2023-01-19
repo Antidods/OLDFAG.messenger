@@ -123,7 +123,7 @@ class Block {
 	}
 
 	// @ts-ignore
-	protected componentDidUpdate(oldProps:Props|undefined, newProps:Props|undefined) {
+	protected componentDidUpdate(oldProps: Props | undefined, newProps: Props | undefined) {
 		return isEqual(oldProps, newProps);
 	}
 

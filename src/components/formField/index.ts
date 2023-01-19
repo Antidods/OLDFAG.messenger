@@ -4,10 +4,8 @@ export default class FormField extends Block {
 	constructor(props: Props) {
 		super({
 			...props,
-
 		});
-	};
-
+	}
 
 	render() {
 		// language=hbs
@@ -21,6 +19,7 @@ export default class FormField extends Block {
                     name=name
                     value=value
                     required=0
+										disabled=disabled
             }}}
             <label for="{{name}}"
                    class="login-form__field-label login-form__field-label_no-valid">{{error}}
@@ -29,11 +28,3 @@ export default class FormField extends Block {
 		`;
 	}
 }
-
-
-
-
-
-
-
-

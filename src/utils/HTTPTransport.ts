@@ -1,25 +1,27 @@
+import { isPlainObject } from './helpers';
+
 type Options = {
 	data?: any;
 	method?: string;
-	headers?: any;
-	timeout?: number;
 };
 
-type HTTP = (path: string, options: Options) => Promise<unknown>;
+type HTTP = (path: string, options?: Options) => Promise<unknown>;
 
 const METHODS: Record<string, string> = {
 	GET: 'GET',
 	PUT: 'PUT',
 	POST: 'POST',
 	PATCH: 'PATCH',
-	DELETE: 'DELETE'
+	DELETE: 'DELETE',
 };
 
-function queryStringify(data:Object): string {
-	return `?${Object
-		.entries(data)
-		.map((item) => `${item[0]}=${item[1]}`)
-		.join('&')}`;
+function queryStringify(data: Record<string, unknown> | unknown): string {
+	if (data) {
+		return `?${Object.entries(data)
+			.map((item) => `${item[0]}=${item[1]}`)
+			.join('&')}`;
+	}
+	return '';
 }
 
 export default class HTTPTransport {
@@ -31,60 +33,59 @@ export default class HTTPTransport {
 		this.endpoint = `${HTTPTransport.API_URL}${endpoint}`;
 	}
 
-	public get: HTTP = (path = '/', options?) => {
-		const params = options.data ? queryStringify(options.data) : '';
+	public get: HTTP = (path, options?) => {
+		const data: Record<string, unknown> | unknown = options?.data;
+		const params: string = data ? queryStringify(data) : '';
 		return this.request(this.endpoint + path + params, {
 			...options,
-			method: METHODS.GET
-		}, options.timeout!);
+			method: METHODS.GET,
+		});
 	};
 
-	public post: HTTP = (path, options?) => {
-		const params = options.data ? queryStringify(options.data) : '';
-		return this.request(
-			this.endpoint + path + params,
-			{ ...options, method: METHODS.POST },
-			options.timeout
-		);
+	public post: HTTP = (url, options?) => {
+		const params = options?.data ? queryStringify(options.data) : '';
+		return this.request(this.endpoint + url + params, {
+			...options,
+			method: METHODS.POST,
+		});
 	};
 
-	public put: HTTP = (path, options?) => {
-		const params = options.data ? queryStringify(options.data) : '';
-		return this.request(
-			this.endpoint + path + params,
-			{ ...options, method: METHODS.PUT },
-			options.timeout
-		);
+	public put: HTTP = (url, options = {}): Promise<XMLHttpRequestResponseType> => {
+		const data: Record<string, unknown> | unknown = options?.data;
+		const params: string = data ? queryStringify(data) : '';
+		return this.request(this.endpoint + url + params, {
+			...options,
+			method: METHODS.PUT,
+		});
 	};
 
-
-	public patch: HTTP = (path, options?) => {
-		const params = options.data ? queryStringify(options.data) : '';
-		return this.request(
-			this.endpoint + path + params,
-			{ ...options, method: METHODS.PATCH },
-			options.timeout
-		);
+	public patch: HTTP = (url, options?) => {
+		const params = options?.data ? queryStringify(options.data) : '';
+		return this.request(this.endpoint + url + params, {
+			...options,
+			method: METHODS.PATCH,
+		});
 	};
 
-	public delete: HTTP = (path, options?) => {
-		const params = options.data ? queryStringify(options.data) : '';
-		return this.request(
-			this.endpoint + path + params,
-			{ ...options, method: METHODS.DELETE },
-			options.timeout
-		);
+	public delete: HTTP = (url, options?) => {
+		const params = options?.data ? queryStringify(options.data) : '';
+		return this.request(this.endpoint + url + params, {
+			...options,
+			method: METHODS.DELETE,
+		});
 	};
 
-	private request = (path: string, options: Options = { method: METHODS.GET }, timeout = 10000) => {
-		const { method = METHODS.GET, headers, data } = options;
+	private request = (
+		url: string,
+		options: Options = { method: METHODS.GET }
+	): Promise<XMLHttpRequestResponseType> => {
+		const { method = METHODS.GET, data } = options;
 
 		return new Promise((resolve, reject) => {
 			const xhr = new XMLHttpRequest();
-			xhr.open(method, path);
+			xhr.open(method, url);
 
 			xhr.onreadystatechange = () => {
-
 				if (xhr.readyState === XMLHttpRequest.DONE) {
 					if (xhr.status < 400) {
 						resolve(xhr.response);
@@ -94,35 +95,57 @@ export default class HTTPTransport {
 				}
 			};
 
-			function setHeaders(headers: any) {
-				for (const key in headers) {
-					xhr.setRequestHeader(key, headers[key]);
-				}
-			}
-
 			xhr.onabort = () => reject({ reason: 'abort' });
 			xhr.onerror = () => reject({ reason: 'network error' });
 			xhr.ontimeout = () => reject({ reason: 'timeout' });
-			xhr.timeout = timeout;
 
-			if (headers) {
-				setHeaders(headers);
-			} else if (!(data instanceof FormData)) {
-				xhr.setRequestHeader('Content-Type', 'application/json');
+			if (isPlainObject(data)) {
+				xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
 			}
 
 			xhr.withCredentials = true;
 			xhr.responseType = 'json';
 
-			if (method === METHODS.GET && !data) {
+			if (method === METHODS.GET || !data) {
 				xhr.send();
 			} else {
-				xhr.send(JSON.stringify(data));
+				xhr.send(isPlainObject(data) ? JSON.stringify(data) : data);
 			}
 		});
 	};
+
+	// private request(url: string, options: Options): Promise<XMLHttpRequestResponseType> {
+	// 	const { method, data } = options;
+	//
+	// 	return new Promise((resolve, reject) => {
+	// 		const xhr = new XMLHttpRequest();
+	//
+	// 		xhr.open(method!, url);
+	//
+	// 		xhr.onreadystatechange = () => {
+	// 			if (xhr.readyState === XMLHttpRequest.DONE) {
+	// 				if (xhr.status < 400) resolve(xhr.response);
+	//
+	// 				reject(xhr.response);
+	// 			}
+	// 		};
+	//
+	// 		xhr.onabort = () => reject({ reason: 'abort' });
+	// 		xhr.onerror = () => reject({ reason: 'network error' });
+	// 		xhr.ontimeout = () => reject({ reason: 'timeout' });
+	//
+	// 		xhr.withCredentials = true;
+	// 		xhr.responseType = 'json';
+	//
+	// 		if (isPlainObject(data)) {
+	// 			xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+	// 		}
+	//
+	// 		if (method === METHODS.GET || !data) {
+	// 			xhr.send();
+	// 		} else {
+	// 			xhr.send(isPlainObject(data) ? JSON.stringify(data) : data);
+	// 		}
+	// 	});
+	// }
 }
-
-
-
-

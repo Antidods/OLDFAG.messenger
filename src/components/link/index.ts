@@ -15,8 +15,8 @@ class BaseLink extends Block {
 		super({
 			...props,
 			events: {
-				click: () => this.navigate()
-			}
+				click: () => this.navigate(),
+			},
 		});
 	}
 
@@ -30,15 +30,6 @@ class BaseLink extends Block {
         <span class="{{ class }}">{{ label }}</span>
 		`;
 	}
-
-
 }
 
 export const Link = withRouter(BaseLink);
-
-
-
-
-
-
-

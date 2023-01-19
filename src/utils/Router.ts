@@ -1,8 +1,8 @@
-import Block from './Block';
+import Block, { Props } from './Block';
 import { isEqual } from './helpers';
 
 function render(query: string, block: Block) {
-	const root = document.querySelector(query);
+	const root: Element | null = document.querySelector(query);
 
 	if (root === null) {
 		throw new Error(`root not found by selector "${query}"`);
@@ -15,14 +15,24 @@ function render(query: string, block: Block) {
 	return root;
 }
 
+function setModal(query: string, modal: Block): void {
+	const root: Element | null = document.querySelector(query);
+
+	if (root === null) {
+		throw new Error(`root not found by selector "${query}"`);
+	}
+
+	root.append(modal.getContent()!);
+}
+
 class Route {
 	private block: Block | null = null;
 
 	constructor(
 		private pathname: string,
-		private readonly blockClass: typeof Block,
-		private readonly query: string) {
-	}
+		private readonly BlockClass: typeof Block,
+		private readonly query: string
+	) {}
 
 	leave() {
 		this.block = null;
@@ -34,10 +44,9 @@ class Route {
 
 	render() {
 		if (!this.block) {
-			this.block = new this.blockClass({});
+			this.block = new this.BlockClass({});
 
 			render(this.query, this.block);
-			
 		}
 	}
 }
@@ -61,14 +70,14 @@ class Router {
 		Router.__instance = this;
 	}
 
-	public use(pathname: string, block: typeof Block) {
+	public use(pathname: string, block: typeof Block | any) {
 		const route = new Route(pathname, block, this.rootQuery);
 		this.routes.push(route);
 
 		return this;
 	}
 
-	public start() {
+	public start(): void {
 		// Регистрация события PopSate(событие перехода по страницам)
 		window.onpopstate = (event: PopStateEvent) => {
 			const target = event.currentTarget as Window;
@@ -80,9 +89,9 @@ class Router {
 	}
 
 	private _onRoute(pathname: string) {
-		// Ищем роут по имени URL, и если нашли - вызывает rout.render
-		const route = this.getRoute(pathname);
+		const route = this._getRoute(pathname);
 
+		// TODO Добавить 404
 		if (!route) {
 			return;
 		}
@@ -96,24 +105,45 @@ class Router {
 		route.render();
 	}
 
-	// Переход на страницу
-	public go(pathname: string) {
+	public setModal(Modal: any, props?: Props): void {
+		const query: string = this.rootQuery;
+		const modal = <Block>new Modal({ ...props });
+
+		setModal(query, modal);
+	}
+
+	public closeAllModal(): void {
+		const modal = document.querySelectorAll('.modal-cover');
+		modal.forEach((item: Element) => {
+			item.remove();
+		});
+	}
+
+	public closeModalById(id: string): void {
+		const modal: Element | null = document.getElementById(id);
+		if (!modal) {
+			console.log(`Модальное окно с id ${id} не найдено`);
+		}
+		modal?.remove();
+	}
+
+	public go(pathname: string): void {
 		// Записываем в историю
 		this.history.pushState({}, '', pathname);
 
 		this._onRoute(pathname);
 	}
 
-	public back() {
+	public back(): void {
 		this.history.back();
 	}
 
-	public forward() {
+	public forward(): void {
 		this.history.forward();
 	}
 
-	private getRoute(pathname: string) {
-		return this.routes.find(route => route.match(pathname));
+	private _getRoute(pathname: string) {
+		return this.routes.find((route) => route.match(pathname));
 	}
 }
 

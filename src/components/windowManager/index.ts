@@ -3,8 +3,7 @@ import Block, { Props } from '../../utils/Block';
 export default class WindowManager extends Block {
 	constructor(props: Props) {
 		super({
-			...props
-
+			...props,
 		});
 	}
 

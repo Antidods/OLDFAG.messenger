@@ -5,11 +5,8 @@ type Indexed<T = any> = {
 };
 
 export function isObject(item: any): boolean {
-	return typeof item === 'object'
-		&& !Array.isArray(item)
-		&& item !== null;
+	return typeof item === 'object' && !Array.isArray(item) && item !== null;
 }
-
 
 export function merge(lhs: any, ...rhs: any): any {
 	if (!rhs.length) return lhs;
@@ -18,13 +15,14 @@ export function merge(lhs: any, ...rhs: any): any {
 	if (isObject(lhs) && isObject(source)) {
 		for (const key in source) {
 			if (isObject(source[key])) {
-				if (!lhs[key]) Object.assign(lhs, {
-					[key]: {}
-				});
+				if (!lhs[key])
+					Object.assign(lhs, {
+						[key]: {},
+					});
 				merge(lhs[key], source[key]);
 			} else {
 				Object.assign(lhs, {
-					[key]: source[key]
+					[key]: source[key],
 				});
 			}
 		}
@@ -32,7 +30,11 @@ export function merge(lhs: any, ...rhs: any): any {
 	return merge(lhs, ...rhs);
 }
 
-export function set(object: Indexed | unknown, path: string | any, value: unknown): Indexed | unknown {
+export function set(
+	object: Indexed | unknown,
+	path: string | any,
+	value: unknown
+): Indexed | unknown {
 	if (!isObject(object)) return object;
 	if (typeof path !== 'string') return new Error('path must be string');
 
@@ -45,10 +47,12 @@ export function set(object: Indexed | unknown, path: string | any, value: unknow
 }
 
 export function isPlainObject(value: any): boolean {
-	return typeof value === 'object'
-		&& value !== null
-		&& value.constructor === Object
-		&& Object.prototype.toString.call(value) === '[object Object]';
+	return (
+		typeof value === 'object' &&
+		value !== null &&
+		value.constructor === Object &&
+		Object.prototype.toString.call(value) === '[object Object]'
+	);
 }
 
 export function isArray(value: any): value is [] {
@@ -82,7 +86,5 @@ export function isEqual(lhs: any, rhs: any) {
 		}
 	}
 
-
 	return true;
 }
-

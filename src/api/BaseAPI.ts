@@ -15,4 +15,3 @@ export default abstract class BaseAPI {
 
 	public abstract delete?(identifier: string): Promise<unknown>;
 }
-
