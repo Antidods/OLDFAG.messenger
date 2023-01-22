@@ -1,7 +1,7 @@
 import Block from '../../utils/Block';
 import { PropsWithRouter, withRouter } from '../../hocs/withRouter';
 
-interface LinkProps extends PropsWithRouter {
+interface ILinkProps extends PropsWithRouter {
 	to: string;
 	label: string;
 	class?: string;
@@ -11,7 +11,7 @@ interface LinkProps extends PropsWithRouter {
 }
 
 class BaseLink extends Block {
-	constructor(props: LinkProps) {
+	constructor(props: ILinkProps) {
 		super({
 			...props,
 			events: {

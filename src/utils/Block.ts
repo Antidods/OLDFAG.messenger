@@ -10,37 +10,37 @@ export type Props = {
 };
 export type Children = Record<string, Block>;
 
-class Block {
+class Block<P extends Record<string, any> = any> {
 	static EVENTS = {
 		INIT: 'init',
 		FLOW_CDM: 'flow:component-did-mount',
 		FLOW_CDU: 'flow:component-did-update',
-		FLOW_RENDER: 'flow:render',
+		FLOW_RENDER: 'flow:render'
 	} as const;
 
 	private _id: string = nanoid(6);
 
 	public id = this._id;
 
-	protected props: Props;
+	protected props: P;
 
-	public children: Children;
+	public children: Record<string, Block | Block[]>;
 
 	private eventBus: () => EventBus;
 
 	private _element: HTMLElement | null = null;
 
 	// @ts-ignore
-	private _meta: { props: Props; tagName?: string };
+	private _meta: { props: P; tagName?: string };
 
-	public constructor(propsWithChildren: Props, tagName?: string) {
+	public constructor(propsWithChildren: P, tagName?: string) {
 		const eventBus = new EventBus();
 
 		const { props, children } = this._getChildrenAndProps(propsWithChildren);
 
 		this._meta = {
 			props,
-			tagName,
+			tagName
 		};
 
 		this.children = children;
@@ -54,28 +54,25 @@ class Block {
 	}
 
 	// Определяем, что является компонентом
-	private _getChildrenAndProps(childrenAndProps: Props): {
-		props: Props;
-		children: Children;
-	} {
-		const props: Props = {};
-		const children: Children = {};
+	private _getChildrenAndProps(childrenAndProps: P): { props: P, children: Record<string, Block | Block[]> } {
+		const props: Record<string, unknown> = {};
+		const children: Record<string, Block | Block[]> = {};
 
 		Object.entries(childrenAndProps).forEach(([key, value]) => {
-			if (value instanceof Block) {
+			if (Array.isArray(value) && value.length > 0 && value.every(v => v instanceof Block)) {
+				children[key as string] = value;
+			} else if (value instanceof Block) {
 				children[key as string] = value;
 			} else {
 				props[key] = value;
 			}
 		});
-		return {
-			props: props as Props,
-			children,
-		};
+
+		return { props: props as P, children };
 	}
 
 	private _addEvents() {
-		const { events = {} } = this.props as Props & {
+		const { events = {} } = this.props as P & {
 			events: Record<string, () => void>;
 		};
 
@@ -91,7 +88,8 @@ class Block {
 		eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
 	}
 
-	private _createResources() {}
+	private _createResources() {
+	}
 
 	// Создаёт элемент обёртку и вызывает событие FLOW_RENDER
 	private _init() {
@@ -100,35 +98,42 @@ class Block {
 		this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
 	}
 
-	public init() {}
+	protected init() {
+	}
 
 	private _componentDidMount() {
 		this.componentDidMount();
 	}
 
-	protected componentDidMount() {}
+	protected componentDidMount() {
+	}
 
 	// Событие вызывается снаружи, т.к. объект сам не сможет определить,
 	// что он появился на странице
 	public dispatchComponentDidMount() {
 		this.eventBus().emit(Block.EVENTS.FLOW_CDM);
 
-		Object.values(this.children).forEach((child) => child.dispatchComponentDidMount());
+		Object.values(this.children).forEach(child => {
+			if (Array.isArray(child)) {
+				child.forEach(ch => ch.dispatchComponentDidMount());
+			} else {
+				child.dispatchComponentDidMount();
+			}
+		});
 	}
 
-	private _componentDidUpdate(oldProps: Props, newProps: Props) {
+	private _componentDidUpdate(oldProps: P, newProps: P) {
 		if (this.componentDidUpdate(oldProps, newProps)) {
 			this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
 		}
 	}
 
-	// @ts-ignore
-	protected componentDidUpdate(oldProps: Props | undefined, newProps: Props | undefined) {
+	protected componentDidUpdate(oldProps: P | undefined, newProps: P | undefined) {
 		return isEqual(oldProps, newProps);
 	}
 
-	// Функция изменения пропсов
-	public setProps = (nextProps: Props) => {
+
+	public setProps = (nextProps: P) => {
 		if (!nextProps) {
 			return;
 		}
@@ -143,7 +148,7 @@ class Block {
 		const template = this.render();
 		const fragment = this.compile(template, {
 			...this.props,
-			children: this.children,
+			children: this.children
 		});
 		const newElement = fragment.firstElementChild as HTMLElement;
 		this._element?.replaceWith(newElement);
@@ -154,24 +159,40 @@ class Block {
 	protected compile(template: string, context: any) {
 		const contextAndStubs = { ...context };
 		Object.entries(this.children).forEach(([name, component]) => {
-			contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
+			if (Array.isArray(component)) {
+				contextAndStubs[name] = component.map(child => `<div data-id='${child.id}'></div>`);
+			} else {
+				contextAndStubs[name] = `<div data-id='${component.id}'></div>`;
+			}
 		});
 		const compiled = Handlebars.compile(template);
 		const temp = document.createElement('template');
 		temp.innerHTML = compiled(contextAndStubs);
-		Object.entries(this.children).forEach(([, component]: [string, Block]) => {
-			const stub = temp.content.querySelector(`[data-id="${component._id}"]`);
+		const replaceStub = (component: Block) => {
+			const stub = temp.content.querySelector(`[data-id="${component.id}"]`);
+
 			if (!stub) {
 				return;
 			}
+
 			component.getContent()?.append(...Array.from(stub.childNodes));
+
 			stub.replaceWith(component.getContent()!);
+		};
+
+		Object.entries(this.children).forEach(([_, component]) => {
+			if (Array.isArray(component)) {
+				component.forEach(replaceStub);
+			} else {
+				replaceStub(component);
+			}
 		});
+
 		return temp.content;
 	}
 
 	// Переопределяется наследниками, этот метод должен вернуть разметку
-	public render() {
+	protected render() {
 		return '';
 	}
 
@@ -179,7 +200,7 @@ class Block {
 		return this.element;
 	}
 
-	private _makePropsProxy(props: Props) {
+	private _makePropsProxy(props: P) {
 		const self = this;
 
 		return new Proxy(props, {
@@ -190,13 +211,13 @@ class Block {
 			set(target, prop: string, value) {
 				const oldTarget = { ...target };
 
-				target[prop as keyof Props] = value;
+				target[prop as keyof P] = value;
 				self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
 				return true;
 			},
 			deleteProperty() {
 				throw new Error('Нет доступа');
-			},
+			}
 		});
 	}
 
