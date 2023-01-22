@@ -1,5 +1,5 @@
 import BaseAPI from './BaseAPI';
-import { IChatUsersRequest, ICreateChat } from '../types/Chats';
+import { IChatUsersRequest, ICreateChat } from '../types';
 
 export default class ChatsAPI extends BaseAPI {
 	constructor() {
@@ -10,8 +10,10 @@ export default class ChatsAPI extends BaseAPI {
 		return this.http.get('', { data });
 	}
 
-	getToken(id: string) {
-		return this.http.post(`/token/${id}`);
+	async getToken(id: number) {
+		const response: any = await this.http.post(`/token/${id}`);
+
+		return response.token;
 	}
 
 	addChat(data: ICreateChat) {

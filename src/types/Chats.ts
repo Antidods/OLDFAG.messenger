@@ -1,11 +1,31 @@
 import { IUser } from './user';
 
-export interface IChatItem {
+export interface IChatProps {
+	id: number;
+	title: string;
+	avatar?: string;
+	unread_count: number;
+	selectedChat: IChatInfo;
+	last_message?: ILastMessage;
+	events?: {
+		click: () => void;
+	};
+}
+
+export interface IChatInfo {
 	id: number;
 	title: string;
 	avatar: string;
 	unread_count: number;
-	last_message?: ILastMessage;
+	last_message: {
+		user: IUser;
+		time: string;
+		content: string;
+	};
+}
+
+export interface ChatsListProps {
+	chats: IChatInfo[];
 }
 
 export interface ICreateChat {

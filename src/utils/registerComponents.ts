@@ -4,7 +4,6 @@ import Block from './Block';
 import Button from '../components/button';
 import WindowManager from '../components/windowManager';
 import StatusBar from '../components/statusBar';
-import ChatListItem from '../components/chatListItem';
 import InputValidate from '../components/inputValidate';
 import FormField from '../components/formField';
 
@@ -25,7 +24,6 @@ export const COMPONENTS = {
 	windowManager: WindowManager,
 	button: Button,
 	statusBar: StatusBar,
-	chatListItem: ChatListItem,
 	inputValidate: InputValidate,
 	formField: FormField,
 };

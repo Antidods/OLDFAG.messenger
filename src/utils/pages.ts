@@ -1,6 +1,6 @@
 import LoginPage from '../pages/login';
 import Registration from '../pages/registration';
-import Chat from '../pages/chat';
+import Chat from '../pages/messenger';
 import registrationAllComponents from './registerComponents';
 import UserSettings from '../pages/userSettings';
 import ErrorPage from '../pages/error';

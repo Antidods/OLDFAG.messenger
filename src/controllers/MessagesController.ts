@@ -10,7 +10,7 @@ class MessagesController {
 			return;
 		}
 
-		const userId = store.getState().user.id;
+		const userId = store.getState().user?.id;
 
 		const wsTransport = new WSTransport(
 			`wss://ya-praktikum.tech/ws/chats/${userId}/${id}/${token}`
@@ -20,11 +20,11 @@ class MessagesController {
 
 		await wsTransport.connect();
 
-		this.subscribe(wsTransport, id);
+		this._subscribe(wsTransport, id);
 		this.fetchOldMessages(id);
 	}
 
-	sendMessage(id: number, message: string) {
+	public sendMessage(id: number, message: string) {
 		const socket = this.sockets.get(id);
 
 		if (!socket) {
@@ -37,7 +37,7 @@ class MessagesController {
 		});
 	}
 
-	fetchOldMessages(id: number) {
+	public fetchOldMessages(id: number) {
 		const socket = this.sockets.get(id);
 
 		if (!socket) {
@@ -47,11 +47,11 @@ class MessagesController {
 		socket.send({ type: 'get old', content: '0' });
 	}
 
-	closeAll() {
+	public closeAll() {
 		Array.from(this.sockets.values()).forEach((socket) => socket.close());
 	}
 
-	private onMessage(id: number, messages: IMessage | IMessage[]) {
+	private _onMessage(id: number, messages: IMessage | IMessage[]) {
 		let messagesToAdd: IMessage[] = [];
 
 		if (Array.isArray(messages)) {
@@ -67,13 +67,13 @@ class MessagesController {
 		store.set(`messages.${id}`, messagesToAdd);
 	}
 
-	private onClose(id: number) {
+	private _onClose(id: number) {
 		this.sockets.delete(id);
 	}
 
-	private subscribe(transport: WSTransport, id: number) {
-		transport.on(WSTransportEvents.Message, (message) => this.onMessage(id, message));
-		transport.on(WSTransportEvents.Close, () => this.onClose(id));
+	private _subscribe(transport: WSTransport, id: number) {
+		transport.on(WSTransportEvents.Message, (message) => this._onMessage(id, message));
+		transport.on(WSTransportEvents.Close, () => this._onClose(id));
 	}
 }
 

@@ -23,6 +23,18 @@ export default class InputValidate extends Block {
 		});
 	}
 
+	public setValue(value: string) {
+		(this.element as HTMLInputElement).value = value;
+	}
+
+	public getName() {
+		return (this.element as HTMLInputElement).name;
+	}
+
+	public getValue() {
+		return (this.element as HTMLInputElement).value;
+	}
+
 	render() {
 		// language=hbs
 		return `
@@ -34,6 +46,7 @@ export default class InputValidate extends Block {
                 name="{{name}}"
             {{/if}}
                 value="{{value}}"
+                placeholder="{{placeholder}}"
             {{#if required}}
                 required
             {{/if}}

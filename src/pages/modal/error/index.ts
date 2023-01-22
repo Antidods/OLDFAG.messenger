@@ -13,7 +13,7 @@ export default class ErrorModal extends Block {
         <div class="modal-cover">
             <div class="main-window ">
                 <header class="main-window__top-line ">
-                    <h1>Вход</h1>
+                    <h1>Модалка</h1>
                     {{{windowManager variation="close" }}}
                 </header>
                 <main class="container_column_center" style="padding: 40px">

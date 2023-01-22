@@ -1,6 +1,6 @@
 import LoginPage from './src/pages/login';
 import Registration from './src/pages/registration';
-import Chat from './src/pages/chat';
+import Chat from './src/pages/messenger';
 import AuthController from './src/controllers/AuthController';
 import registrationAllComponents from './src/utils/registerComponents';
 import Profile from './src/pages/userSettings';

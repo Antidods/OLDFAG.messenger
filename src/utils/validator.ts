@@ -38,12 +38,14 @@ export const checkValueValidity = (
 export const checkElementValidity = (input: any) => {
 	const validStatus: boolean = checkValueValidity(input.name, input.value).validateStatus;
 	const { errorMessage } = checkValueValidity(input.name, input.value);
-	const sibling: HTMLElement | any = input.nextElementSibling;
-	input.dataset.valid = validStatus.toString();
-	if (!input.value) {
-		sibling.textContent = 'поле не должно быть пустым';
-	} else {
-		sibling.textContent = errorMessage || '';
+	if (input.name !== 'message') {
+		const sibling: HTMLElement | any = input.nextElementSibling;
+		input.dataset.valid = validStatus.toString();
+		if (!input.value) {
+			sibling.textContent = 'поле не должно быть пустым';
+		} else {
+			sibling.textContent = errorMessage || '';
+		}
 	}
 };
 

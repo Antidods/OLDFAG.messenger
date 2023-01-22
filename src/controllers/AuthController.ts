@@ -2,6 +2,7 @@ import API, { AuthAPI } from '../api/AuthAPI';
 import { ISigninData, ISignupData } from '../types';
 import store from '../utils/Store';
 import router from '../utils/Router';
+import MessagesController from './MessagesController';
 
 export class AuthController {
 	private readonly api: AuthAPI;
@@ -47,7 +48,7 @@ export class AuthController {
 	}
 
 	public async updateUserName(username: string) {
-		const { username: oldUsername } = store.getState().user;
+		const oldUsername = store.getState().user;
 
 		store.set('user.username', username);
 
@@ -68,6 +69,7 @@ export class AuthController {
 	public async logout() {
 		try {
 			await this.api.logout();
+			MessagesController.closeAll();
 			store.set('user', undefined);
 			router.go('/');
 			console.log('Выполнен выход из аккаунта на сервере');

@@ -1,8 +1,8 @@
 import ChatsAPI from '../api/ChatsAPI';
 import store from '../utils/Store';
-import { IChatUsersRequest, ICreateChat } from '../types/Chats';
+import { IChatUsersRequest, ICreateChat, IUser } from '../types';
 import UserController from './UserController';
-import { IUser } from '../types';
+import MessagesController from './MessagesController';
 
 class ChatsController {
 	private api: ChatsAPI;
@@ -13,20 +13,31 @@ class ChatsController {
 		this.api = new ChatsAPI();
 	}
 
+	getToken(id: number) {
+		return this.api.getToken(id);
+	}
+
 	async getChats() {
 		const chatList = await this.api.getChats({
 			offset: 0,
 			limit: 50,
 		});
 
-		store.set('chatList', chatList);
+		store.set('chats', chatList);
 		store.emit('updated');
+	}
+
+	public async selectChat(id: number) {
+		store.set('selectedChat', id);
+		const token = await this.getToken(id);
+		console.log(token);
+		await MessagesController.connect(id, token);
 	}
 
 	async addChat(data: ICreateChat) {
 		await this.api.addChat(data);
 
-		this.getChats();
+		await this.getChats();
 	}
 
 	async addUser(data: Record<string, unknown>) {

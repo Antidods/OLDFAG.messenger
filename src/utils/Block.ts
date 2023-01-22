@@ -15,7 +15,7 @@ class Block<P extends Record<string, any> = any> {
 		INIT: 'init',
 		FLOW_CDM: 'flow:component-did-mount',
 		FLOW_CDU: 'flow:component-did-update',
-		FLOW_RENDER: 'flow:render'
+		FLOW_RENDER: 'flow:render',
 	} as const;
 
 	private _id: string = nanoid(6);
@@ -33,14 +33,13 @@ class Block<P extends Record<string, any> = any> {
 	// @ts-ignore
 	private _meta: { props: P; tagName?: string };
 
-	public constructor(propsWithChildren: P, tagName?: string) {
+	public constructor(propsWithChildren: P) {
 		const eventBus = new EventBus();
 
 		const { props, children } = this._getChildrenAndProps(propsWithChildren);
 
 		this._meta = {
 			props,
-			tagName
 		};
 
 		this.children = children;
@@ -54,12 +53,15 @@ class Block<P extends Record<string, any> = any> {
 	}
 
 	// Определяем, что является компонентом
-	private _getChildrenAndProps(childrenAndProps: P): { props: P, children: Record<string, Block | Block[]> } {
+	private _getChildrenAndProps(childrenAndProps: P): {
+		props: P;
+		children: Record<string, Block | Block[]>;
+	} {
 		const props: Record<string, unknown> = {};
 		const children: Record<string, Block | Block[]> = {};
 
 		Object.entries(childrenAndProps).forEach(([key, value]) => {
-			if (Array.isArray(value) && value.length > 0 && value.every(v => v instanceof Block)) {
+			if (Array.isArray(value) && value.length > 0 && value.every((v) => v instanceof Block)) {
 				children[key as string] = value;
 			} else if (value instanceof Block) {
 				children[key as string] = value;
@@ -88,8 +90,7 @@ class Block<P extends Record<string, any> = any> {
 		eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
 	}
 
-	private _createResources() {
-	}
+	private _createResources() {}
 
 	// Создаёт элемент обёртку и вызывает событие FLOW_RENDER
 	private _init() {
@@ -98,24 +99,22 @@ class Block<P extends Record<string, any> = any> {
 		this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
 	}
 
-	protected init() {
-	}
+	protected init() {}
 
 	private _componentDidMount() {
 		this.componentDidMount();
 	}
 
-	protected componentDidMount() {
-	}
+	protected componentDidMount() {}
 
 	// Событие вызывается снаружи, т.к. объект сам не сможет определить,
 	// что он появился на странице
 	public dispatchComponentDidMount() {
 		this.eventBus().emit(Block.EVENTS.FLOW_CDM);
 
-		Object.values(this.children).forEach(child => {
+		Object.values(this.children).forEach((child) => {
 			if (Array.isArray(child)) {
-				child.forEach(ch => ch.dispatchComponentDidMount());
+				child.forEach((ch) => ch.dispatchComponentDidMount());
 			} else {
 				child.dispatchComponentDidMount();
 			}
@@ -132,7 +131,6 @@ class Block<P extends Record<string, any> = any> {
 		return isEqual(oldProps, newProps);
 	}
 
-
 	public setProps = (nextProps: P) => {
 		if (!nextProps) {
 			return;
@@ -148,7 +146,7 @@ class Block<P extends Record<string, any> = any> {
 		const template = this.render();
 		const fragment = this.compile(template, {
 			...this.props,
-			children: this.children
+			children: this.children,
 		});
 		const newElement = fragment.firstElementChild as HTMLElement;
 		this._element?.replaceWith(newElement);
@@ -160,7 +158,7 @@ class Block<P extends Record<string, any> = any> {
 		const contextAndStubs = { ...context };
 		Object.entries(this.children).forEach(([name, component]) => {
 			if (Array.isArray(component)) {
-				contextAndStubs[name] = component.map(child => `<div data-id='${child.id}'></div>`);
+				contextAndStubs[name] = component.map((child) => `<div data-id='${child.id}'></div>`);
 			} else {
 				contextAndStubs[name] = `<div data-id='${component.id}'></div>`;
 			}
@@ -217,7 +215,7 @@ class Block<P extends Record<string, any> = any> {
 			},
 			deleteProperty() {
 				throw new Error('Нет доступа');
-			}
+			},
 		});
 	}
 
