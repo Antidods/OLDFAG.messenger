@@ -9,9 +9,6 @@ class MessengerBase extends Block<IMessengerProps> {
 		super(props);
 	}
 
-	protected init() {
-		this.children.messages = this.createMessages(this.props);
-	}
 
 	protected componentDidUpdate(oldProps: IMessengerProps, newProps: IMessengerProps): boolean {
 		if (!isEqual(oldProps, newProps)) {
@@ -24,7 +21,7 @@ class MessengerBase extends Block<IMessengerProps> {
 		return props.messages.map((data) => {
 			return new Message({
 				...data,
-				isMine: props.userId === data.user_id,
+				isMine: props.userId === data.user_id
 			});
 		});
 	}
@@ -32,18 +29,18 @@ class MessengerBase extends Block<IMessengerProps> {
 	protected render() {
 		// language=hbs
 		return `
-        <div class="{{ styles.messenger }}">
-            {{#if selectedChat }}
+        {{#if selectedChat }}
+            <div class="message-field">
+                {{#each messages}}
+                    {{{this}}}
+                {{/each}}</div>
 
-                <div class="{{ styles.messenger__messages }}">
-                    {{#each messages}}
-                        {{{this}}}
-                    {{/each}}
-                </div>
-            {{else}}
-                Выбирете чат
-            {{/if}}
-        </div>
+        {{else}}
+            <div class='message-field__no-selected-chat'>
+                выберете чат
+            </div>
+        {{/if}}
+
 		`;
 	}
 }
@@ -55,7 +52,7 @@ const withSelectedChatMessages = withStore((state) => {
 		return {
 			messages: [],
 			selectedChat: undefined,
-			userId: state.user?.id,
+			userId: state.user?.id
 		};
 	}
 
@@ -63,7 +60,7 @@ const withSelectedChatMessages = withStore((state) => {
 		// @ts-ignore
 		messages: (state.messages || {})[selectedChatId] || [],
 		selectedChat: state.selectedChat,
-		userId: state.user?.id,
+		userId: state.user?.id
 	};
 });
 

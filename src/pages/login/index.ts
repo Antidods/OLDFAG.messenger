@@ -18,29 +18,33 @@ export default class LoginPage extends Block {
 				if (logForm.dataset.valid === 'true') {
 					AuthController.signin(data as ISigninData);
 				}
-			},
+			}
 		});
 	}
 
 	init() {
+
+		AuthController.loggingCheck();
+
 		this.children.linkRegistartion = <Block>new Link({
 			label: 'Регистрация',
 			to: '/register',
-			class: 'button',
+			class: 'button'
 		});
 
 		this.children.login = <Block>new FormField({
 			type: 'text',
 			name: 'login',
-			label: 'Логин',
+			label: 'Логин'
 		});
 
 		this.children.password = <Block>new FormField({
 			type: 'password',
 			name: 'password',
-			label: 'Пароль',
+			label: 'Пароль'
 		});
 	}
+
 
 	render() {
 		// language=hbs

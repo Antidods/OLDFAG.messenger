@@ -6,12 +6,7 @@ class selectedChatInfoBase extends Block {
 		super({
 			...props,
 			events: {
-				click: () => {
-					console.log('---------------');
-					console.log('Активный чат');
-					console.log(this.props.selectedChat);
-					console.log('---------------');
-				},
+				click: () => {},
 			},
 		});
 	}

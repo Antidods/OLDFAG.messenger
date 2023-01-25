@@ -1,5 +1,5 @@
 import API, { AuthAPI } from '../api/AuthAPI';
-import { ISigninData, ISignupData } from '../types';
+import { IResponse, ISigninData, ISignupData } from '../types';
 import store from '../utils/Store';
 import router from '../utils/Router';
 import MessagesController from './MessagesController';
@@ -14,32 +14,52 @@ export class AuthController {
 	public async signin(SigninData: ISigninData) {
 		try {
 			await this.api.signin(SigninData);
-			this.fetchUser();
-
-			router.go('/chat');
-		} catch (e: any) {
-			if (e.reason === 'User already in system') {
-				router.go('/chat');
+			await this.fetchUser();
+			router.go('/messenger');
+		} catch (e:unknown) {
+			const error = e as IResponse;
+			if (error.reason === 'User already in system') {
+				router.go('/messenger');
 			} else {
-				console.log('Ошибка при входе', e);
+				console.log('Ошибка при входе', error.reason);
 			}
 		}
 	}
+
+	public async loggingCheck() {
+		try {
+			await this.fetchUser();
+			router.go('/messenger');
+		} catch (e: unknown) {
+			const error = e as IResponse;
+			if (error.reason === 'Cookie is not valid') {
+				router.go('/');
+			} else  {
+				console.error('Ошибка при проверки нахождения пользователя в системе', e);
+			}
+		}
+	}
+
 
 	public async signup(SignupData: ISignupData) {
 		try {
 			await this.api.signup(SignupData);
 			await this.fetchUser();
-			router.go('/chat');
-		} catch (e: any) {
-			store.set('user.error', e);
-			console.log(e);
+			router.go('/messenger');
+		} catch (e: unknown) {
+			const error = e as IResponse;
+			console.error('Ошибка при регистрации ', error.reason);
+			store.set('user.error', error);
 		}
+	}
+
+	public async fetchUser() {
+		const user = await this.api.read();
+		store.set('user', user);
 	}
 
 	public async fetchChats() {
 		const chats = await this.api.read();
-
 		store.set('chats', chats);
 	}
 
@@ -47,24 +67,6 @@ export class AuthController {
 		store.set('selectedChat', id);
 	}
 
-	public async updateUserName(username: string) {
-		const oldUsername = store.getState().user;
-
-		store.set('user.username', username);
-
-		// @ts-ignore
-		const result = await this.api.update({ username });
-
-		if (!result) {
-			store.set('user.username', oldUsername);
-		}
-	}
-
-	public async fetchUser() {
-		const user = await this.api.read();
-		store.set('user', user);
-		console.log('Выполнен fetchUser()', store.getState());
-	}
 
 	public async logout() {
 		try {
@@ -73,8 +75,9 @@ export class AuthController {
 			store.set('user', undefined);
 			router.go('/');
 			console.log('Выполнен выход из аккаунта на сервере');
-		} catch (e: any) {
-			console.error(e.message);
+		} catch (e: unknown) {
+			const error = e as IResponse;
+			console.error('Ошибка при выходе из системы', error.reason);
 		}
 	}
 }

@@ -45,7 +45,7 @@ class UserSettings extends Block {
 							error_message: `${e.reason}`,
 						});
 					} finally {
-						router.go('/chat');
+						router.go('/messenger');
 					}
 				}
 			},
@@ -63,7 +63,7 @@ class UserSettings extends Block {
 			class: 'button',
 			label: 'Назад',
 			onclick: () => {
-				router.go('/chat');
+				router.go('/messenger');
 			},
 		});
 	}

@@ -1,15 +1,40 @@
 .message {
 	padding: 15px 10px;
-	margin: 15px 0;
+	margin: 15px 20px;
+	min-height: 30px;
+	max-width: 600px;
+	background: $field;
+	box-sizing: unset;
+	hyphens: auto;
+	overflow: hidden;
+	scroll-snap-align: end;
 
-	max-width: 150px;
-
-	background: #e9ffff;
-
-	border-radius: 6px;
+	&__mine {
+		text-align: end;
+		align-items: end;
+		margin-left: auto;
+		justify-content: end;
+		background: $surface;
+	}
 }
 
-.message__mine {
-	align-self: flex-end;
-	background: #cdc1f1;
+.message-field{
+	width: 99.5%;
+	max-height: 85%;
+	margin: 2px;
+	padding: 0;
+	flex-grow: 1;
+	overflow-y: scroll;
+	overflow-x:  hidden;
+	box-sizing: border-box;
+	justify-content: end;
+	scroll-padding: 10px;
+	scroll-snap-align: end;
+	scroll-snap-type: y mandatory;
+
+
+	&_no-selected-chat{
+
+	}
 }
+

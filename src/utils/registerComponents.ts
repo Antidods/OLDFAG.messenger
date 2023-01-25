@@ -1,6 +1,5 @@
 import Handlebars from 'handlebars';
 import Block from './Block';
-
 import Button from '../components/button';
 import WindowManager from '../components/windowManager';
 import StatusBar from '../components/statusBar';
@@ -30,4 +29,5 @@ export const COMPONENTS = {
 
 export default function registrationAllComponents(): void {
 	Object.entries(COMPONENTS).map(([key, value]: [string, any]) => registerComponent(key, value));
+	console.log('регистрация компонентов');
 }

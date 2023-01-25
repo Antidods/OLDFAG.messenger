@@ -8,7 +8,7 @@ export const template =
           </div>
           <div class="main-window__spacer"></div>
           <main>
-							{{{chatList}}}
+              {{{chatList}}}
               <div class="chat">
                   <div class="chat-text-block">
                       <div class="chat-text-block__top-bar">
@@ -19,13 +19,13 @@ export const template =
                               {{{ exitButton }}}
                           </div>
                           <div class="chat-text-block__spacer"></div>
-													{{{ messenger }}}
                       </div>
+                      {{{ messenger }}}
                   </div>
                   <form class="chat-send-block" onsubmit="return false">
                       <button class="chat-send-block__clip"></button>
-											{{{ inputMessage }}}
-											{{{ buttonSubmit }}}
+                      {{{ inputMessage }}}
+                      {{{ buttonSubmit }}}
                   </form>
               </div>
           </main>

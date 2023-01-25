@@ -1,49 +1,66 @@
 import Block, { Props } from '../../../utils/Block';
-import Button from '../../../components/button';
 import UserController from '../../../controllers/UserController';
+import router from '../../../utils/Router';
 
 export default class LoadAvatar extends Block {
 	constructor(props: Props) {
 		super({
 			...props,
 			submit: () => {
-				// @ts-ignore
-				const form = document.forms.updateAvatar;
-				const file = form.elements.avatar;
-				const data: FormData = new FormData(form);
-				data.append('avatar', file.files[0]);
-				UserController.updateAvatar(data);
-			},
+				try {
+					// @ts-ignore
+					const form = document.forms.updateAvatar;
+					const file = form.elements.avatar;
+					const data: FormData = new FormData(form);
+					data.append('avatar', file.files[0]);
+					UserController.updateAvatar(data);
+					router.closeAllModal();
+				}
+					catch (e) {
+						console.error('Ошибка при загрузки аватарки');
+					}
+
+			}
+
 		});
 	}
 
-	init() {
-		this.children.submitButton = <Block>new Button({
-			label: 'Отправить',
-			class: 'button',
-		});
-	}
 
 	render() {
 		// language=hbs
 		return `
         <div class="modal-cover">
-            <div class="main-window ">
+            <div class="main-window modal">
                 <header class="main-window__top-line ">
                     <h1>Изменить аватар</h1>
                     {{{windowManager variation="close" }}}
                 </header>
                 <main class="container_column_center" style="padding: 40px">
-                    <div class="logo"></div>
-
+                    <img class="preview-avatar" id="preview" alt="" src="#">
                     <form
                             name="updateAvatar"
                             id="updateAvatar"
-                            class="container_column_start"
-														onsubmit="submit()"
+                            class="container_column_start upload-file"
+                            onsubmit="submit()"
                     >
-                        <input type="file"  id="avatar">
-                        {{{button class="button" label="Вход" form="loginForm" onclick=submit}}}
+                        <label for="avatar" class="button upload-file__label">Выберите файл</label>
+                        <input class="upload-file__input" type="file" id="avatar"
+                               onchange=" 
+																const form = document.forms.updateAvatar;
+																const file = form.elements.avatar;
+																const previewURL = window.URL.createObjectURL(file.files[0]);
+																if(file){
+																	const preview = document.getElementById('preview');
+																	preview.src = previewURL;
+																}
+															"
+                        >
+                        {{{button
+                                class="button"
+                                label="Сохранить"
+                                form="loginForm"
+                                onclick=submit
+                        }}}
                     </form>
 
                 </main>

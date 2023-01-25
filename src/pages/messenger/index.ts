@@ -14,27 +14,26 @@ import InputValidate from '../../components/inputValidate';
 class ChatPage extends Block {
 	constructor(props: Props) {
 		super({
-			...props,
+			...props
 		});
 	}
 
 	init() {
-		AuthController.fetchUser();
+		AuthController.loggingCheck();
 		ChatsController.getChats();
-
 		this.children.exitButton = new Button({
 			class: 'chat-text-block__button chat-text-block__button_exit button-img',
 			onclick: () => {
 				AuthController.logout();
 				router.go('/');
-			},
+			}
 		});
 
 		this.children.goProfile = new Button({
 			class: 'chat-text-block__button chat-text-block__button_setting button-img',
 			onclick: () => {
 				router.go('/profile');
-			},
+			}
 		});
 
 		this.children.inputMessage = new InputValidate({
@@ -43,7 +42,7 @@ class ChatPage extends Block {
 			placeholder: 'Введите сообщение ... ',
 			name: 'message',
 			id: 'message',
-			requared: true,
+			requared: true
 		});
 
 		this.children.buttonSubmit = new Button({
@@ -57,7 +56,7 @@ class ChatPage extends Block {
 				input.setValue('');
 
 				MessagesController.sendMessage(this.props.selectedChat!, message);
-			},
+			}
 		});
 
 		// @ts-ignore

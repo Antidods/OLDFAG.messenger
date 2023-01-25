@@ -93,6 +93,7 @@ class Router {
 
 		// TODO Добавить 404
 		if (!route) {
+			this.go('/404')
 			return;
 		}
 
@@ -103,7 +104,10 @@ class Router {
 		this.currentRoute = route;
 
 		route.render();
+
+
 	}
+
 
 	public setModal(Modal: any, props?: Props): void {
 		const query: string = this.rootQuery;

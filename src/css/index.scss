@@ -5,6 +5,8 @@
 @import "error";
 @import "login";
 @import "messenger";
+@import "modal";
+
 
 body {
   margin: 0;
@@ -36,7 +38,7 @@ body {
   &__top-line {
     background: linear-gradient(90deg, #000080 0%, #1083d0 100%);
     margin: 4px;
-    height: 28px;
+		min-height: 28px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -46,7 +48,6 @@ body {
   &__top-line > h1,
   &__top-line > h2 {
     @extend %fontForHeaders;
-
     color: #fff;
     margin: 0 20px;
     padding-top: 2px;
@@ -172,7 +173,15 @@ main {
       &__avatar {
         width: 50px;
         height: 50px;
+
+				&_null{
+					background-image: url("/src/assets/img/LOGO.svg");
+					background-size: contain;
+					background-position: center;
+					background-repeat: no-repeat ;
+				}
       }
+
 
       &__message {
         margin: 9px;
@@ -183,6 +192,7 @@ main {
         flex-grow: 7;
         align-items: start;
         justify-content: start;
+				max-width: 60%;
       }
 
       &__message-from {
@@ -202,6 +212,10 @@ main {
         display: flex;
         align-items: start;
         justify-content: start;
+				hyphens: auto;
+
+
+
       }
 
       &__information {
@@ -260,7 +274,9 @@ main {
     background: linear-gradient(215.45deg, #74bee5 -14.25%, #fff 24.32%);
     min-height: 92%;
     display: flex;
+		flex-direction: column;
     flex-grow: 1;
+		justify-content: space-between;
 
     &__top-bar {
       height: 70px;
@@ -331,7 +347,8 @@ main {
     &__spacer {
       @extend %colored-horizontal-spacer;
 
-      width: 45%;
+      width: 100%;
+			margin-left: 50%;
       height: 2px;
     }
   }
@@ -409,6 +426,15 @@ main {
 
 .hidden {
   display: none;
+}
+
+.modal{
+	width: 400px;
+	height: 400px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+
 }
 
 .modal-cover {

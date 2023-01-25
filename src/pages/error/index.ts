@@ -1,4 +1,5 @@
 import Block, { Props } from '../../utils/Block';
+import router from '../../utils/Router';
 
 export default class ErrorPage extends Block {
 	constructor(props: Props) {
@@ -6,7 +7,7 @@ export default class ErrorPage extends Block {
 			...props,
 			toMain: () => {
 				// @ts-ignore
-				window.PAGES.selectPage(window.PAGES.chat);
+				router.go('/messenger')
 			},
 		});
 	}

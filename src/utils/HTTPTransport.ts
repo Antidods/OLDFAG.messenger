@@ -113,39 +113,4 @@ export default class HTTPTransport {
 			}
 		});
 	};
-
-	// private request(url: string, options: Options): Promise<XMLHttpRequestResponseType> {
-	// 	const { method, data } = options;
-	//
-	// 	return new Promise((resolve, reject) => {
-	// 		const xhr = new XMLHttpRequest();
-	//
-	// 		xhr.open(method!, url);
-	//
-	// 		xhr.onreadystatechange = () => {
-	// 			if (xhr.readyState === XMLHttpRequest.DONE) {
-	// 				if (xhr.status < 400) resolve(xhr.response);
-	//
-	// 				reject(xhr.response);
-	// 			}
-	// 		};
-	//
-	// 		xhr.onabort = () => reject({ reason: 'abort' });
-	// 		xhr.onerror = () => reject({ reason: 'network error' });
-	// 		xhr.ontimeout = () => reject({ reason: 'timeout' });
-	//
-	// 		xhr.withCredentials = true;
-	// 		xhr.responseType = 'json';
-	//
-	// 		if (isPlainObject(data)) {
-	// 			xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-	// 		}
-	//
-	// 		if (method === METHODS.GET || !data) {
-	// 			xhr.send();
-	// 		} else {
-	// 			xhr.send(isPlainObject(data) ? JSON.stringify(data) : data);
-	// 		}
-	// 	});
-	// }
 }
