@@ -41,7 +41,7 @@
 }
 
 %colored-horizontal-spacer {
-  background-image: url("../assets/img/4-color-line.svg");
+  background-image: url("../img/4-color-line.svg");
   background-size: cover;
 }
 
@@ -55,7 +55,7 @@
 %button-close {
   @extend %window-manager-button;
 
-  background-image: url("../assets/icon/close.svg");
+  background-image: url("../icon/close.svg");
   background-repeat: no-repeat;
   background-position: top 3px left 4px;
 }
@@ -63,7 +63,7 @@
 %button-minimize {
   @extend %window-manager-button;
 
-  background-image: url("../assets/icon/minimize.svg");
+  background-image: url("../icon/minimize.svg");
   background-repeat: no-repeat;
   background-position: top 9px left 5px;
 }
@@ -71,7 +71,7 @@
 %button-maximize {
   @extend %window-manager-button;
 
-  background-image: url("../assets/icon/maximize.svg");
+  background-image: url("../icon/maximize.svg");
   background-repeat: no-repeat;
   background-position: top 2px left 3px;
 }
@@ -131,5 +131,5 @@
   width: 163px;
   height: 62px;
   margin: 0 auto 20px;
-  background: url("../assets/img/LOGO.svg");
+  background: url("../img/LOGO.svg");
 }

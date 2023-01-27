@@ -21,6 +21,7 @@ class ChatPage extends Block {
 	init() {
 		AuthController.loggingCheck();
 		ChatsController.getChats();
+
 		this.children.exitButton = new Button({
 			class: 'chat-text-block__button chat-text-block__button_exit button-img',
 			onclick: () => {
@@ -52,9 +53,7 @@ class ChatPage extends Block {
 				const input = this.children.inputMessage as InputValidate;
 				console.log(input.getValue());
 				const message = input.getValue();
-
 				input.setValue('');
-
 				MessagesController.sendMessage(this.props.selectedChat!, message);
 			}
 		});
@@ -66,19 +65,6 @@ class ChatPage extends Block {
 		// @ts-ignore
 		this.children.selectedChatInfo = new SelectedChatInfo({});
 	}
-
-	// protected componentDidUpdate(oldProps: IMessengerProps, newProps: IMessengerProps): boolean {
-	// 	if (!isEqual(oldProps, newProps)) {
-	// 		this.children.messages = this.createMessages(newProps);
-	// 	}
-	// 	return true;
-	// }
-	//
-	// private createMessages(props: IMessengerProps) {
-	// 	return props.messages.map((data) => {
-	// 		return new Message({ ...data, isMine: props.userId === data.user_id });
-	// 	});
-	// }
 
 	render() {
 		return template;

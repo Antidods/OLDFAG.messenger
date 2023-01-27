@@ -6,7 +6,10 @@ import ChatsController from '../../controllers/ChatsController';
 import Button from '../button';
 import { isEqual } from '../../utils/helpers';
 import { Chat } from '../chat';
-import store from '../../utils/Store';
+
+import router from '../../utils/Router';
+import UserSearch from '../../pages/modal/userSearch';
+import CreateChat from '../../pages/modal/createChat';
 
 class ChatsListBase extends Block<ChatsListProps> {
 	constructor(props: ChatsListProps) {
@@ -23,13 +26,19 @@ class ChatsListBase extends Block<ChatsListProps> {
 			label: 'Профиль',
 		});
 
+		this.children.createChatButton = new Button({
+			class: 'chat-list__button chat-list__button_add',
+			label: 'Создать',
+			onclick: () => {
+				router.setModal(CreateChat, {});
+			},
+		});
+
 		this.children.userSearchButton = new Button({
 			class: 'chat-list__button chat-list__button_search',
 			label: 'Найти',
-
 			onclick: () => {
-				// router.setModal(UserSearch, {});
-				console.log(store.getState());
+				router.setModal(UserSearch, {});
 			},
 		});
 	}
@@ -49,7 +58,6 @@ class ChatsListBase extends Block<ChatsListProps> {
 				events: {
 					click: () => {
 						ChatsController.selectChat(data.id);
-						console.log(store.getState());
 					},
 				},
 			});
@@ -61,10 +69,7 @@ class ChatsListBase extends Block<ChatsListProps> {
 		return `
         <div class="chat-list">
             <div class="chat-list__action-panel">
-                {{{button
-                        class="chat-list__button chat-list__button_add"
-                        label="добавить"
-                }}}
+                {{{ createChatButton }}}
                 {{{button
                         class="chat-list__button chat-list__button_dell"
                         label="добавить"

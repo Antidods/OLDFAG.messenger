@@ -16,7 +16,7 @@ export default class ChatsAPI extends BaseAPI {
 		return response.token;
 	}
 
-	addChat(data: ICreateChat) {
+	createChat(data: ICreateChat) {
 		return this.http.post('', { data });
 	}
 

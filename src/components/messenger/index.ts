@@ -36,7 +36,7 @@ class MessengerBase extends Block<IMessengerProps> {
                 {{/each}}</div>
 
         {{else}}
-            <div class='message-field__no-selected-chat'>
+            <div class='message-field_no-selected-chat'>
                 выберете чат
             </div>
         {{/if}}

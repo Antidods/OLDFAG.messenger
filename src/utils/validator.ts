@@ -12,6 +12,7 @@ export const checkValueValidity = (
 		second_password: /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6}/,
 		phone: /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/,
 		message: /^\s*$/,
+		chatName: /^[a-zA-Z][a-zA-Z0-9-_-]{3,20}$/,
 	};
 
 	const _errorMessage: Record<string, string> = {
@@ -24,6 +25,7 @@ export const checkValueValidity = (
 		second_password: 'пароли не совпадают',
 		phone: 'недопустимое значение',
 		message: 'сообщение содержит недопустимые символы',
+		chatName: 'недопустимое имя чата',
 	};
 
 	if (!_pattern[type]) return { validateStatus: true };

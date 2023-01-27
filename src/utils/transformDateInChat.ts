@@ -1,4 +1,5 @@
-export const transformDateInChat = (date: string): string => {
+export const transformDateInChat = (date: string | undefined): string => {
+	if(!date) return '';
 	const lastMessageDate: Date = new Date(date);
 				const lastMessageDay: number = lastMessageDate.getDay();
 				const currentDate: Date = new Date();

@@ -9,7 +9,7 @@ $field-chat: linear-gradient(215.45deg, #74bee5 -14.25%, #fff 24.32%);
 // fonts
 @font-face {
   font-family: "Press Start 2P";
-  src: url("../assets/fonts/PressStart2P-Regular.ttf");
+  src: url("../fonts/PressStart2P-Regular.ttf");
 }
 
 %fontForHeaders {
@@ -22,7 +22,7 @@ $field-chat: linear-gradient(215.45deg, #74bee5 -14.25%, #fff 24.32%);
 
 @font-face {
   font-family: "Post Pixel-7";
-  src: url("../assets/fonts/post_pixel-7.ttf");
+  src: url("../fonts/post_pixel-7.ttf");
 }
 
 %regularFont {

@@ -34,7 +34,12 @@
 
 
 	&_no-selected-chat{
-
+		@extend %fontForHeaders;
+		margin: auto;
+		display: flex;
+		overflow: hidden;
+		align-items: center;
+		justify-content: center;
 	}
 }
 

@@ -20,10 +20,9 @@ class UserController {
 	async updateProfile(data: IUser) {
 		try {
 			const newUser = await this.api.updateProfile(data);
-			console.log(newUser);
 			store.set('user', newUser);
 		} catch (e) {
-			console.log(e);
+			console.error(e);
 		} finally {
 			AuthController.fetchUser();
 			this.lockEditProfile(true);
@@ -37,7 +36,7 @@ class UserController {
 
 			router.go('/profile');
 		} catch (e: IResponse | unknown) {
-			console.log(e);
+			console.error(e);
 		}
 	}
 

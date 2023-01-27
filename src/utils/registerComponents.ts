@@ -29,5 +29,4 @@ export const COMPONENTS = {
 
 export default function registrationAllComponents(): void {
 	Object.entries(COMPONENTS).map(([key, value]: [string, any]) => registerComponent(key, value));
-	console.log('регистрация компонентов');
 }

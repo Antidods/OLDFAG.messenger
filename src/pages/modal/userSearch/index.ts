@@ -3,6 +3,7 @@ import FormField from '../../../components/formField';
 import { checkFormValidity } from '../../../utils/validator';
 import UserController from '../../../controllers/UserController';
 import { IUserSearch } from '../../../types';
+import store from '../../../utils/Store';
 
 export default class UserSearch extends Block {
 	constructor(props: Props) {
@@ -20,6 +21,9 @@ export default class UserSearch extends Block {
 	}
 
 	init() {
+		console.log(store.getState());
+		store.set('searchUser',null)
+
 		this.children.login = <Block>new FormField({
 			type: 'text',
 			name: 'login',
@@ -36,26 +40,34 @@ export default class UserSearch extends Block {
                     <h1>Поиск пользователя</h1>
                     {{{ windowManager variation="close" }}}
                 </header>
-                <main class="container_column_center" style="padding: 40px">
-                    <form
-                            name="searchUser"
-                            id="searchUser"
-                            class="container_column_start"
-                            onsubmit="submit()"
-                    >
+                <main class="container_column_start" style="padding: 40px 40px 0;">
+										{{#if searchUser}}
+												
+												
+										{{else}}
+                        <form
+                                name="searchUser"
+                                id="searchUser"
+                                class="container_column_start"
+                                onsubmit="submit()"
+																style=" min-height: 150px; justify-content: space-between;"
+                        >
 
-                        {{{ login }}}
-                        {{{ button
-                                class="button"
-                                label="Найти"
-                                form="loginForm"
-                                onclick=submit
-                        }}}
-                    </form>
+                            {{{ login }}}
+                            {{{ button
+                                    class="button"
+                                    label="Найти"
+                                    form="loginForm"
+                                    onclick=submit
+                            }}}
+                        </form>
+										{{/if}}
                     <h3>{{ message }}</h3>
                 </main>
             </div>
         </div>
 		`;
 	}
+
 }
+

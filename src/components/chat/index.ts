@@ -8,7 +8,7 @@ class ChatBase extends Block {
 		super({
 			...props,
 			messageLastDate: () => {
-				return transformDateInChat(props.last_message.time);
+				return transformDateInChat(props.last_message?.time );
 			}
 		});
 	}
@@ -27,8 +27,6 @@ class ChatBase extends Block {
                 <span class="chat-list-item__message-text">
                     {{#if last_message.content }}
                         {{last_message.content }}
-                    {{else}}
-                        id: {{ id }}
                     {{/if}}
                 </span>
             </div>

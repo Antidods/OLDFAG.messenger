@@ -30,12 +30,11 @@ class ChatsController {
 	public async selectChat(id: number) {
 		store.set('selectedChat', id);
 		const token = await this.getToken(id);
-		console.log(token);
 		await MessagesController.connect(id, token);
 	}
 
-	async addChat(data: ICreateChat) {
-		await this.api.addChat(data);
+	async createChat(data: ICreateChat) {
+		await this.api.createChat(data);
 
 		await this.getChats();
 	}

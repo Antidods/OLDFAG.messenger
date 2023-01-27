@@ -124,15 +124,15 @@ main {
       justify-content: center;
 
       &_add {
-        background-image: url("../assets/img/chat-list-add.png");
+        background-image: url("../img/chat-list-add.png");
       }
 
       &_dell {
-        background-image: url("../assets/img/chat-list-dell.png");
+        background-image: url("../img/chat-list-dell.png");
       }
 
       &_search {
-        background-image: url("../assets/img/chat-list-search.png");
+        background-image: url("../img/chat-list-search.png");
       }
     }
 
@@ -248,7 +248,7 @@ main {
         //content: "";
         min-width: 15px;
         height: 15px;
-        background-image: url("../assets/img/envelope.png");
+        background-image: url("../img/envelope.png");
         background-size: cover;
         display: flex;
         justify-content: center;
@@ -336,11 +336,11 @@ main {
       margin: 10px 30px 17px 0;
 
       &_setting {
-        background-image: url("../assets/img/chat-text-block-user-setting.png");
+        background-image: url("../img/chat-text-block-user-setting.png");
       }
 
       &_exit {
-        background-image: url("../assets/img/chat-text-block-user-exit.png");
+        background-image: url("../img/chat-text-block-user-exit.png");
       }
     }
 
@@ -366,7 +366,7 @@ main {
       box-shadow: none;
       width: 40px;
       height: 35px;
-      background-image: url("../assets/img/chat-send-block-clip.svg");
+      background-image: url("../img/chat-send-block-clip.svg");
       background-position: center;
       background-repeat: no-repeat;
       background-size: contain;
