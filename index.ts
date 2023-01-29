@@ -5,7 +5,7 @@ import Profile from './src/pages/userSettings';
 import router from './src/utils/Router';
 import Messenger from './src/pages/messenger';
 import ErrorPage from './src/pages/error';
-import  AuthController  from './src/controllers/AuthController';
+import AuthController from './src/controllers/AuthController';
 
 registrationAllComponents();
 
@@ -26,30 +26,6 @@ window.addEventListener('DOMContentLoaded', async () => {
 		.use(Routes.Profile, Profile)
 		.use(Routes.error404, ErrorPage);
 
-AuthController.loggingCheck();
-	// let isProtectedRoute = true;
-	// let currentPages = window.location.pathname;
-	//
-	// switch (currentPages) {
-	// 	case Routes.Login:
-	// 	case Routes.Register:
-	// 		isProtectedRoute = false;
-	// 		break;
-	// }
-	//
-	//
-	// try {
-	// 	await AuthController.loggingCheck();
-	// 	router.start();
-	//
-	// 	if (!isProtectedRoute) {
-	// 		router.go(Routes.Messenger);
-	// 	}
-	// } catch (e) {
-	// 	router.start();
-	//
-	// 	if (isProtectedRoute) {
-	// 		router.go(Routes.Login);
-	// 	}
-	// }
+	AuthController.loggingCheck();
+
 });

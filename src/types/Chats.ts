@@ -1,15 +1,8 @@
 import { IUser } from './user';
 
-export interface IChatProps {
-	id: number;
-	title: string;
-	avatar?: string;
-	unread_count: number;
-	selectedChat: IChatInfo;
-	last_message?: ILastMessage;
-	events?: {
-		click: () => void;
-	};
+export interface IGetChats{
+	offset: number;
+	limit: number;
 }
 
 export interface IChatInfo {

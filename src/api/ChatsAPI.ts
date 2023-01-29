@@ -1,12 +1,12 @@
 import BaseAPI from './BaseAPI';
-import { IChatUsersRequest, ICreateChat } from '../types';
+import { IChatUsersRequest, ICreateChat, IGetChats } from '../types';
 
 export default class ChatsAPI extends BaseAPI {
 	constructor() {
 		super('/chats');
 	}
 
-	getChats(data: Record<string, unknown>) {
+	getChats(data: IGetChats) {
 		return this.http.get('', { data });
 	}
 
