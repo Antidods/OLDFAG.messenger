@@ -1,9 +1,31 @@
-import  PAGES  from "./src/utils/pages";
+import LoginPage from './src/pages/login';
+import Registration from './src/pages/registration';
+import registrationAllComponents from './src/utils/registerComponents';
+import Profile from './src/pages/userSettings';
+import router from './src/utils/Router';
+import Messenger from './src/pages/messenger';
+import ErrorPage from './src/pages/error';
+import AuthController from './src/controllers/AuthController';
 
-// @ts-ignore
-window.PAGES = PAGES;
+registrationAllComponents();
 
-document.addEventListener("DOMContentLoaded", () => {
-	// @ts-ignore
-	window.PAGES.selectPage(window.PAGES.loginPage);
+
+export enum Routes {
+	Login = '/',
+	Register = '/register',
+	Messenger = '/messenger',
+	Profile = '/profile',
+	error404 = '/404'
+}
+
+window.addEventListener('DOMContentLoaded', async () => {
+	router
+		.use(Routes.Login, LoginPage)
+		.use(Routes.Register, Registration)
+		.use(Routes.Messenger, Messenger)
+		.use(Routes.Profile, Profile)
+		.use(Routes.error404, ErrorPage);
+
+	AuthController.loggingCheck();
+
 });

@@ -10,14 +10,33 @@ export default class InputValidate extends Block {
 					checkElementValidity(this.element);
 				},
 				focus: () => {
-					checkElementValidity(this.element);
-				}
-			}
+					const input: Element | null = this.element;
+					let timeout: any;
+					input?.addEventListener('keypress', () => {
+						clearTimeout(timeout);
+						timeout = setTimeout(() => {
+							checkElementValidity(this.element);
+						}, 800);
+					});
+				},
+			},
 		});
-	};
+	}
+
+	public setValue(value: string) {
+		(this.element as HTMLInputElement).value = value;
+	}
+
+	public getName() {
+		return (this.element as HTMLInputElement).name;
+	}
+
+	public getValue() {
+		return (this.element as HTMLInputElement).value;
+	}
 
 	render() {
-		//language=hbs
+		// language=hbs
 		return `
         <input
                 type="{{type}}"
@@ -27,6 +46,7 @@ export default class InputValidate extends Block {
                 name="{{name}}"
             {{/if}}
                 value="{{value}}"
+                placeholder="{{placeholder}}"
             {{#if required}}
                 required
             {{/if}}
@@ -34,15 +54,10 @@ export default class InputValidate extends Block {
                 pattern="{{pattern}}"
             {{/if}}
                 data-valid=false
+            {{#if disabled}}
+                disabled
+            {{/if}}
         >
 		`;
 	}
 }
-
-
-
-
-
-
-
-

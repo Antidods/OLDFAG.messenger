@@ -1,6 +1,7 @@
 import { nanoid } from 'nanoid';
 import Handlebars from 'handlebars';
 import EventBus from './EventBus';
+import { isEqual } from './helpers';
 
 export type Props = {
 	[key: string]: any | Block;
@@ -9,7 +10,7 @@ export type Props = {
 };
 export type Children = Record<string, Block>;
 
-class Block {
+class Block<P extends Record<string, any> = any> {
 	static EVENTS = {
 		INIT: 'init',
 		FLOW_CDM: 'flow:component-did-mount',
@@ -19,25 +20,26 @@ class Block {
 
 	private _id: string = nanoid(6);
 
-	protected props: Props;
+	public id = this._id;
 
-	public children: Children;
+	protected props: P;
+
+	public children: Record<string, Block | Block[]>;
 
 	private eventBus: () => EventBus;
 
-	private _element: any = null;
+	private _element: HTMLElement | null = null;
 
 	// @ts-ignore
 	private _meta: { props: P; tagName?: string };
 
-	protected constructor(propsWithChildren: Props, tagName?: string) {
+	public constructor(propsWithChildren: P) {
 		const eventBus = new EventBus();
 
 		const { props, children } = this._getChildrenAndProps(propsWithChildren);
 
 		this._meta = {
 			props,
-			tagName,
 		};
 
 		this.children = children;
@@ -50,29 +52,29 @@ class Block {
 		eventBus.emit(Block.EVENTS.INIT);
 	}
 
-	// Функция для определения, что является компонентом
-	private _getChildrenAndProps(childrenAndProps: Props): {
-		props: Props;
-		children: Children;
+	// Определяем, что является компонентом
+	private _getChildrenAndProps(childrenAndProps: P): {
+		props: P;
+		children: Record<string, Block | Block[]>;
 	} {
-		const props: Props = {};
-		const children: Children = {};
+		const props: Record<string, unknown> = {};
+		const children: Record<string, Block | Block[]> = {};
 
 		Object.entries(childrenAndProps).forEach(([key, value]) => {
-			if (value instanceof Block) {
+			if (Array.isArray(value) && value.length > 0 && value.every((v) => v instanceof Block)) {
+				children[key as string] = value;
+			} else if (value instanceof Block) {
 				children[key as string] = value;
 			} else {
 				props[key] = value;
 			}
 		});
-		return {
-			props: props as Props,
-			children,
-		};
+
+		return { props: props as P, children };
 	}
 
 	private _addEvents() {
-		const { events = {} } = this.props as Props & {
+		const { events = {} } = this.props as P & {
 			events: Record<string, () => void>;
 		};
 
@@ -110,22 +112,26 @@ class Block {
 	public dispatchComponentDidMount() {
 		this.eventBus().emit(Block.EVENTS.FLOW_CDM);
 
-		Object.values(this.children).forEach((child) => child.dispatchComponentDidMount());
+		Object.values(this.children).forEach((child) => {
+			if (Array.isArray(child)) {
+				child.forEach((ch) => ch.dispatchComponentDidMount());
+			} else {
+				child.dispatchComponentDidMount();
+			}
+		});
 	}
 
-	private _componentDidUpdate(oldProps: Props, newProps: Props) {
+	private _componentDidUpdate(oldProps: P, newProps: P) {
 		if (this.componentDidUpdate(oldProps, newProps)) {
 			this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
 		}
 	}
 
-	// @ts-ignore
-	protected componentDidUpdate(oldProps: Props, newProps: Props) {
-		return true;
+	protected componentDidUpdate(oldProps: P | undefined, newProps: P | undefined) {
+		return isEqual(oldProps, newProps);
 	}
 
-	// Функция изменения пропсов
-	public setProps = (nextProps: Props) => {
+	public setProps = (nextProps: P) => {
 		if (!nextProps) {
 			return;
 		}
@@ -150,21 +156,41 @@ class Block {
 
 	protected compile(template: string, context: any) {
 		const contextAndStubs = { ...context };
+		Object.entries(this.children).forEach(([name, component]) => {
+			if (Array.isArray(component)) {
+				contextAndStubs[name] = component.map((child) => `<div data-id='${child.id}'></div>`);
+			} else {
+				contextAndStubs[name] = `<div data-id='${component.id}'></div>`;
+			}
+		});
 		const compiled = Handlebars.compile(template);
 		const temp = document.createElement('template');
 		temp.innerHTML = compiled(contextAndStubs);
-		Object.entries(this.children).forEach(([, component]: [string, Block]) => {
-			const stub = temp.content.querySelector(`[data-id="${component._id}"]`);
+		const replaceStub = (component: Block) => {
+			const stub = temp.content.querySelector(`[data-id="${component.id}"]`);
+
 			if (!stub) {
 				return;
 			}
-			stub.replaceWith(component.getContent());
+
+			component.getContent()?.append(...Array.from(stub.childNodes));
+
+			stub.replaceWith(component.getContent()!);
+		};
+
+		Object.entries(this.children).forEach(([_, component]) => {
+			if (Array.isArray(component)) {
+				component.forEach(replaceStub);
+			} else {
+				replaceStub(component);
+			}
 		});
+
 		return temp.content;
 	}
 
 	// Переопределяется наследниками, этот метод должен вернуть разметку
-	public render() {
+	protected render() {
 		return '';
 	}
 
@@ -172,7 +198,7 @@ class Block {
 		return this.element;
 	}
 
-	private _makePropsProxy(props: Props) {
+	private _makePropsProxy(props: P) {
 		const self = this;
 
 		return new Proxy(props, {
@@ -183,7 +209,7 @@ class Block {
 			set(target, prop: string, value) {
 				const oldTarget = { ...target };
 
-				target[prop as keyof Props] = value;
+				target[prop as keyof P] = value;
 				self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
 				return true;
 			},

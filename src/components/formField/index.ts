@@ -3,12 +3,24 @@ import Block, { Props } from '../../utils/Block';
 export default class FormField extends Block {
 	constructor(props: Props) {
 		super({
-			...props
+			...props,
 		});
-	};
+	}
+
+	public setValue(value: string) {
+		return (this.element as HTMLInputElement).value = value;
+	}
+
+	public getName() {
+		return (this.element as HTMLInputElement).name;
+	}
+
+	public getValue() {
+		return (this.element as HTMLInputElement).value;
+	}
 
 	render() {
-		//language=hbs
+		// language=hbs
 		return `
         <div class='container_column_start' style='width: 100%'>
             <label for="{{name}}" class="login-form__field-label">{{label}}</label>
@@ -19,6 +31,7 @@ export default class FormField extends Block {
                     name=name
                     value=value
                     required=0
+										disabled=disabled
             }}}
             <label for="{{name}}"
                    class="login-form__field-label login-form__field-label_no-valid">{{error}}
@@ -27,11 +40,3 @@ export default class FormField extends Block {
 		`;
 	}
 }
-
-
-
-
-
-
-
-
