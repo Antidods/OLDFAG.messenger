@@ -9,7 +9,6 @@ class MessengerBase extends Block<IMessengerProps> {
 		super(props);
 	}
 
-
 	protected componentDidUpdate(oldProps: IMessengerProps, newProps: IMessengerProps): boolean {
 		if (!isEqual(oldProps, newProps)) {
 			this.children.messages = this.createMessages(newProps);
@@ -27,6 +26,14 @@ class MessengerBase extends Block<IMessengerProps> {
 	}
 
 	protected render() {
+
+		setTimeout(() => {
+			const element: Element | null = document.querySelector('.message-field');
+			if (element) {
+				element.scrollTop = element.scrollHeight;
+			}
+		}, 50);
+
 		// language=hbs
 		return `
         {{#if selectedChat }}
@@ -34,13 +41,11 @@ class MessengerBase extends Block<IMessengerProps> {
                 {{#each messages}}
                     {{{this}}}
                 {{/each}}</div>
-
         {{else}}
             <div class='message-field_no-selected-chat'>
                 выберете чат
             </div>
         {{/if}}
-
 		`;
 	}
 }
@@ -57,7 +62,6 @@ const withSelectedChatMessages = withStore((state) => {
 	}
 
 	return {
-		// @ts-ignore
 		messages: (state.messages || {})[selectedChatId] || [],
 		selectedChat: state.selectedChat,
 		userId: state.user?.id

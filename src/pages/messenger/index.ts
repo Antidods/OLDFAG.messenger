@@ -10,6 +10,8 @@ import { Messenger } from '../../components/messenger';
 import { SelectedChatInfo } from '../../components/selectedChatInfo';
 import MessagesController from '../../controllers/MessagesController';
 import InputValidate from '../../components/inputValidate';
+import StatusBar from '../../components/statusBar';
+
 
 class ChatPage extends Block {
 	constructor(props: Props) {
@@ -64,6 +66,8 @@ class ChatPage extends Block {
 		this.children.messenger = new Messenger({});
 		// @ts-ignore
 		this.children.selectedChatInfo = new SelectedChatInfo({});
+		// @ts-ignore
+		this.children.statusBar = new StatusBar({})
 	}
 
 	render() {

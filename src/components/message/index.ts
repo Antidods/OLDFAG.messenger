@@ -6,17 +6,7 @@ export class Message extends Block<IMessageProps> {
 		super(props);
 	}
 
-	init() {
-	setTimeout(()=>{
-		const messageField: Element | null = document.querySelector('.message-field');
-		const elem: Element | null | undefined = messageField?.lastElementChild;
-		if (elem) {
-			elem.scrollIntoView(false);
-		}
-	},50);
-	}
-
-	render(): string {
+	render() {
 		// language=hbs
 		return `
         <div class='message {{#if isMine}} message__mine{{/if}}'>
@@ -24,8 +14,5 @@ export class Message extends Block<IMessageProps> {
         </div>
 		`;
 	}
-
-
-
 }
 

@@ -1,20 +1,10 @@
 import { set } from './helpers';
 import EventBus from './EventBus';
-import { IChatInfo, IMessage, IUser } from '../types';
-// import Block from './Block';
+import { IState } from '../types';
+
 
 export enum StoreEvents {
 	Updated = 'updated',
-}
-
-export interface IState {
-	user?: IUser;
-	chats?: IChatInfo[];
-	messages?: Record<number, IMessage[]>;
-	selectedChat?: {
-		chat: IChatInfo | null;
-		messages: IChatInfo[] | [];
-	};
 }
 
 export class Store extends EventBus {

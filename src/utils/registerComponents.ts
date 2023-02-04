@@ -2,7 +2,6 @@ import Handlebars from 'handlebars';
 import Block from './Block';
 import Button from '../components/button';
 import WindowManager from '../components/windowManager';
-import StatusBar from '../components/statusBar';
 import InputValidate from '../components/inputValidate';
 import FormField from '../components/formField';
 
@@ -22,10 +21,9 @@ function registerComponent(name: string, Component: typeof Block): void {
 export const COMPONENTS = {
 	windowManager: WindowManager,
 	button: Button,
-	statusBar: StatusBar,
 	inputValidate: InputValidate,
-	formField: FormField,
-};
+	formField: FormField
+}
 
 export default function registrationAllComponents(): void {
 	Object.entries(COMPONENTS).map(([key, value]: [string, any]) => registerComponent(key, value));

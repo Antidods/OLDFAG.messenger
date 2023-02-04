@@ -15,7 +15,7 @@ main .chat-send-block__send, main .chat-text-block__user-name, main .chat-text-b
   font-family: "Post Pixel-7";
   src: url("../fonts/post_pixel-7.ttf");
 }
-main .chat-send-block__textarea, main .chat-list .chat-list-item__message-text {
+.status-bar__section, main .chat-send-block__textarea, main .chat-list .chat-list-item__message-text {
   font-family: "Post Pixel-7", ui-serif;
   font-style: normal;
   font-weight: 400;
@@ -83,7 +83,7 @@ main .chat-send-block__send, main .chat-text-block__user-name, main .chat-text-b
   font-family: "Post Pixel-7";
   src: url("../fonts/post_pixel-7.ttf");
 }
-main .chat-send-block__textarea, main .chat-list .chat-list-item__message-text {
+.status-bar__section, main .chat-send-block__textarea, main .chat-list .chat-list-item__message-text {
   font-family: "Post Pixel-7", ui-serif;
   font-style: normal;
   font-weight: 400;
@@ -275,7 +275,7 @@ main .chat-send-block__send, main .chat-text-block__user-name, main .chat-text-b
   font-family: "Post Pixel-7";
   src: url("../fonts/post_pixel-7.ttf");
 }
-main .chat-send-block__textarea, main .chat-list .chat-list-item__message-text {
+.status-bar__section, main .chat-send-block__textarea, main .chat-list .chat-list-item__message-text {
   font-family: "Post Pixel-7", ui-serif;
   font-style: normal;
   font-weight: 400;
@@ -422,7 +422,7 @@ main .chat-send-block__send, main .chat-text-block__user-name, main .chat-text-b
   font-family: "Post Pixel-7";
   src: url("../fonts/post_pixel-7.ttf");
 }
-main .chat-send-block__textarea, main .chat-list .chat-list-item__message-text {
+.status-bar__section, main .chat-send-block__textarea, main .chat-list .chat-list-item__message-text {
   font-family: "Post Pixel-7", ui-serif;
   font-style: normal;
   font-weight: 400;
@@ -777,8 +777,16 @@ main .chat-send-block__send {
 .status-bar__section {
   height: 25px;
   margin: 0 1px;
+  padding: 0 5px;
   flex-grow: 1;
-  display: block;
+  display: flex;
+  align-items: center;
+}
+.status-bar__section_right {
+  justify-content: end;
+}
+.status-bar__section_left {
+  justify-content: start;
 }
 
 .full-screen {
