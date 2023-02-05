@@ -167,7 +167,7 @@ main {
 			overflow: hidden;
 			padding-left: 8px;
 			display: flex;
-			justify-content: space-between;
+			justify-content: flex-start;
 			align-items: center;
 
 			&__avatar {

@@ -6,6 +6,7 @@ import router from './src/utils/Router';
 import Messenger from './src/pages/messenger';
 import ErrorPage from './src/pages/error';
 import AuthController from './src/controllers/AuthController';
+import './src/assets/css/index.scss';
 
 registrationAllComponents();
 
