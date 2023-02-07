@@ -3,6 +3,8 @@
 	"version": "0.9.0",
 	"description": "working project on the middle frontend developer course at yandex practicum",
 	"scripts": {
+		"docker-build": "docker build -t oldfag.messenger .",
+		"docker-run": "docker run -p 3000:3000 -d --name oldfag.messenger oldfag.messenger",
 		"dev": "webpack serve",
 		"build": "webpack",
 		"lint": "eslint . --fix && npx stylelint \"**/*.scss\" --fix"
@@ -31,7 +33,6 @@
 		"handlebars-loader": "1.7.3",
 		"html-webpack-plugin": "^5.5.0",
 		"mini-css-extract-plugin": "2.7.2",
-		"node-sass": "8.0.0",
 		"path-browserify": "1.0.1",
 		"prettier": "2.8.1",
 		"process": "0.11.10",
