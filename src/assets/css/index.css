@@ -593,7 +593,7 @@ main .chat-list .chat-list-item {
   padding-left: 8px;
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
 }
 main .chat-list .chat-list-item__avatar {
   width: 50px;

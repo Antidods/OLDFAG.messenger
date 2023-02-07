@@ -1,12 +1,12 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin').CleanWebpackPlugin;
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 
 module.exports = {
 	entry: './index.ts',
-	stats: "errors-only",
+	stats: 'errors-only',
 	resolve: {
 		extensions: ['.js', '.ts', '.css', '.scss'],
 		alias: {
@@ -22,7 +22,7 @@ module.exports = {
 	},
 	module: {
 		rules: [
-			{ test: /\.handlebars$/, loader: "handlebars-loader" },
+			{ test: /\.handlebars$/, loader: 'handlebars-loader' },
 			{
 				test: /\.(?:ico|gif|png|jpg|jpeg|svg)$/i,
 				type: 'asset/resource',
@@ -39,7 +39,6 @@ module.exports = {
 				use: [
 					MiniCssExtractPlugin.loader,
 					'css-loader',
-					'postcss-loader',
 					'sass-loader',
 				]
 			}
@@ -56,7 +55,7 @@ module.exports = {
 
 		new HtmlWebpackPlugin({
 			title: 'OLDFAG.messenger',
-			template: path.resolve(__dirname, './src/template.html'), // шаблон
+			template: path.resolve(__dirname, './src/pages/template.html'), // шаблон
 			filename: 'index.html' // название выходного файла
 		}),
 

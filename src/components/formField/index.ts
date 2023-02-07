@@ -8,7 +8,7 @@ export default class FormField extends Block {
 	}
 
 	public setValue(value: string) {
-		return (this.element as HTMLInputElement).value = value;
+		(this.element as HTMLInputElement).value = value;
 	}
 
 	public getName() {

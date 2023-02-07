@@ -1,7 +1,6 @@
-/build
-/node_modules
-/.parcel-cache
-/dist
+node_modules/
+dist/
+.idea/
+.git/
 **/*.md
-**/*.min.js
-**/*min.css
+**/*.d.*
