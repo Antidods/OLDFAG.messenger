@@ -19,4 +19,4 @@
 
 [Проект на Netlify](https://earnest-scone-dc05e4.netlify.app/)
 
-[Проект на своём VPS](https://94.158.219.206:3000/)
+[Проект на своём VPS](http://94.158.219.206:3000/)
