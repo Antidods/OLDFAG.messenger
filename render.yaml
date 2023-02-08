@@ -1,0 +1,10 @@
+services:
+  # A Docker web service
+  - type: web
+    name: oldfag.messenger
+    env: docker
+    repo: https://github.com/Antidods/middle.messenger.praktikum.yandex
+    branch: sprint4
+    rootDir: dist
+    healthCheckPath: /
+
