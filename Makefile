@@ -7,12 +7,15 @@ docker-run:
 dev:
 	webpack serve
 
+start:
+	webpack && node server.js
+
 build:
 	webpack
 
 lint:
 	eslint . --fix && npx stylelint "**/*.scss" --fix
 
-testing-jest:
-	jest --src/core/Store.test.ts
+jest:
+	jest
 
