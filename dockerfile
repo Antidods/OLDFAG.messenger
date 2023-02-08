@@ -1,4 +1,4 @@
-FROM node:lts-alpine3.17
+FROM node:latest
 
 MAINTAINER Andrey Streltsov <streltsov.34rus@yandex.ru>
 
@@ -6,7 +6,7 @@ WORKDIR /var/www/app
 
 COPY package*.json ./
 
-RUN npm ci
+RUN npm install
 
 COPY . .
 
