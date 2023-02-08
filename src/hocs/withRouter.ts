@@ -1,5 +1,5 @@
-import Block from '../utils/Block';
-import Router from '../utils/Router';
+import Block from '../core/Block';
+import Router from '../core/Router';
 
 export function withRouter(Component: any) {
 	// @ts-ignore

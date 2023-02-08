@@ -1,4 +1,4 @@
-import Block, { Props } from '../../utils/Block';
+import Block, { Props } from '../../core/Block';
 import { checkFormValidity } from '../../utils/validator';
 import { Link } from '../../components/link';
 import FormField from '../../components/formField';
@@ -18,33 +18,31 @@ export default class LoginPage extends Block {
 				if (logForm.dataset.valid === 'true') {
 					AuthController.signin(data as ISigninData);
 				}
-			}
+			},
 		});
 	}
 
 	init() {
-
 		AuthController.loggingCheck();
 
 		this.children.linkRegistartion = <Block>new Link({
 			label: 'Регистрация',
 			to: '/register',
-			class: 'button'
+			class: 'button',
 		});
 
 		this.children.login = <Block>new FormField({
 			type: 'text',
 			name: 'login',
-			label: 'Логин'
+			label: 'Логин',
 		});
 
 		this.children.password = <Block>new FormField({
 			type: 'password',
 			name: 'password',
-			label: 'Пароль'
+			label: 'Пароль',
 		});
 	}
-
 
 	render() {
 		// language=hbs

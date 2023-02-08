@@ -1,6 +1,6 @@
-import Block, { Props } from '../../../utils/Block';
+import Block, { Props } from '../../../core/Block';
 import UserController from '../../../controllers/UserController';
-import router from '../../../utils/Router';
+import router from '../../../core/Router';
 
 export default class LoadAvatar extends Block {
 	constructor(props: Props) {
@@ -15,16 +15,12 @@ export default class LoadAvatar extends Block {
 					data.append('avatar', file.files[0]);
 					UserController.updateAvatar(data);
 					router.closeAllModal();
+				} catch (e) {
+					console.error('Ошибка при загрузки аватарки');
 				}
-					catch (e) {
-						console.error('Ошибка при загрузки аватарки');
-					}
-
-			}
-
+			},
 		});
 	}
-
 
 	render() {
 		// language=hbs

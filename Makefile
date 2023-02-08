@@ -13,3 +13,6 @@ build:
 lint:
 	eslint . --fix && npx stylelint "**/*.scss" --fix
 
+testing-jest:
+	jest --src/core/Store.test.ts
+

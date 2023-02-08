@@ -1,5 +1,5 @@
-import Block, { Props } from '../../utils/Block';
-import router from '../../utils/Router';
+import Block, { Props } from '../../core/Block';
+import router from '../../core/Router';
 
 export default class ErrorPage extends Block {
 	constructor(props: Props) {
@@ -7,7 +7,7 @@ export default class ErrorPage extends Block {
 			...props,
 			toMain: () => {
 				// @ts-ignore
-				router.go('/messenger')
+				router.go('/messenger');
 			},
 		});
 	}

@@ -1,7 +1,7 @@
-import Block, { Props } from '../../utils/Block';
+import Block, { Props } from '../../core/Block';
 import Button from '../../components/button';
 import AuthController from '../../controllers/AuthController';
-import router from '../../utils/Router';
+import router from '../../core/Router';
 import { withAllStore } from '../../hocs/withAllStore';
 import ChatsController from '../../controllers/ChatsController';
 import { template } from './template';
@@ -12,11 +12,10 @@ import MessagesController from '../../controllers/MessagesController';
 import InputValidate from '../../components/inputValidate';
 import StatusBar from '../../components/statusBar';
 
-
 class ChatPage extends Block {
 	constructor(props: Props) {
 		super({
-			...props
+			...props,
 		});
 	}
 
@@ -29,14 +28,14 @@ class ChatPage extends Block {
 			onclick: () => {
 				AuthController.logout();
 				router.go('/');
-			}
+			},
 		});
 
 		this.children.goProfile = new Button({
 			class: 'chat-text-block__button chat-text-block__button_setting button-img',
 			onclick: () => {
 				router.go('/profile');
-			}
+			},
 		});
 
 		this.children.inputMessage = new InputValidate({
@@ -45,7 +44,7 @@ class ChatPage extends Block {
 			placeholder: 'Введите сообщение ... ',
 			name: 'message',
 			id: 'message',
-			requared: true
+			requared: true,
 		});
 
 		this.children.buttonSubmit = new Button({
@@ -57,7 +56,7 @@ class ChatPage extends Block {
 				const message = input.getValue();
 				input.setValue('');
 				MessagesController.sendMessage(this.props.selectedChat!, message);
-			}
+			},
 		});
 
 		// @ts-ignore
@@ -67,7 +66,7 @@ class ChatPage extends Block {
 		// @ts-ignore
 		this.children.selectedChatInfo = new SelectedChatInfo({});
 		// @ts-ignore
-		this.children.statusBar = new StatusBar({})
+		this.children.statusBar = new StatusBar({});
 	}
 
 	render() {

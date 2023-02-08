@@ -1,9 +1,9 @@
-import Block, { Props } from '../../../utils/Block';
+import Block, { Props } from '../../../core/Block';
 import FormField from '../../../components/formField';
 import { checkFormValidity } from '../../../utils/validator';
 import UserController from '../../../controllers/UserController';
 import { IUserSearch } from '../../../types';
-import store from '../../../utils/Store';
+import store from '../../../core/Store';
 
 export default class UserSearch extends Block {
 	constructor(props: Props) {
@@ -22,7 +22,7 @@ export default class UserSearch extends Block {
 
 	init() {
 		console.log(store.getState());
-		store.set('searchUser',null)
+		store.set('searchUser', null);
 
 		this.children.login = <Block>new FormField({
 			type: 'text',
@@ -68,6 +68,4 @@ export default class UserSearch extends Block {
         </div>
 		`;
 	}
-
 }
-

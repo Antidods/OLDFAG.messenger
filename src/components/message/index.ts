@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../core/Block';
 import { IMessageProps } from '../../types';
 
 export class Message extends Block<IMessageProps> {
@@ -15,4 +15,3 @@ export class Message extends Block<IMessageProps> {
 		`;
 	}
 }
-

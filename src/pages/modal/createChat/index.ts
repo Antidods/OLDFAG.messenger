@@ -1,4 +1,4 @@
-import Block, { Props } from '../../../utils/Block';
+import Block, { Props } from '../../../core/Block';
 import FormField from '../../../components/formField';
 import { checkFormValidity } from '../../../utils/validator';
 import { ICreateChat } from '../../../types';
@@ -16,23 +16,18 @@ export default class CreateChat extends Block {
 				const data: unknown = checkFormValidity(form);
 				console.log(data);
 				chatsController.createChat(data as ICreateChat);
-
-			}
-
+			},
 		});
 	}
 
 	init() {
 		this.children.chatName = <Block>new FormField({
 			type: 'text',
-			name:'title',
+			name: 'title',
 			id: 'chatName',
-			label: 'Название чата'
-
-
-		})
+			label: 'Название чата',
+		});
 	}
-
 
 	render() {
 		// language=hbs

@@ -1,5 +1,5 @@
 import ChatsAPI from '../api/ChatsAPI';
-import store from '../utils/Store';
+import store from '../core/Store';
 import { IChatUsersRequest, ICreateChat, IUser } from '../types';
 import UserController from './UserController';
 import MessagesController from './MessagesController';

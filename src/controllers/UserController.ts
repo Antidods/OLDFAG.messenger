@@ -1,8 +1,8 @@
 import { IPasswordData, IUser, IUserSearch, IResponse } from '../types';
 import AuthController from './AuthController';
 import API, { UserAPI } from '../api/UserAPI';
-import router from '../utils/Router';
-import store from '../utils/Store';
+import router from '../core/Router';
+import store from '../core/Store';
 import ErrorModal from '../pages/modal/error';
 
 class UserController {

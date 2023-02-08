@@ -1,4 +1,4 @@
-import Block, { Props } from '../../utils/Block';
+import Block, { Props } from '../../core/Block';
 import { checkElementValidity } from '../../utils/validator';
 
 export default class InputValidate extends Block {

@@ -1,6 +1,6 @@
-import store, {StoreEvents } from '../utils/Store';
+import store, { StoreEvents } from '../core/Store';
 import { isEqual } from '../utils/helpers';
-import { Props } from '../utils/Block';
+import { Props } from '../core/Block';
 import { IState } from '../types';
 
 export default function withStore(mapSateToProps: (sate: IState) => Record<string, unknown>) {

@@ -1,5 +1,5 @@
 import Block, { Props } from './Block';
-import { isEqual } from './helpers';
+import { isEqual } from '../utils/helpers';
 
 function render(query: string, block: Block) {
 	const root: Element | null = document.querySelector(query);
@@ -93,7 +93,7 @@ class Router {
 
 		// TODO Добавить 404
 		if (!route) {
-			this.go('/404')
+			this.go('/404');
 			return;
 		}
 
@@ -104,10 +104,7 @@ class Router {
 		this.currentRoute = route;
 
 		route.render();
-
-
 	}
-
 
 	public setModal(Modal: any, props?: Props): void {
 		const query: string = this.rootQuery;

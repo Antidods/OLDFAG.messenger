@@ -1,14 +1,12 @@
-import Block, { Props } from '../../utils/Block';
+import Block, { Props } from '../../core/Block';
 import { withAllStore } from '../../hocs/withAllStore';
 
 class StatusBarBase extends Block {
 	constructor(props: Props) {
-		super(
-			{
-				...props,
-				chatsSum: props.chats?.length,
-
-			});
+		super({
+			...props,
+			chatsSum: props.chats?.length,
+		});
 	}
 
 	render() {

@@ -1,4 +1,4 @@
-import Block, { Props } from '../../utils/Block';
+import Block, { Props } from '../../core/Block';
 
 export default class Button extends Block {
 	constructor(props: Props) {
@@ -13,6 +13,7 @@ export default class Button extends Block {
 	}
 
 	render() {
+		// language=hbs
 		return `
             <button class="{{class}}"  value="{{value}}" form="{{form}}" type="{{type}}">{{label}} </button>
         `;

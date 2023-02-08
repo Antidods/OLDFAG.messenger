@@ -1,5 +1,5 @@
 import WSTransport, { WSTransportEvents } from '../utils/WSTransport';
-import store from '../utils/Store';
+import store from '../core/Store';
 import { IMessage } from '../types';
 
 class MessagesController {

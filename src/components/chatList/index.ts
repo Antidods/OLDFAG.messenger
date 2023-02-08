@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../core/Block';
 import { ChatsListProps } from '../../types';
 import withStore from '../../hocs/withStore';
 import { Link } from '../link';
@@ -7,7 +7,7 @@ import Button from '../button';
 import { isEqual } from '../../utils/helpers';
 import { Chat } from '../chat';
 
-import router from '../../utils/Router';
+import router from '../../core/Router';
 import UserSearch from '../../pages/modal/userSearch';
 import CreateChat from '../../pages/modal/createChat';
 

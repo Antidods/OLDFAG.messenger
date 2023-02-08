@@ -1,4 +1,4 @@
-import Block, { Props } from '../../utils/Block';
+import Block, { Props } from '../../core/Block';
 import { withSelectedChat } from '../../hocs/withSelectedChat';
 
 class selectedChatInfoBase extends Block {

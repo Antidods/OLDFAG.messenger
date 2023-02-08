@@ -1,5 +1,5 @@
 import { IMessengerProps } from '../../types';
-import Block from '../../utils/Block';
+import Block from '../../core/Block';
 import withStore from '../../hocs/withStore';
 import { Message } from '../message';
 import { isEqual } from '../../utils/helpers';
@@ -20,13 +20,12 @@ class MessengerBase extends Block<IMessengerProps> {
 		return props.messages.map((data) => {
 			return new Message({
 				...data,
-				isMine: props.userId === data.user_id
+				isMine: props.userId === data.user_id,
 			});
 		});
 	}
 
 	protected render() {
-
 		setTimeout(() => {
 			const element: Element | null = document.querySelector('.message-field');
 			if (element) {
@@ -57,14 +56,14 @@ const withSelectedChatMessages = withStore((state) => {
 		return {
 			messages: [],
 			selectedChat: undefined,
-			userId: state.user?.id
+			userId: state.user?.id,
 		};
 	}
 
 	return {
 		messages: (state.messages || {})[selectedChatId] || [],
 		selectedChat: state.selectedChat,
-		userId: state.user?.id
+		userId: state.user?.id,
 	};
 });
 

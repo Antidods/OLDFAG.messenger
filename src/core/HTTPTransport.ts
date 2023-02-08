@@ -1,4 +1,4 @@
-import { isPlainObject } from './helpers';
+import { isPlainObject } from '../utils/helpers';
 
 type Options = {
 	data?: any;
@@ -25,7 +25,7 @@ function queryStringify(data: Record<string, unknown> | unknown): string {
 }
 
 export default class HTTPTransport {
-	static API_URL = 'https://ya-praktikum.tech/api/v2';
+	static API_URL = `${process.env.API_ENDPOINT}`;
 
 	protected endpoint: string;
 

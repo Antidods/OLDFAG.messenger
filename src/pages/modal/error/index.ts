@@ -1,4 +1,4 @@
-import Block, { Props } from '../../../utils/Block';
+import Block, { Props } from '../../../core/Block';
 
 export default class ErrorModal extends Block {
 	constructor(props: Props) {

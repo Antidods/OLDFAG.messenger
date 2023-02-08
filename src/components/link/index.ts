@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../core/Block';
 import { PropsWithRouter, withRouter } from '../../hocs/withRouter';
 
 interface ILinkProps extends PropsWithRouter {

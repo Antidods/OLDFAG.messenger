@@ -1,8 +1,8 @@
-import Block, { Props } from '../../utils/Block';
+import Block, { Props } from '../../core/Block';
 import { checkFormValidity } from '../../utils/validator';
 import FormField from '../../components/formField';
 import AuthController from '../../controllers/AuthController';
-import store from '../../utils/Store';
+import store from '../../core/Store';
 import { ISignupData } from '../../types';
 import { template } from './template';
 

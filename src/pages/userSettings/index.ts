@@ -1,14 +1,14 @@
-import Block, { Props } from '../../utils/Block';
+import Block, { Props } from '../../core/Block';
 import Button from '../../components/button';
 import UserController from '../../controllers/UserController';
 import { withUser } from '../../hocs/withUser';
 import AuthController from '../../controllers/AuthController';
 import { checkFormValidity } from '../../utils/validator';
 import { IUser } from '../../types';
-import router from '../../utils/Router';
+import router from '../../core/Router';
 import ErrorModal from '../modal/error';
 import LoadAvatar from '../modal/loadAvatar';
-import store from '../../utils/Store';
+import store from '../../core/Store';
 
 class UserSettings extends Block {
 	constructor(props: Props) {
@@ -85,7 +85,7 @@ class UserSettings extends Block {
                          alt="avatar" class="user-settings__avatar"
                     >
                 {{else}}
-                    <img src="avatar-substitute.svg"
+                    <img src="#"
                          alt="avatar" class="user-settings__avatar"
                     >
                 {{/if}}

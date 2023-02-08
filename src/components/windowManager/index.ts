@@ -1,4 +1,4 @@
-import Block, { Props } from '../../utils/Block';
+import Block, { Props } from '../../core/Block';
 
 export default class WindowManager extends Block {
 	constructor(props: Props) {
@@ -11,7 +11,7 @@ export default class WindowManager extends Block {
 		if (this.props.variation === 'close') {
 			// language=hbs
 			return `
-          <div class="main-window__manager">
+          <div class="main-window__manager" data-testid="window-manager">
               <button class="main-window__manager_close" id="main-window-close"
                       onclick="{
                                 this.closest('.main-window').classList.add('hidden');                             

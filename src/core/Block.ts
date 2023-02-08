@@ -1,7 +1,7 @@
-import { nanoid } from 'nanoid';
 import Handlebars from 'handlebars';
+import { v4 as uuidv4 } from 'uuid';
 import EventBus from './EventBus';
-import { isEqual } from './helpers';
+import { isEqual } from '../utils/helpers';
 
 export type Props = {
 	[key: string]: any | Block;
@@ -18,7 +18,7 @@ class Block<P extends Record<string, any> = any> {
 		FLOW_RENDER: 'flow:render',
 	} as const;
 
-	private _id: string = nanoid(6);
+	private _id: string = uuidv4();
 
 	public id = this._id;
 
@@ -136,6 +136,10 @@ class Block<P extends Record<string, any> = any> {
 			return;
 		}
 		Object.assign(this.props, nextProps);
+	};
+
+	public getProps = () => {
+		return this.props;
 	};
 
 	get element() {

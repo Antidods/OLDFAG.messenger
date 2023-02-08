@@ -1,5 +1,5 @@
 import Handlebars from 'handlebars';
-import Block from './Block';
+import Block from '../core/Block';
 import Button from '../components/button';
 import WindowManager from '../components/windowManager';
 import InputValidate from '../components/inputValidate';
@@ -22,8 +22,8 @@ export const COMPONENTS = {
 	windowManager: WindowManager,
 	button: Button,
 	inputValidate: InputValidate,
-	formField: FormField
-}
+	formField: FormField,
+};
 
 export default function registrationAllComponents(): void {
 	Object.entries(COMPONENTS).map(([key, value]: [string, any]) => registerComponent(key, value));
