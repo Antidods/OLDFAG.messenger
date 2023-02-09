@@ -10,7 +10,7 @@ export default class UserSearch extends Block {
 		super({
 			...props,
 			submit: () => {
-				event!.preventDefault();
+				// event!.preventDefault();
 				event!.stopPropagation();
 				// @ts-ignore
 				const form: any = document.forms.searchUser;
@@ -28,6 +28,16 @@ export default class UserSearch extends Block {
 			type: 'text',
 			name: 'login',
 			label: 'Логин',
+			events: {
+				submit: () => {
+					// event!.preventDefault();
+					event!.stopPropagation();
+					// @ts-ignore
+					const form: any = document.forms.searchUser;
+					const data: unknown = checkFormValidity(form);
+					UserController.searchUser(data as IUserSearch);
+				},
+			},
 		});
 	}
 
@@ -49,7 +59,7 @@ export default class UserSearch extends Block {
                                 name="searchUser"
                                 id="searchUser"
                                 class="container_column_start"
-                                onsubmit="submit()"
+                                onsubmit="return false"
 																style=" min-height: 150px; justify-content: space-between;"
                         >
 

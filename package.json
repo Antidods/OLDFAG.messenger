@@ -5,9 +5,9 @@
 	"scripts": {
 		"docker-build": "docker build -t oldfag.messenger .",
 		"docker-run": "docker run -p 3000:3000 -d --name oldfag.messenger oldfag.messenger",
-		"start": "webpack && node server.js &",
-		"dev": "webpack serve",
-		"build": "webpack",
+		"start": "webpack --mode production && node server.js &",
+		"dev": "webpack serve --open --mode development",
+		"build": "webpack --mode production",
 		"lint": "eslint . --fix && npx stylelint \"**/*.scss\" --fix",
 		"test": "jest"
 	},
@@ -24,7 +24,7 @@
 		"assert": "2.0.0",
 		"browserify-zlib": "0.2.0",
 		"buffer": "5.7.1",
-		"clean-webpack-plugin": "4.0.0",
+		"clean-webpack-plugin": "^4.0.0",
 		"copy-webpack-plugin": "11.0.0",
 		"crypto-browserify": "3.12.0",
 		"css-loader": "6.7.3",

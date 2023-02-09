@@ -16,11 +16,12 @@ module.exports = () => {
 		},
 
 		devServer: {
-			static: {
-				directory: path.join(__dirname, 'public'),
-			},
+			watchFiles: path.join(__dirname, 'src'),
+			// static: {
+			// 	directory: path.join(__dirname, 'public'),
+			// },
 			compress: true,
-			port: 3000,
+			port: 9000,
 		},
 
 		module: {
@@ -54,7 +55,9 @@ module.exports = () => {
 		mode: process.env.NODE_ENV === 'production' ? 'production' : 'development', // development & production
 
 		plugins: [
-			new CleanWebpackPlugin(),
+			new CleanWebpackPlugin({
+				dangerouslyAllowCleanPatternsOutsideProject: true,
+			}),
 
 			new Dotenv(),
 

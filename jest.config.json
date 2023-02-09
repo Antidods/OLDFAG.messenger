@@ -4,6 +4,7 @@
 	"transform": {
 		"^.+\\.[t|j]sx?$": "ts-jest"
 	},
+	"testRegex": "\\.spec\\.[jt]s?$",
 	"transformIgnorePatterns": [
 		"<rootDir>/node_modules/"
 	],

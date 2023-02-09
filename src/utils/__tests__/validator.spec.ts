@@ -90,4 +90,13 @@ describe('Проверка валидации', () => {
 
 		expect(checkValueValidity(value.type, value.value)).toHaveProperty('validateStatus', false);
 	});
+
+	it('тип "message" с значение "" не должен быть валидным', async () => {
+		const value = {
+			type: 'message',
+			value: '',
+		};
+
+		expect(checkValueValidity(value.type, value.value)).toHaveProperty('validateStatus', false);
+	});
 });
