@@ -27,7 +27,8 @@ window.addEventListener('DOMContentLoaded', async () => {
 		.use(Routes.Register, Registration)
 		.use(Routes.Messenger, Messenger)
 		.use(Routes.Profile, Profile)
-		.use(Routes.error404, ErrorPage);
+		.use(Routes.error404, ErrorPage)
+		.start();
 
 	AuthController.loggingCheck();
 });

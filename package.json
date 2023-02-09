@@ -13,6 +13,9 @@
 	},
 	"author": "Andrey Streltsov",
 	"license": "MIT",
+	"engines": {
+		"node": ">=16.0.0"
+	},
 	"devDependencies": {
 		"@testing-library/dom": "8.20.0",
 		"@testing-library/jest-dom": "5.16.5",
