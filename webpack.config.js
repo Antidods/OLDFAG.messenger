@@ -11,65 +11,55 @@ module.exports = () => {
 		resolve: {
 			extensions: ['.js', '.ts', '.css', '.scss'],
 			alias: {
-				handlebars: 'handlebars/dist/handlebars.js',
-			},
+				handlebars: 'handlebars/dist/handlebars.js'
+			}
 		},
-
+		output: {
+			path: path.resolve(__dirname, 'dist')
+		},
+		mode: process.env.NODE_ENV === 'production' ? 'production' : 'development', // development & production
 		devServer: {
 			watchFiles: path.join(__dirname, 'src'),
-			// static: {
-			// 	directory: path.join(__dirname, 'public'),
-			// },
 			compress: true,
-			port: 9000,
+			port: 9000
 		},
-
 		module: {
 			rules: [
 				{
-					test: /\.handlebars$/,
-					loader: 'handlebars-loader',
-				},
-				{
 					test: /\.(?:ico|gif|png|jpg|jpeg|svg)$/i,
-					type: 'asset/resource',
+					type: 'asset/resource'
 				},
+				// {
+				// 	test: /\.ts?$/,
+				// 	loader: 'ts-loader',
+				// 	options: {
+				// 		configFile: path.resolve(__dirname, 'tsconfig.json')
+				// 	}
+				// },
 				{
-					test: /\.tsx?$/,
-					loader: 'ts-loader',
-					options: {
-						configFile: 'tsconfig.json',
-					},
+					test: /\.(js|jsx|tsx|ts)$/,
+					exclude: /node_modules/,
+					loader: 'babel-loader'
 				},
 				{
 					test: /\.(sa|sc|c)ss$/,
-					use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
-				},
-			],
+					use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+				}
+			]
 		},
-
-		output: {
-			path: path.resolve(__dirname, 'dist'),
-		},
-
-		mode: process.env.NODE_ENV === 'production' ? 'production' : 'development', // development & production
-
 		plugins: [
 			new CleanWebpackPlugin({
-				dangerouslyAllowCleanPatternsOutsideProject: true,
+				dangerouslyAllowCleanPatternsOutsideProject: true
 			}),
-
 			new Dotenv(),
-
 			new HtmlWebpackPlugin({
 				title: 'OLDFAG.messenger',
 				template: path.resolve(__dirname, './src/pages/indexPageTemplate.html'),
-				filename: 'index.html',
+				filename: 'index.html'
 			}),
-
 			new MiniCssExtractPlugin({
-				filename: '[name].[contenthash].css',
-			}),
-		],
+				filename: '[name].[contenthash].css'
+			})
+		]
 	};
 };

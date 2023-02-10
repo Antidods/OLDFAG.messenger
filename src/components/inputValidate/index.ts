@@ -36,6 +36,7 @@ export default class InputValidate extends Block {
 	}
 
 	render() {
+		// TODO: добавить подстановку autocomplete
 		// language=hbs
 		return `
         <input
@@ -57,6 +58,7 @@ export default class InputValidate extends Block {
             {{#if disabled}}
                 disabled
             {{/if}}
+								
         >
 		`;
 	}

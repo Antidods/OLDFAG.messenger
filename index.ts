@@ -5,11 +5,8 @@ import Profile from './src/pages/userSettings';
 import router from './src/core/Router';
 import Messenger from './src/pages/messenger';
 import ErrorPage from './src/pages/error';
-import AuthController from './src/controllers/AuthController';
 import './src/assets/css/index.scss';
 import 'regenerator-runtime/runtime';
-
-// require('dotenv').config();
 
 registrationAllComponents();
 
@@ -30,5 +27,4 @@ window.addEventListener('DOMContentLoaded', async () => {
 		.use(Routes.error404, ErrorPage)
 		.start();
 
-	AuthController.loggingCheck();
 });

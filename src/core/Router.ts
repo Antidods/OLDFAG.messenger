@@ -78,20 +78,18 @@ class Router {
 	}
 
 	public start(): void {
-		// Регистрация события PopSate(событие перехода по страницам)
-		window.onpopstate = (event: PopStateEvent) => {
-			const target = event.currentTarget as Window;
-
-			this._onRoute(target.location.pathname);
+		console.log('step1');
+		window.onpopstate = () => {
+			console.log('Сработал обработчик popstate');
+			this._onRoute(window.location.pathname);
 		};
-
+		console.log('step2');
 		this._onRoute(window.location.pathname);
 	}
 
 	private _onRoute(pathname: string) {
 		const route = this._getRoute(pathname);
 
-		// TODO Добавить 404
 		if (!route) {
 			this.go('/404');
 			return;
