@@ -21,7 +21,8 @@ module.exports = () => {
 		devServer: {
 			watchFiles: path.join(__dirname, 'src'),
 			compress: true,
-			port: 9000
+			port: 9000,
+			historyApiFallback: true,
 		},
 		module: {
 			rules: [
@@ -29,17 +30,12 @@ module.exports = () => {
 					test: /\.(?:ico|gif|png|jpg|jpeg|svg)$/i,
 					type: 'asset/resource'
 				},
-				// {
-				// 	test: /\.ts?$/,
-				// 	loader: 'ts-loader',
-				// 	options: {
-				// 		configFile: path.resolve(__dirname, 'tsconfig.json')
-				// 	}
-				// },
 				{
-					test: /\.(js|jsx|tsx|ts)$/,
-					exclude: /node_modules/,
-					loader: 'babel-loader'
+					test: /\.ts?$/,
+					loader: 'ts-loader',
+					options: {
+						configFile: path.resolve(__dirname, 'tsconfig.json')
+					}
 				},
 				{
 					test: /\.(sa|sc|c)ss$/,

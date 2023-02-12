@@ -1,7 +1,6 @@
 import ChatsAPI from '../api/ChatsAPI';
 import store from '../core/Store';
-import { IChatUsersRequest, ICreateChat, IUser } from '../types';
-import UserController from './UserController';
+import { IChatUsersRequest, ICreateChat } from '../types';
 import MessagesController from './MessagesController';
 
 class ChatsController {
@@ -20,10 +19,19 @@ class ChatsController {
 	async getChats() {
 		const chatList = await this.api.getChats({
 			offset: 0,
-			limit: 50,
+			limit: 50
 		});
 
 		store.set('chats', chatList);
+		store.emit('updated');
+	}
+
+	async getChatUsers(id: string | number) {
+		const userList = await this.api.getChatUsers(id, {
+			offset: 0,
+			limit: 20
+		});
+		store.set('selectedChatUsers', userList);
 		store.emit('updated');
 	}
 
@@ -31,6 +39,7 @@ class ChatsController {
 		store.set('selectedChat', id);
 		const token = await this.getToken(id);
 		await MessagesController.connect(id, token);
+		await this.getChatUsers(id);
 	}
 
 	async createChat(data: ICreateChat) {
@@ -39,38 +48,31 @@ class ChatsController {
 		await this.getChats();
 	}
 
-	async addUser(data: Record<string, unknown>) {
-		const { login, chatId } = data;
-
-		const user = (await UserController.searchUser({
-			login: login as string,
-		})) as unknown as IUser[];
+	async addUser(data: Record<string, string | number>) {
+		const { id, chatId } = data;
 
 		const requestData: IChatUsersRequest = {
-			users: [user[0].id as number],
-			chatId: chatId as number,
+			users: [id as number],
+			chatId: chatId as number
 		};
 
 		await this.api.addUser(requestData);
 	}
 
-	async deleteUser(data: Record<string, unknown>) {
-		const { login, chatId } = data;
-
-		const user = (await UserController.searchUser({
-			login: login as string,
-		})) as unknown as IUser[];
+	async deleteUser(data: Record<string, string | number>) {
+		const { userId, chatId } = data;
 
 		const requestData: IChatUsersRequest = {
-			users: [user[0].id as number],
-			chatId: chatId as number,
+			users: [userId as number],
+			chatId: chatId as number
 		};
 
 		await this.api.deleteUser(requestData);
 	}
 
-	async deleteChat(id: string) {
-		await this.api.deleteChat(id);
+
+	async deleteChat(id: string | number) {
+		await this.api.deleteChat(id as string);
 		await this.getChats();
 		store.set('activeChat.chat.id', null);
 	}

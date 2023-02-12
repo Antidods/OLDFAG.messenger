@@ -13,7 +13,7 @@ class MessagesController {
 		const userId = store.getState().user?.id;
 
 		const wsTransport = new WSTransport(
-			`wss://ya-praktikum.tech/ws/chats/${userId}/${id}/${token}`
+			`${process.env.WSS_ENDPOINT}${userId}/${id}/${token}`
 		);
 
 		this.sockets.set(id, wsTransport);
@@ -21,7 +21,8 @@ class MessagesController {
 		await wsTransport.connect();
 
 		this._subscribe(wsTransport, id);
-		this.fetchOldMessages(id);
+		await this.fetchOldMessages(id);
+
 	}
 
 	public sendMessage(id: number, message: string) {
@@ -65,6 +66,8 @@ class MessagesController {
 		messagesToAdd = [...currentMessages, ...messagesToAdd];
 
 		store.set(`messages.${id}`, messagesToAdd);
+
+
 	}
 
 	private _onClose(id: number) {

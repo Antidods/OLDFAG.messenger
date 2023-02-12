@@ -1,4 +1,4 @@
-import { IPasswordData, IUser, IUserSearch, IResponse } from '../types';
+import { IPasswordData, IResponse, IUser, IUserSearch } from '../types';
 import AuthController from './AuthController';
 import API, { UserAPI } from '../api/UserAPI';
 import router from '../core/Router';
@@ -52,8 +52,9 @@ class UserController {
 	}
 
 	async searchUser(data: IUserSearch) {
-		const searchUser = await this.api.search(data);
-		store.set('searchUser', searchUser);
+		// TODO: редактирование контроллера, протестировать
+		// store.set('searchUser', searchUser);
+		return await this.api.search(data) as IUser[];
 	}
 }
 

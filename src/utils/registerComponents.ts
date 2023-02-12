@@ -4,6 +4,7 @@ import Button from '../components/button';
 import WindowManager from '../components/windowManager';
 import InputValidate from '../components/inputValidate';
 import FormField from '../components/formField';
+import Span from '../components/span';
 
 function registerComponent(name: string, Component: typeof Block): void {
 	Handlebars.registerHelper(name, ({ data, hash }) => {
@@ -23,6 +24,7 @@ export const COMPONENTS = {
 	button: Button,
 	inputValidate: InputValidate,
 	formField: FormField,
+	span: Span,
 };
 
 export default function registrationAllComponents(): void {

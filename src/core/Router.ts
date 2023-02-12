@@ -19,7 +19,7 @@ function setModal(query: string, modal: Block): void {
 	const root: Element | null = document.querySelector(query);
 
 	if (root === null) {
-		throw new Error(`root not found by selector "${query}"`);
+		throw new Error(`root не найден "${query}"`);
 	}
 
 	root.append(modal.getContent()!);
@@ -78,12 +78,9 @@ class Router {
 	}
 
 	public start(): void {
-		console.log('step1');
 		window.onpopstate = () => {
-			console.log('Сработал обработчик popstate');
 			this._onRoute(window.location.pathname);
 		};
-		console.log('step2');
 		this._onRoute(window.location.pathname);
 	}
 

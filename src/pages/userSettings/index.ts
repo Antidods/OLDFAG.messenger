@@ -3,6 +3,7 @@ import Button from '../../components/button';
 import UserController from '../../controllers/UserController';
 import { withUser } from '../../hocs/withUser';
 import AuthController from '../../controllers/AuthController';
+import authController from '../../controllers/AuthController';
 import { checkFormValidity } from '../../utils/validator';
 import { IUser } from '../../types';
 import router from '../../core/Router';
@@ -13,21 +14,20 @@ import store from '../../core/Store';
 class UserSettings extends Block {
 	constructor(props: Props) {
 		super({
-			...props,
+			...props
 		});
 	}
 
 	init() {
-		AuthController.fetchUser();
-
 		UserController.lockEditProfile(true);
+		AuthController.fetchUser();
 		store.emit('updated');
 		this.children.editProfileButton = <Block>new Button({
 			class: 'button user-settings__button',
 			label: 'Изменить данные',
 			onclick: () => {
 				UserController.lockEditProfile(false);
-			},
+			}
 		});
 
 		this.children.submit = <Block>new Button({
@@ -42,13 +42,15 @@ class UserSettings extends Block {
 						UserController.updateProfile(formData as IUser);
 					} catch (e: any) {
 						router.setModal(ErrorModal, {
-							error_message: `${e.reason}`,
+							error_message: `${e.reason}`
 						});
 					} finally {
+						authController.selectChats(this.props.selectedChat);
 						router.go('/messenger');
+
 					}
 				}
-			},
+			}
 		});
 
 		this.children.updateAvatarButton = <Block>new Button({
@@ -56,15 +58,17 @@ class UserSettings extends Block {
 			label: 'Загрузить аватар',
 			onclick: () => {
 				router.setModal(LoadAvatar, {});
-			},
+			}
 		});
 
 		this.children.cancelButton = <Block>new Button({
 			class: 'button',
 			label: 'Назад',
 			onclick: () => {
+				// store.emit('updated');
+				authController.selectChats(this.props.selectedChat);
 				router.go('/messenger');
-			},
+			}
 		});
 	}
 

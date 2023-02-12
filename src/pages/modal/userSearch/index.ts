@@ -1,43 +1,28 @@
 import Block, { Props } from '../../../core/Block';
 import FormField from '../../../components/formField';
-import { checkFormValidity } from '../../../utils/validator';
-import UserController from '../../../controllers/UserController';
-import { IUserSearch } from '../../../types';
-import store from '../../../core/Store';
+import router from '../../../core/Router';
+
 
 export default class UserSearch extends Block {
 	constructor(props: Props) {
 		super({
 			...props,
 			submit: () => {
-				// event!.preventDefault();
-				event!.stopPropagation();
-				// @ts-ignore
-				const form: any = document.forms.searchUser;
-				const data: unknown = checkFormValidity(form);
-				UserController.searchUser(data as IUserSearch);
+				props.submit(this.props.events);
 			},
+			clickBack: () => {
+				router.closeModalById('userSearch');
+			}
 		});
 	}
 
 	init() {
-		console.log(store.getState());
-		store.set('searchUser', null);
+
 
 		this.children.login = <Block>new FormField({
 			type: 'text',
 			name: 'login',
-			label: 'Логин',
-			events: {
-				submit: () => {
-					// event!.preventDefault();
-					event!.stopPropagation();
-					// @ts-ignore
-					const form: any = document.forms.searchUser;
-					const data: unknown = checkFormValidity(form);
-					UserController.searchUser(data as IUserSearch);
-				},
-			},
+			label: 'Логин'
 		});
 	}
 
@@ -47,32 +32,36 @@ export default class UserSearch extends Block {
         <div class="modal-cover" id="userSearch">
             <div class="main-window ">
                 <header class="main-window__top-line ">
-                    <h1>Поиск пользователя</h1>
+                    <h1>{{ title }}</h1>
                     {{{ windowManager variation="close" }}}
                 </header>
-                <main class="container_column_start" style="padding: 40px 40px 0;">
-										{{#if searchUser}}
-												
-												
-										{{else}}
-                        <form
-                                name="searchUser"
-                                id="searchUser"
-                                class="container_column_start"
-                                onsubmit="return false"
-																style=" min-height: 150px; justify-content: space-between;"
-                        >
+                <main class="container_column_start" style="padding: 40px;">
+                    <span>{{ description }}</span>
+                    <form
+                            name="searchUser"
+                            id="searchUser"
+                            class="container_column_start"
+                            onsubmit="return false"
+                            style=" min-height: 150px; justify-content: space-between;"
+                    >
 
-                            {{{ login }}}
+                        {{{ login }}}
+                        <div class='container_row_between'>
+                            {{{ button
+                                    class="button"
+                                    label="Назад"
+                                    form="loginForm"
+                                    onclick=clickBack
+                            }}}
                             {{{ button
                                     class="button"
                                     label="Найти"
                                     form="loginForm"
                                     onclick=submit
                             }}}
-                        </form>
-										{{/if}}
-                    <h3>{{ message }}</h3>
+
+                        </div>
+                    </form>
                 </main>
             </div>
         </div>

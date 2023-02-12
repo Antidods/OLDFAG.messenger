@@ -1,5 +1,5 @@
 import API, { AuthAPI } from '../api/AuthAPI';
-import { IResponse, ISigninData, ISignupData } from '../types';
+import { IResponse, ISigninData, ISignupData, IUser } from '../types';
 import store from '../core/Store';
 import router from '../core/Router';
 import MessagesController from './MessagesController';
@@ -53,7 +53,7 @@ export class AuthController {
 	}
 
 	public async fetchUser() {
-		const user = await this.api.read();
+		const user = await this.api.read() as IUser;
 		store.set('user', user);
 	}
 

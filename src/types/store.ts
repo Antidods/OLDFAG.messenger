@@ -6,4 +6,5 @@ export interface IState {
 	chats?: IChatInfo[];
 	messages?: Record<number, IMessage[]>;
 	selectedChat?:  number | null;
+	selectedChatUsers?: IUser[];
 }

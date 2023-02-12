@@ -4,6 +4,7 @@ import withStore from '../../hocs/withStore';
 import { Message } from '../message';
 import { isEqual } from '../../utils/helpers';
 
+
 class MessengerBase extends Block<IMessengerProps> {
 	constructor(props: IMessengerProps) {
 		super(props);
@@ -32,6 +33,7 @@ class MessengerBase extends Block<IMessengerProps> {
 				element.scrollTop = element.scrollHeight;
 			}
 		}, 50);
+
 
 		// language=hbs
 		return `

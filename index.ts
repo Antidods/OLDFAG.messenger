@@ -5,8 +5,9 @@ import Profile from './src/pages/userSettings';
 import router from './src/core/Router';
 import Messenger from './src/pages/messenger';
 import ErrorPage from './src/pages/error';
-import './src/assets/css/index.scss';
+import './src/assets/styles/index.scss';
 import 'regenerator-runtime/runtime';
+import store from './src/core/Store';
 
 registrationAllComponents();
 
@@ -26,5 +27,10 @@ window.addEventListener('DOMContentLoaded', async () => {
 		.use(Routes.Profile, Profile)
 		.use(Routes.error404, ErrorPage)
 		.start();
+
+	store.on('updated', ()=>{
+		console.clear();
+		console.log(store.getState());
+	})
 
 });

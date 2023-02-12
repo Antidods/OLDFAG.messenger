@@ -14,16 +14,25 @@
 
 .button {
   @extend %button;
-  @extend %font-for-headers;
-
+  @extend %font-for-inscription;
+	font-size: 9px;
   text-decoration: none;
+	padding: 0 5px;
   color: #1e1e1e;
   height: 35px;
   width: 140px;
-  font-size: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
+	margin: 10px;
+
+	&_big{
+		width: 160px;
+	}
+
+	&_small{
+		font-size: 8px;
+	}
 }
 
 .button-img {
@@ -49,7 +58,9 @@
   @extend %out-window-border;
 
   background: $surface;
-  filter: drop-shadow(5px 5px 8px rgb(0 0 0 / 25%));
+	display: flex;
+	flex-direction: column;
+	filter: drop-shadow(10px 10px 6px rgb(0 0 0 / 25%));
 }
 
 %button-close {
@@ -132,4 +143,36 @@
   height: 62px;
   margin: 0 auto 20px;
   background: url("../img/LOGO.svg");
+}
+
+.modal {
+	width: 400px;
+	height: 400px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+
+.modal-cover {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	overflow: hidden;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center; /* см. ниже */
+	align-items: center;
+	z-index: 99;
+	padding: 30px 0;
+	background: rgb(0 0 0 / 15%);
+}
+
+.span{
+	@extend %font-for-headers;
+	font-size: 9px;
+	margin: 9px;
 }

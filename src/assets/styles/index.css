@@ -3,12 +3,16 @@
   font-family: "Press Start 2P";
   src: url("../fonts/PressStart2P-Regular.ttf");
 }
-main .chat-send-block__send, main .chat-text-block__user-name, main .chat-text-block__to-talk-to-name, main .chat-list .chat-list-item__unread, main .chat-list .chat-list-item__date, main .chat-list .chat-list-item__information, main .chat-list .chat-list-item__message-from, main .chat-list__button, .main-window__top-line > h1, .main-window__top-line > h2, .message-field_no-selected-chat, .login-form__field-label, .button, .user-settings__field-label {
+main .chat-send-block__send, main .chat-text-block__user-name, main .chat-text-block__to-talk-to-name, main .chat-list .chat-list-item__unread, main .chat-list .chat-list-item__date, main .chat-list .chat-list-item__information, main .chat-list .chat-list-item__message-from, main .chat-list__button, .main-window__top-line > h1, .main-window__top-line > h2, .error-modal__message, .message-field_no-selected-chat, .login-form__field-label, .span, .user-settings__field-label {
   font-family: "Press Start 2P", ui-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 10px;
-  line-height: 12px;
+}
+
+.button {
+  font-family: "Press Start 2P", ui-serif;
+  font-style: normal;
+  font-weight: 400;
 }
 
 @font-face {
@@ -19,8 +23,6 @@ main .chat-send-block__send, main .chat-text-block__user-name, main .chat-text-b
   font-family: "Post Pixel-7", ui-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 12px;
-  line-height: 15px;
 }
 
 ::-webkit-scrollbar-thumb, .main-window, main .chat-send-block__send, main .chat-send-block__clip, .main-window__manager_maximize, .main-window__manager_minimize, .main-window__manager_close, .button {
@@ -71,12 +73,16 @@ main .chat-send-block__textarea, main .chat-text-block, main .chat-list, .previe
   font-family: "Press Start 2P";
   src: url("../fonts/PressStart2P-Regular.ttf");
 }
-main .chat-send-block__send, main .chat-text-block__user-name, main .chat-text-block__to-talk-to-name, main .chat-list .chat-list-item__unread, main .chat-list .chat-list-item__date, main .chat-list .chat-list-item__information, main .chat-list .chat-list-item__message-from, main .chat-list__button, .main-window__top-line > h1, .main-window__top-line > h2, .message-field_no-selected-chat, .login-form__field-label, .button, .user-settings__field-label {
+main .chat-send-block__send, main .chat-text-block__user-name, main .chat-text-block__to-talk-to-name, main .chat-list .chat-list-item__unread, main .chat-list .chat-list-item__date, main .chat-list .chat-list-item__information, main .chat-list .chat-list-item__message-from, main .chat-list__button, .main-window__top-line > h1, .main-window__top-line > h2, .error-modal__message, .message-field_no-selected-chat, .login-form__field-label, .span, .user-settings__field-label {
   font-family: "Press Start 2P", ui-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 10px;
-  line-height: 12px;
+}
+
+.button {
+  font-family: "Press Start 2P", ui-serif;
+  font-style: normal;
+  font-weight: 400;
 }
 
 @font-face {
@@ -87,8 +93,6 @@ main .chat-send-block__send, main .chat-text-block__user-name, main .chat-text-b
   font-family: "Post Pixel-7", ui-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 12px;
-  line-height: 15px;
 }
 
 ::-webkit-scrollbar-thumb, .main-window, main .chat-send-block__send, main .chat-send-block__clip, .main-window__manager_maximize, .main-window__manager_minimize, .main-window__manager_close, .button {
@@ -112,14 +116,22 @@ main .chat-send-block__send, main .chat-send-block__clip, .main-window__manager_
   cursor: pointer;
 }
 .button {
+  font-size: 9px;
   text-decoration: none;
+  padding: 0 5px;
   color: #1e1e1e;
   height: 35px;
   width: 140px;
-  font-size: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 10px;
+}
+.button_big {
+  width: 160px;
+}
+.button_small {
+  font-size: 8px;
 }
 
 .button-img {
@@ -141,7 +153,9 @@ main .chat-text-block__spacer, main .chat-list__spacer {
 
 .main-window {
   background: #c0c0c0;
-  filter: drop-shadow(5px 5px 8px rgba(0, 0, 0, 0.25));
+  display: flex;
+  flex-direction: column;
+  filter: drop-shadow(10px 10px 6px rgba(0, 0, 0, 0.25));
 }
 
 .main-window__manager_close {
@@ -212,6 +226,37 @@ main .chat-text-block__spacer, main .chat-list__spacer {
   background: url("../img/LOGO.svg");
 }
 
+.modal {
+  width: 400px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.modal-cover {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  overflow: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center; /* см. ниже */
+  align-items: center;
+  z-index: 99;
+  padding: 30px 0;
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.span {
+  font-size: 9px;
+  margin: 9px;
+}
+
 ::-webkit-scrollbar {
   width: 16px;
 }
@@ -263,12 +308,16 @@ main .chat-text-block__spacer, main .chat-list__spacer {
   font-family: "Press Start 2P";
   src: url("../fonts/PressStart2P-Regular.ttf");
 }
-main .chat-send-block__send, main .chat-text-block__user-name, main .chat-text-block__to-talk-to-name, main .chat-list .chat-list-item__unread, main .chat-list .chat-list-item__date, main .chat-list .chat-list-item__information, main .chat-list .chat-list-item__message-from, main .chat-list__button, .main-window__top-line > h1, .main-window__top-line > h2, .message-field_no-selected-chat, .login-form__field-label, .user-settings__field-label, .button {
+main .chat-send-block__send, main .chat-text-block__user-name, main .chat-text-block__to-talk-to-name, main .chat-list .chat-list-item__unread, main .chat-list .chat-list-item__date, main .chat-list .chat-list-item__information, main .chat-list .chat-list-item__message-from, main .chat-list__button, .main-window__top-line > h1, .main-window__top-line > h2, .error-modal__message, .message-field_no-selected-chat, .login-form__field-label, .user-settings__field-label, .span {
   font-family: "Press Start 2P", ui-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 10px;
-  line-height: 12px;
+}
+
+.button {
+  font-family: "Press Start 2P", ui-serif;
+  font-style: normal;
+  font-weight: 400;
 }
 
 @font-face {
@@ -279,8 +328,6 @@ main .chat-send-block__send, main .chat-text-block__user-name, main .chat-text-b
   font-family: "Post Pixel-7", ui-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 12px;
-  line-height: 15px;
 }
 
 main .chat-send-block__send, main .chat-send-block__clip, .button, .main-window, .main-window__manager_close, .main-window__manager_minimize, .main-window__manager_maximize, ::-webkit-scrollbar-thumb {
@@ -331,15 +378,15 @@ main .chat-send-block__textarea, main .chat-text-block, main .chat-list, .previe
   line-height: 28px;
 }
 
-.main-window_login-form {
+.window_login-form {
   align-items: center;
 }
-.main-window__top-line_login-form {
+.window__top-line_login-form {
   width: 98%;
   height: 23px;
   align-items: center;
 }
-.main-window__manager_close {
+.window__manager_close {
   margin-right: 5px;
 }
 
@@ -363,6 +410,47 @@ main .chat-send-block__textarea, main .chat-text-block, main .chat-list, .previe
   margin: 0;
   padding: 0;
   min-height: 12px;
+}
+
+@font-face {
+  font-family: "Press Start 2P";
+  src: url("../fonts/PressStart2P-Regular.ttf");
+}
+main .chat-send-block__send, main .chat-text-block__user-name, main .chat-text-block__to-talk-to-name, main .chat-list .chat-list-item__unread, main .chat-list .chat-list-item__date, main .chat-list .chat-list-item__information, main .chat-list .chat-list-item__message-from, main .chat-list__button, .main-window__top-line > h1, .main-window__top-line > h2, .error-modal__message, .message-field_no-selected-chat, .user-settings__field-label, .span, .login-form__field-label {
+  font-family: "Press Start 2P", ui-serif;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.button {
+  font-family: "Press Start 2P", ui-serif;
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Post Pixel-7";
+  src: url("../fonts/post_pixel-7.ttf");
+}
+.status-bar__section, main .chat-send-block__textarea, main .chat-list .chat-list-item__message-text {
+  font-family: "Post Pixel-7", ui-serif;
+  font-style: normal;
+  font-weight: 400;
+}
+
+main .chat-send-block__send, main .chat-send-block__clip, .button, .main-window, .main-window__manager_close, .main-window__manager_minimize, .main-window__manager_maximize, ::-webkit-scrollbar-thumb {
+  border: 0;
+  box-shadow: inset -1px -1px 0 #1e1e1e, inset 1px 1px 0 #dfdfdf, inset -2px -2px 0 #808080, inset 2px 2px 0 #fff;
+}
+
+main .chat-send-block__textarea, main .chat-text-block, main .chat-list, .preview-avatar, .user-settings__field-text, main .chat-send-block__send:active, main .chat-send-block__clip:active, .button:active, .main-window__manager_close:active, .main-window__manager_minimize:active, .main-window__manager_maximize:active, .login-form__field-text {
+  border: 0;
+  box-shadow: inset 1px 1px 0 #1e1e1e, inset -1px -1px 0 #dfdfdf, inset 2px 2px 0 #808080, inset -2px -2px 0 #fff;
+}
+
+.status-bar__section, .main-window__spacer {
+  border: 0;
+  box-shadow: inset 1px 1px 0 #808080, inset -1px -1px 0 #f4f4f4;
 }
 
 .message {
@@ -399,6 +487,7 @@ main .chat-send-block__textarea, main .chat-text-block, main .chat-list, .previe
   scroll-snap-type: y mandatory;
 }
 .message-field_no-selected-chat {
+  color: #c0c0c0;
   margin: auto;
   display: flex;
   overflow: hidden;
@@ -410,12 +499,16 @@ main .chat-send-block__textarea, main .chat-text-block, main .chat-list, .previe
   font-family: "Press Start 2P";
   src: url("../fonts/PressStart2P-Regular.ttf");
 }
-main .chat-send-block__send, main .chat-text-block__user-name, main .chat-text-block__to-talk-to-name, main .chat-list .chat-list-item__unread, main .chat-list .chat-list-item__date, main .chat-list .chat-list-item__information, main .chat-list .chat-list-item__message-from, main .chat-list__button, .main-window__top-line > h1, .main-window__top-line > h2, .user-settings__field-label, .button, .login-form__field-label, .message-field_no-selected-chat {
+main .chat-send-block__send, main .chat-text-block__user-name, main .chat-text-block__to-talk-to-name, main .chat-list .chat-list-item__unread, main .chat-list .chat-list-item__date, main .chat-list .chat-list-item__information, main .chat-list .chat-list-item__message-from, main .chat-list__button, .main-window__top-line > h1, .main-window__top-line > h2, .error-modal__message, .user-settings__field-label, .span, .login-form__field-label, .message-field_no-selected-chat {
   font-family: "Press Start 2P", ui-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 10px;
-  line-height: 12px;
+}
+
+.button {
+  font-family: "Press Start 2P", ui-serif;
+  font-style: normal;
+  font-weight: 400;
 }
 
 @font-face {
@@ -426,8 +519,6 @@ main .chat-send-block__send, main .chat-text-block__user-name, main .chat-text-b
   font-family: "Post Pixel-7", ui-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 12px;
-  line-height: 15px;
 }
 
 main .chat-send-block__send, main .chat-send-block__clip, .button, .main-window, .main-window__manager_close, .main-window__manager_minimize, .main-window__manager_maximize, ::-webkit-scrollbar-thumb {
@@ -467,6 +558,45 @@ main .chat-send-block__textarea, main .chat-text-block, main .chat-list, .previe
   object-fit: cover;
 }
 
+.chat-settings {
+  width: 600px;
+  height: 350px;
+}
+.chat-settings__main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.chat-settings__user-list-container {
+  width: 100%;
+  height: 140px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.error-modal__message-container {
+  margin-bottom: 20px;
+}
+.error-modal__message {
+  font-size: 9px;
+  max-width: 250px;
+  hyphens: auto;
+  line-height: 12px;
+}
+.error-modal__icon {
+  background-image: url("../img/msg_error-0.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  margin: 10px;
+}
+
 body {
   margin: 0;
 }
@@ -482,11 +612,6 @@ body {
   justify-content: center;
 }
 
-.main-window {
-  display: flex;
-  flex-direction: column;
-  filter: drop-shadow(10px 10px 6px rgba(0, 0, 0, 0.25));
-}
 .main-window_chat {
   width: 1280px;
   height: 720px;
@@ -501,6 +626,7 @@ body {
   box-sizing: border-box;
 }
 .main-window__top-line > h1, .main-window__top-line > h2 {
+  font-size: 10px;
   color: #fff;
   margin: 0 20px;
   padding-top: 2px;
@@ -543,7 +669,7 @@ main .chat-list__action-panel {
   align-items: center;
   box-sizing: border-box;
   width: 96%;
-  justify-content: space-around;
+  justify-content: flex-end;
 }
 main .chat-list__button {
   font-size: 8px;
@@ -631,6 +757,7 @@ main .chat-list .chat-list-item__message-text {
   hyphens: auto;
 }
 main .chat-list .chat-list-item__information {
+  font-size: 9px;
   flex-grow: 1;
   height: 90%;
   display: flex;
@@ -695,12 +822,18 @@ main .chat-text-block__to-talk-to-avatar {
   height: 50px;
   margin: 10px 10px 0 30px;
 }
+main .chat-text-block__to-talk-to-avatar_error {
+  background-image: url("../img/LOGO.svg");
+}
 main .chat-text-block__to-talk-to-name {
+  font-size: 10px;
   height: 40px;
   display: flex;
   justify-content: start;
   align-items: start;
-  margin: 0 0 0 15px;
+  margin: 0 20px 0 15px;
+  max-width: 300px;
+  overflow: hidden;
 }
 main .chat-text-block__user {
   height: 100%;
@@ -711,6 +844,9 @@ main .chat-text-block__user {
   align-items: end;
 }
 main .chat-text-block__user-name {
+  overflow: hidden;
+  max-width: 200px;
+  font-size: 12px;
   margin: 10px 30px 17px 0;
 }
 main .chat-text-block__button {
@@ -796,32 +932,6 @@ main .chat-send-block__send {
 
 .hidden {
   display: none;
-}
-
-.modal {
-  width: 400px;
-  height: 400px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-.modal-cover {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  overflow: hidden;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center; /* см. ниже */
-  align-items: center;
-  z-index: 99;
-  padding: 30px 0;
-  background: rgba(0, 0, 0, 0.15);
 }
 
 /*# sourceMappingURL=index.css.map */

@@ -1,18 +1,17 @@
 import Block from '../../core/Block';
-import { ChatsListProps } from '../../types';
+import { IChatsListProps } from '../../types';
 import withStore from '../../hocs/withStore';
 import { Link } from '../link';
 import ChatsController from '../../controllers/ChatsController';
 import Button from '../button';
 import { isEqual } from '../../utils/helpers';
 import { Chat } from '../chat';
-
 import router from '../../core/Router';
-import UserSearch from '../../pages/modal/userSearch';
 import CreateChat from '../../pages/modal/createChat';
 
-class ChatsListBase extends Block<ChatsListProps> {
-	constructor(props: ChatsListProps) {
+
+class ChatsListBase extends Block<IChatsListProps> {
+	constructor(props: IChatsListProps) {
 		super({ ...props });
 	}
 
@@ -34,16 +33,9 @@ class ChatsListBase extends Block<ChatsListProps> {
 			},
 		});
 
-		this.children.userSearchButton = new Button({
-			class: 'chat-list__button chat-list__button_search',
-			label: 'Найти',
-			onclick: () => {
-				router.setModal(UserSearch, {});
-			},
-		});
 	}
 
-	protected componentDidUpdate(oldProps: ChatsListProps, newProps: ChatsListProps): boolean {
+	protected componentDidUpdate(oldProps: IChatsListProps, newProps: IChatsListProps): boolean {
 		if (!isEqual(oldProps, newProps)) {
 			// @ts-ignore
 			this.children.chats = this.createChats(newProps);
@@ -51,7 +43,7 @@ class ChatsListBase extends Block<ChatsListProps> {
 		return true;
 	}
 
-	private createChats(props: ChatsListProps) {
+	private createChats(props: IChatsListProps) {
 		return props.chats.map((data) => {
 			return new Chat({
 				...data,
@@ -70,12 +62,6 @@ class ChatsListBase extends Block<ChatsListProps> {
         <div class="chat-list">
             <div class="chat-list__action-panel">
                 {{{ createChatButton }}}
-                {{{button
-                        class="chat-list__button chat-list__button_dell"
-                        label="добавить"
-                        onclick=error404
-                }}}
-                {{{ userSearchButton }}}
             </div>
             <div class="chat-list__spacer"></div>
             <div class="chat-list__contacts">

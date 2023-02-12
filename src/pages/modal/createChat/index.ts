@@ -3,19 +3,18 @@ import FormField from '../../../components/formField';
 import { checkFormValidity } from '../../../utils/validator';
 import { ICreateChat } from '../../../types';
 import chatsController from '../../../controllers/ChatsController';
+import router from '../../../core/Router';
 
 export default class CreateChat extends Block {
 	constructor(props: Props) {
 		super({
 			...props,
 			submit: () => {
-				event!.preventDefault();
-				event!.stopPropagation();
 				// @ts-ignore
 				const form: any = document.forms.createChat;
 				const data: unknown = checkFormValidity(form);
-				console.log(data);
 				chatsController.createChat(data as ICreateChat);
+				router.closeModalById('CreateChat')
 			},
 		});
 	}
@@ -32,8 +31,8 @@ export default class CreateChat extends Block {
 	render() {
 		// language=hbs
 		return `
-        <div class="modal-cover">
-            <div class="main-window modal">
+        <div class="modal-cover" id="CreateChat">
+            <div class="main-window modal" >
                 <header class="main-window__top-line ">
                     <h1>Создать чат</h1>
                     {{{windowManager variation="close" }}}

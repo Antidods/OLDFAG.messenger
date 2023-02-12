@@ -11,6 +11,9 @@ import { SelectedChatInfo } from '../../components/selectedChatInfo';
 import MessagesController from '../../controllers/MessagesController';
 import InputValidate from '../../components/inputValidate';
 import StatusBar from '../../components/statusBar';
+import ChatSettings from '../chatSettings';
+import ErrorModal from '../modal/error/index';
+
 
 class ChatPage extends Block {
 	constructor(props: Props) {
@@ -44,7 +47,7 @@ class ChatPage extends Block {
 			placeholder: 'Введите сообщение ... ',
 			name: 'message',
 			id: 'message',
-			requared: true,
+			required: true,
 		});
 
 		this.children.buttonSubmit = new Button({
@@ -52,24 +55,45 @@ class ChatPage extends Block {
 			label: 'Отправить',
 			onclick: () => {
 				const input = this.children.inputMessage as InputValidate;
-				console.log(input.getValue());
 				const message = input.getValue();
-				input.setValue('');
-				MessagesController.sendMessage(this.props.selectedChat!, message);
+				if(this.props.selectedChat) {
+					if (input.getValidateStatus()) {
+						input.setValue('');
+						MessagesController.sendMessage(this.props.selectedChat!, message);
+					} else {
+						router.setModal(ErrorModal, {
+							title: 'Ошибка',
+							error_message: 'Поле ввода содержит недопустимые символы'
+						})
+
+					}
+				} else {
+					router.setModal(ErrorModal, {
+						title: 'Ошибка',
+						error_message: 'Для отправки сообщения выберите чат'
+					})
+				}
 			},
 		});
 
 		// @ts-ignore
 		this.children.chatList = new ChatsList({});
 		// @ts-ignore
-		this.children.messenger = new Messenger({});
+		this.children.messenger = new Messenger({
+
+		});
 		// @ts-ignore
-		this.children.selectedChatInfo = new SelectedChatInfo({});
+		this.children.selectedChatInfo = new SelectedChatInfo({
+			clickSettings: () =>{
+				router.setModal(ChatSettings);
+			}
+		});
 		// @ts-ignore
 		this.children.statusBar = new StatusBar({});
 	}
 
 	render() {
+
 		return template;
 	}
 }

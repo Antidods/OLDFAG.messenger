@@ -131,6 +131,10 @@ class Block<P extends Record<string, any> = any> {
 		return isEqual(oldProps, newProps);
 	}
 
+	protected componentUpdate(){
+		this.eventBus().emit(Block.EVENTS.FLOW_CDU);
+	}
+
 	public setProps = (nextProps: P) => {
 		if (!nextProps) {
 			return;
