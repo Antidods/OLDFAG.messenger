@@ -11,8 +11,6 @@ export default class Registration extends Block {
 		super({
 			...props,
 			submit: () => {
-				event!.preventDefault();
-				event!.stopPropagation();
 				// @ts-ignore
 				const regForm: any = document.forms.registrationForm;
 				const data: unknown = checkFormValidity(regForm);

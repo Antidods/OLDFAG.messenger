@@ -3,19 +3,19 @@ import Button from '../../components/button/index';
 import ChatsController from '../../controllers/ChatsController';
 import store from '../../core/Store';
 import router from '../../core/Router';
-import UserSearch from '../modal/userSearch/index';
+import UserAdd from '../modal/userAdd/index';
 import { checkFormValidity } from '../../utils/validator';
 import UserController from '../../controllers/UserController';
 import { IUser, IUserSearch } from '../../types';
 import UserList from '../modal/userList';
 import { template } from './template';
-
+import ErrorModal from '../modal/error/index';
 
 export default class ChatSettings extends Block {
 	constructor(props: Props) {
 		super({
 			...props,
-			selectedChatUsers: store.getState().selectedChatUsers
+			selectedChatUsers: store.getState().selectedChatUsers,
 		});
 	}
 
@@ -28,7 +28,7 @@ export default class ChatSettings extends Block {
 			class: 'button button_big',
 			onclick: () => {
 				store.set('searchUserForAddingChat', null);
-				router.setModal(UserSearch, {
+				router.setModal(UserAdd, {
 					title: 'Добавить пользователя',
 					description: ' Введите логин пользователя для добавления в чат',
 					submit: () => {
@@ -37,32 +37,31 @@ export default class ChatSettings extends Block {
 
 						const formData: unknown = checkFormValidity(form);
 						if (form.dataset.valid === 'true') {
-							const user: Promise<IUser[]> = (UserController.searchUser(formData as IUserSearch));
-							user.then(
-								result => {
-									const userSearchId = result[0]?.id;
+							const user: Promise<IUser[]> = UserController.searchUser(formData as IUserSearch);
+							user.then((result) => {
+								const userSearchId = result[0]?.id;
 
-									if (!userSearchId) {
-										// TODO: добавить окно с ошибкой
-										console.log('По вашему запросу не найдено пользователей, пожалуйста уточните запрос');
-									} else if (userSearchId) {
-
-										ChatsController.addUser({
-											'id': userSearchId,
-											'chatId': selectedChatId as number
-										});
-										console.log('Пользователь добавлен');
-										router.closeAllModal();
-									} else {
-										console.log('Что то пошло не так');
-									}
+								if (!userSearchId) {
+									router.setModal(ErrorModal, {
+										title: 'Ошибка',
+										error_message:
+											'По вашему запросу не найдено пользователей, пожалуйста уточните запрос',
+									});
+								} else if (userSearchId) {
+									ChatsController.addUser({
+										id: userSearchId,
+										chatId: selectedChatId as number,
+									});
+									console.log('Пользователь добавлен');
+									router.closeAllModal();
+								} else {
+									console.log('Что то пошло не так');
 								}
-							);
+							});
 						}
-					}
+					},
 				});
-
-			}
+			},
 		});
 
 		this.children.userAdd = new Button({
@@ -74,11 +73,12 @@ export default class ChatSettings extends Block {
 				const selectedChatUsers = store.getState().selectedChatUsers;
 				router.setModal(UserList, {
 					chatUsers: selectedChatUsers,
+					title: 'Удалить пользователя',
+					description: 'Выберите пользователя для удаления из чата',
 					cancel: () => {
 						router.closeModalById('userList');
 					},
 					delete: () => {
-
 						ChatsController.getChatUsers(selectedChatId);
 						// @ts-ignore
 						const form: HTMLFormElement = document.forms.chatUsers;
@@ -89,16 +89,13 @@ export default class ChatSettings extends Block {
 						}
 						ChatsController.deleteUser({
 							userId: deleteUserId,
-							chatId: selectedChatId
+							chatId: selectedChatId,
 						}).then(() => {
 							router.closeAllModal();
-						})
-
-					}
+						});
+					},
 				});
-
-
-			}
+			},
 		});
 
 		this.children.userDell = new Button({
@@ -111,11 +108,9 @@ export default class ChatSettings extends Block {
 				await ChatsController.getChats();
 				router.closeAllModal();
 				location.reload();
-			}
+			},
 		});
-
 	}
-
 
 	render() {
 		// language=hbs

@@ -5,7 +5,7 @@ import router from '../../../core/Router';
 export default class ErrorModal extends Block {
 	constructor(props: Props) {
 		super({
-			...props
+			...props,
 		});
 	}
 
@@ -14,9 +14,8 @@ export default class ErrorModal extends Block {
 			class: 'button',
 			label: 'OK',
 			onclick: () => {
-				router.closeModalById('errorModal')
-			}
-
+				router.closeModalById('errorModal');
+			},
 		});
 	}
 
@@ -33,7 +32,7 @@ export default class ErrorModal extends Block {
                     <div class="error-modal__message-container container_row_center">
                         <div class="error-modal__icon"></div>
                         <span class="error-modal__message">
-                            {{error_message}}
+                            {{ error_message }}
                         </span>
                     </div>
                     {{{ OK }}}

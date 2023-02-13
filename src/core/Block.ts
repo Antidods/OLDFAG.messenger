@@ -107,8 +107,6 @@ class Block<P extends Record<string, any> = any> {
 
 	protected componentDidMount() {}
 
-	// Событие вызывается снаружи, т.к. объект сам не сможет определить,
-	// что он появился на странице
 	public dispatchComponentDidMount() {
 		this.eventBus().emit(Block.EVENTS.FLOW_CDM);
 
@@ -131,7 +129,7 @@ class Block<P extends Record<string, any> = any> {
 		return isEqual(oldProps, newProps);
 	}
 
-	protected componentUpdate(){
+	protected componentUpdate() {
 		this.eventBus().emit(Block.EVENTS.FLOW_CDU);
 	}
 
@@ -146,7 +144,7 @@ class Block<P extends Record<string, any> = any> {
 		return this.props;
 	};
 
-	get element() {
+	public get element() {
 		return this._element;
 	}
 

@@ -2,8 +2,7 @@ import Block, { Props } from '../../../core/Block';
 import FormField from '../../../components/formField';
 import router from '../../../core/Router';
 
-
-export default class UserSearch extends Block {
+export default class UserAdd extends Block {
 	constructor(props: Props) {
 		super({
 			...props,
@@ -12,17 +11,15 @@ export default class UserSearch extends Block {
 			},
 			clickBack: () => {
 				router.closeModalById('userSearch');
-			}
+			},
 		});
 	}
 
 	init() {
-
-
 		this.children.login = <Block>new FormField({
 			type: 'text',
 			name: 'login',
-			label: 'Логин'
+			label: 'Логин',
 		});
 	}
 
@@ -36,7 +33,7 @@ export default class UserSearch extends Block {
                     {{{ windowManager variation="close" }}}
                 </header>
                 <main class="container_column_start" style="padding: 40px;">
-                    <span>{{ description }}</span>
+
                     <form
                             name="searchUser"
                             id="searchUser"
@@ -44,9 +41,12 @@ export default class UserSearch extends Block {
                             onsubmit="return false"
                             style=" min-height: 150px; justify-content: space-between;"
                     >
-
+												<span class="error-modal__message">
+													{{ description }}
+												</span>
+												<hr>
                         {{{ login }}}
-                        <div class='container_row_between'>
+                        <div class='container_row_center' style="width: 100%">
                             {{{ button
                                     class="button"
                                     label="Назад"
@@ -55,7 +55,7 @@ export default class UserSearch extends Block {
                             }}}
                             {{{ button
                                     class="button"
-                                    label="Найти"
+                                    label="Добавить"
                                     form="loginForm"
                                     onclick=submit
                             }}}

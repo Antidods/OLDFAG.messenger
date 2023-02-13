@@ -10,11 +10,12 @@ import router from '../../core/Router';
 import ErrorModal from '../modal/error';
 import LoadAvatar from '../modal/loadAvatar';
 import store from '../../core/Store';
+import ChangePassword from '../modal/changePassword';
 
 class UserSettings extends Block {
 	constructor(props: Props) {
 		super({
-			...props
+			...props,
 		});
 	}
 
@@ -27,7 +28,7 @@ class UserSettings extends Block {
 			label: 'Изменить данные',
 			onclick: () => {
 				UserController.lockEditProfile(false);
-			}
+			},
 		});
 
 		this.children.submit = <Block>new Button({
@@ -42,15 +43,14 @@ class UserSettings extends Block {
 						UserController.updateProfile(formData as IUser);
 					} catch (e: any) {
 						router.setModal(ErrorModal, {
-							error_message: `${e.reason}`
+							error_message: `${e.reason}`,
 						});
 					} finally {
 						authController.selectChats(this.props.selectedChat);
 						router.go('/messenger');
-
 					}
 				}
-			}
+			},
 		});
 
 		this.children.updateAvatarButton = <Block>new Button({
@@ -58,7 +58,15 @@ class UserSettings extends Block {
 			label: 'Загрузить аватар',
 			onclick: () => {
 				router.setModal(LoadAvatar, {});
-			}
+			},
+		});
+
+		this.children.changePassword = <Block>new Button({
+			class: 'button user-settings__button',
+			label: 'Изменить пароль',
+			onclick: () => {
+				router.setModal(ChangePassword, {});
+			},
 		});
 
 		this.children.cancelButton = <Block>new Button({
@@ -68,7 +76,7 @@ class UserSettings extends Block {
 				// store.emit('updated');
 				authController.selectChats(this.props.selectedChat);
 				router.go('/messenger');
-			}
+			},
 		});
 	}
 
@@ -94,9 +102,9 @@ class UserSettings extends Block {
                     >
                 {{/if}}
                 <div class="container_row_between" style="width: 300px">
-                    {{{editProfileButton}}}
-                    <button class="button user-settings__button">изменить пароль</button>
-                    {{{updateAvatarButton}}}
+                    {{{ editProfileButton }}}
+										{{{ changePassword }}}
+                    {{{ updateAvatarButton }}}
                 </div>
                 <form
                         name="updateProfileForm"

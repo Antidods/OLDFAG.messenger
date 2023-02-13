@@ -14,7 +14,6 @@ import StatusBar from '../../components/statusBar';
 import ChatSettings from '../chatSettings';
 import ErrorModal from '../modal/error/index';
 
-
 class ChatPage extends Block {
 	constructor(props: Props) {
 		super({
@@ -56,44 +55,51 @@ class ChatPage extends Block {
 			onclick: () => {
 				const input = this.children.inputMessage as InputValidate;
 				const message = input.getValue();
-				if(this.props.selectedChat) {
+				if (this.props.selectedChat) {
 					if (input.getValidateStatus()) {
 						input.setValue('');
 						MessagesController.sendMessage(this.props.selectedChat!, message);
 					} else {
 						router.setModal(ErrorModal, {
 							title: 'Ошибка',
-							error_message: 'Поле ввода содержит недопустимые символы'
-						})
-
+							error_message: 'Поле ввода содержит недопустимые символы',
+						});
 					}
 				} else {
 					router.setModal(ErrorModal, {
 						title: 'Ошибка',
-						error_message: 'Для отправки сообщения выберите чат'
-					})
+						error_message: 'Для отправки сообщения выберите чат',
+					});
 				}
 			},
+		});
+
+		const inputMessage = this.children.inputMessage.element;
+		inputMessage?.addEventListener('keydown', (e) => {
+			if (e.keyCode === 13) {
+				const event = new Event('click');
+				(this.children.buttonSubmit as Block).element?.dispatchEvent(event);
+			}
 		});
 
 		// @ts-ignore
 		this.children.chatList = new ChatsList({});
 		// @ts-ignore
-		this.children.messenger = new Messenger({
-
-		});
+		this.children.messenger = new Messenger({});
 		// @ts-ignore
 		this.children.selectedChatInfo = new SelectedChatInfo({
-			clickSettings: () =>{
+			clickSettings: () => {
+				ChatsController.getChatUsers(this.props.selectedChat);
 				router.setModal(ChatSettings);
-			}
+			},
 		});
 		// @ts-ignore
-		this.children.statusBar = new StatusBar({});
+		this.children.statusBar = new StatusBar({
+			chatsSum: this.props.chats.length,
+		});
 	}
 
 	render() {
-
 		return template;
 	}
 }

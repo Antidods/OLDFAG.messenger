@@ -36,7 +36,8 @@
 
   &_no-selected-chat {
     @extend %font-for-headers;
-		color: $surface;
+
+    color: $surface;
     margin: auto;
     display: flex;
     overflow: hidden;

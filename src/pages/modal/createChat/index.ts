@@ -14,7 +14,7 @@ export default class CreateChat extends Block {
 				const form: any = document.forms.createChat;
 				const data: unknown = checkFormValidity(form);
 				chatsController.createChat(data as ICreateChat);
-				router.closeModalById('CreateChat')
+				router.closeModalById('CreateChat');
 			},
 		});
 	}
@@ -32,7 +32,7 @@ export default class CreateChat extends Block {
 		// language=hbs
 		return `
         <div class="modal-cover" id="CreateChat">
-            <div class="main-window modal" >
+            <div class="main-window modal create-chat" >
                 <header class="main-window__top-line ">
                     <h1>Создать чат</h1>
                     {{{windowManager variation="close" }}}
