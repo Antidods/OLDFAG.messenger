@@ -33,7 +33,8 @@ class UserController {
 	async updatePassword(PasswordData: IPasswordData) {
 		try {
 			await this.api.updatePassword(PasswordData);
-
+			router.closeAllModal();
+			console.log('Пароль изменён');
 			router.go('/profile');
 		} catch (e) {
 			const error = e as IResponse
