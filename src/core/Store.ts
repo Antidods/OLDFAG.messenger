@@ -12,7 +12,6 @@ export class Store extends EventBus {
 	public set(keypath: string, data: unknown) {
 		set(this.state, keypath, data);
 		this.emit(StoreEvents.Updated, this.getState());
-		// TODO: Решить проблему с необходимость повторного прокидывания события Update для Store
 		this.emit(StoreEvents.Updated);
 	}
 

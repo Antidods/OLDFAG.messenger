@@ -3,7 +3,6 @@ import AuthController from './AuthController';
 import API, { UserAPI } from '../api/UserAPI';
 import router from '../core/Router';
 import store from '../core/Store';
-import ErrorModal from '../pages/modal/error';
 
 class UserController {
 	private readonly api: UserAPI;
@@ -22,7 +21,8 @@ class UserController {
 			const newUser = await this.api.updateProfile(data);
 			store.set('user', newUser);
 		} catch (e) {
-			console.error(e);
+			const error = e as IResponse
+			console.log('Ошибка при обновлении данных пользователя: ', error);
 		} finally {
 			AuthController.fetchUser();
 			this.lockEditProfile(true);
@@ -35,8 +35,9 @@ class UserController {
 			await this.api.updatePassword(PasswordData);
 
 			router.go('/profile');
-		} catch (e: IResponse | unknown) {
-			console.error(e);
+		} catch (e) {
+			const error = e as IResponse
+			console.log('Ошибка при обновлении пароля: ', error);
 		}
 	}
 
@@ -44,16 +45,13 @@ class UserController {
 		try {
 			const response = (await this.api.updateAvatar(data)) as unknown as IUser;
 			store.set('user.avatar', response.avatar);
-		} catch (e: any) {
-			router.setModal(ErrorModal, {
-				error_message: `${e.reason!}`,
-			});
+		} catch (e) {
+			const error = e as IResponse
+			console.log('Ошибка при обновлении пароля: ', error);
 		}
 	}
 
 	async searchUser(data: IUserSearch) {
-		// TODO: редактирование контроллера, протестировать
-		// store.set('searchUser', searchUser);
 		return await this.api.search(data) as IUser[];
 	}
 }

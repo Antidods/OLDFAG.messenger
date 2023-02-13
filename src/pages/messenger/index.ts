@@ -29,7 +29,6 @@ class ChatPage extends Block {
 			class: 'chat-text-block__button chat-text-block__button_exit button-img',
 			onclick: () => {
 				AuthController.logout();
-				router.go('/');
 			},
 		});
 
@@ -95,7 +94,7 @@ class ChatPage extends Block {
 		});
 		// @ts-ignore
 		this.children.statusBar = new StatusBar({
-			chatsSum: this.props.chats.length,
+			chatsSum: this.props.chats?.length!,
 		});
 	}
 

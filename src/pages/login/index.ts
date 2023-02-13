@@ -11,14 +11,13 @@ export default class LoginPage extends Block {
 		super({
 			...props,
 			submit: () => {
-				event!.preventDefault();
 				// @ts-ignore
 				const logForm: any = document.forms.loginForm;
 				const data: unknown = checkFormValidity(logForm);
 				if (logForm.dataset.valid === 'true') {
 					AuthController.signin(data as ISigninData);
 				}
-			},
+			}
 		});
 	}
 
@@ -28,21 +27,29 @@ export default class LoginPage extends Block {
 		this.children.linkRegistartion = <Block>new Link({
 			label: 'Регистрация',
 			to: '/register',
-			class: 'button',
+			class: 'button'
 		});
 
 		this.children.login = <Block>new FormField({
 			type: 'text',
 			name: 'login',
-			label: 'Логин',
+			label: 'Логин'
 		});
 
 		this.children.password = <Block>new FormField({
 			type: 'password',
 			name: 'password',
-			label: 'Пароль',
+			label: 'Пароль'
 		});
+
+
+		const form = this.element;
+		form?.addEventListener('keydown', (e) => {
+			if (e.keyCode === 13) this.props.submit();
+		});
+
 	}
+
 
 	render() {
 		// language=hbs

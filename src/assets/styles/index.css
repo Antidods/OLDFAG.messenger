@@ -50,6 +50,7 @@ main .chat-send-block__textarea, main .chat-text-block, main .chat-list, .previe
 }
 .user-settings__button {
   font-size: 8px;
+  padding: 10px;
 }
 .user-settings__button:first-child {
   margin-right: 8px;

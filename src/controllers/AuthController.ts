@@ -28,14 +28,16 @@ export class AuthController {
 
 	public async loggingCheck() {
 		try {
+			store.set('user', null);
 			await this.fetchUser();
-			router.go('/messenger');
+			setTimeout(()=>{
+				if(store.getState().user?.id) router.go('/messenger');
+			},200)
+
 		} catch (e: unknown) {
 			const error = e as IResponse;
 			if (error.reason === 'Cookie is not valid') {
 				router.go('/');
-			} else {
-				console.error('Ошибка при проверки нахождения пользователя в системе', e);
 			}
 		}
 	}
@@ -47,7 +49,7 @@ export class AuthController {
 			router.go('/messenger');
 		} catch (e: unknown) {
 			const error = e as IResponse;
-			console.error('Ошибка при регистрации ', error.reason);
+			console.log('Ошибка при регистрации ', error.reason);
 			store.set('user.error', error);
 		}
 	}
@@ -70,12 +72,16 @@ export class AuthController {
 		try {
 			await this.api.logout();
 			MessagesController.closeAll();
-			store.set('user', undefined);
-			router.go('/');
-			console.log('Выполнен выход из аккаунта на сервере');
-		} catch (e: unknown) {
+
+			setTimeout(()=>{
+				console.log('Выполнен выход из аккаунта на сервере');
+				store.set('user', undefined);
+				router.go('/');
+			},50);
+
+		} catch (e) {
 			const error = e as IResponse;
-			console.error('Ошибка при выходе из системы', error.reason);
+			console.log('Ошибка при выходе из системы', error.reason);
 		}
 	}
 }

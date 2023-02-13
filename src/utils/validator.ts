@@ -51,7 +51,7 @@ export const checkElementValidity = (input: HTMLInputElement) => {
 	}
 };
 
-export const checkFormValidity = (form: any): Record<string, unknown> => {
+export const checkFormValidity = (form:any): Record<string, unknown> => {
 	const _data: any = {};
 	const formElements = form.elements;
 

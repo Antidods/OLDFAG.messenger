@@ -13,6 +13,7 @@ export const template =
                       id="loginForm"
                       name="loginForm"
                       data-valid="false"
+											onsubmit="return false"
               >
                   {{{login}}}
                   {{{password}}}

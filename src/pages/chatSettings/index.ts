@@ -32,8 +32,9 @@ export default class ChatSettings extends Block {
 					title: 'Добавить пользователя',
 					description: ' Введите логин пользователя для добавления в чат',
 					submit: () => {
+
 						// @ts-ignore
-						const form: any = document.forms.searchUser;
+						const form = document.forms.searchUser;
 
 						const formData: unknown = checkFormValidity(form);
 						if (form.dataset.valid === 'true') {
