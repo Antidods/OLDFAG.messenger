@@ -60,7 +60,7 @@ export default class ChangePassword extends Block {
                             name="changePassword"
                             id="changePassword"
                             class="container_column_start"
-                            onsubmit="submit()"
+                            onsubmit="return false"
 
                     >
 

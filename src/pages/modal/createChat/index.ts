@@ -43,7 +43,7 @@ export default class CreateChat extends Block {
                             name="createChat"
                             id="title"
                             class="container_column_start"
-                            onsubmit="submit()"
+                            onsubmit="return false"
 
                     >
 

@@ -8,7 +8,7 @@ WORKDIR /var/www/app
 
 COPY package*.json ./
 
-RUN npm ci -- cache .npm -- prefer-offline
+RUN npm ci
 
 COPY . .
 

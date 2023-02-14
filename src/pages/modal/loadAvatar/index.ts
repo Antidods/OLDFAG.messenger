@@ -37,7 +37,7 @@ export default class LoadAvatar extends Block {
                             name="updateAvatar"
                             id="updateAvatar"
                             class="container_column_start upload-file"
-                            onsubmit="submit()"
+                            onsubmit="return false"
                     >
                         <label for="avatar" class="button upload-file__label">Выберите файл</label>
                         <input class="upload-file__input" type="file" id="avatar"

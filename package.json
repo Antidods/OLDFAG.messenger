@@ -14,7 +14,7 @@
 	"author": "Andrey Streltsov",
 	"license": "MIT",
 	"engines": {
-		"node": ">=16.0.0"
+		"node": ">=12.0.0"
 	},
 	"devDependencies": {
 		"@testing-library/dom": "8.20.0",
