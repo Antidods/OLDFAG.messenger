@@ -1,9 +1,9 @@
-import Block, { Props } from '../../utils/Block';
+import Block, { Props } from '../../core/Block';
 
 export default class WindowManager extends Block {
 	constructor(props: Props) {
 		super({
-			...props,
+			...props
 		});
 	}
 
@@ -11,13 +11,17 @@ export default class WindowManager extends Block {
 		if (this.props.variation === 'close') {
 			// language=hbs
 			return `
-          <div class="main-window__manager">
+          <div class="main-window__manager" data-testid="window-manager">
               <button class="main-window__manager_close" id="main-window-close"
                       onclick="{
-                                this.closest('.main-window').classList.add('hidden');                             
-                                this.closest('.modal-cover').remove();
+                                try {
+                                  this.closest('.main-window')?.classList.add('hidden');                             
+                                	this.closest('.modal-cover')?.remove();
+                                } catch (e) {
+																	console.log(e)                                  
+                                }
                       }"
-							>
+              >
               </button>
           </div>
 			`;
@@ -32,10 +36,14 @@ export default class WindowManager extends Block {
                     onclick="this.closest('.main-window').classList.toggle('full-screen')"></button>
             <button class="main-window__manager_close" id="main-window-close"
                     onclick="{
-                            this.closest('.main-window').classList.add('hidden');
-                            this.closest('.modal-cover').remove();
+                                try {
+                                  this.closest('.main-window')?.classList.add('hidden');                             
+                                	this.closest('.modal-cover')?.remove();
+                                } catch (e) {
+																	console.log(e)                                  
+                                }
                     }"
-						>
+            >
             </button>
         </div>
 		`;

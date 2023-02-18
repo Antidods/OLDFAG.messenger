@@ -13,6 +13,7 @@ export const template =
                       id="registrationForm"
                       name="registrationForm"
                       data-valid="false"
+											onsubmit="return false"
               >
                   {{{firstName}}}
                   {{{secondName}}}

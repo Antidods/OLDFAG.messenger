@@ -1,7 +1,7 @@
 import API, { AuthAPI } from '../api/AuthAPI';
-import { IResponse, ISigninData, ISignupData } from '../types';
-import store from '../utils/Store';
-import router from '../utils/Router';
+import { IResponse, ISigninData, ISignupData, IUser } from '../types';
+import store from '../core/Store';
+import router from '../core/Router';
 import MessagesController from './MessagesController';
 
 export class AuthController {
@@ -16,7 +16,7 @@ export class AuthController {
 			await this.api.signin(SigninData);
 			await this.fetchUser();
 			router.go('/messenger');
-		} catch (e:unknown) {
+		} catch (e: unknown) {
 			const error = e as IResponse;
 			if (error.reason === 'User already in system') {
 				router.go('/messenger');
@@ -28,18 +28,19 @@ export class AuthController {
 
 	public async loggingCheck() {
 		try {
+			store.set('user', null);
 			await this.fetchUser();
-			router.go('/messenger');
+			setTimeout(()=>{
+				if(store.getState().user?.id) router.go('/messenger');
+			},200)
+
 		} catch (e: unknown) {
 			const error = e as IResponse;
 			if (error.reason === 'Cookie is not valid') {
 				router.go('/');
-			} else  {
-				console.error('Ошибка при проверки нахождения пользователя в системе', e);
 			}
 		}
 	}
-
 
 	public async signup(SignupData: ISignupData) {
 		try {
@@ -48,13 +49,13 @@ export class AuthController {
 			router.go('/messenger');
 		} catch (e: unknown) {
 			const error = e as IResponse;
-			console.error('Ошибка при регистрации ', error.reason);
+			console.log('Ошибка при регистрации ', error.reason);
 			store.set('user.error', error);
 		}
 	}
 
 	public async fetchUser() {
-		const user = await this.api.read();
+		const user = await this.api.read() as IUser;
 		store.set('user', user);
 	}
 
@@ -67,17 +68,20 @@ export class AuthController {
 		store.set('selectedChat', id);
 	}
 
-
 	public async logout() {
 		try {
 			await this.api.logout();
 			MessagesController.closeAll();
-			store.set('user', undefined);
-			router.go('/');
-			console.log('Выполнен выход из аккаунта на сервере');
-		} catch (e: unknown) {
+
+			setTimeout(()=>{
+				console.log('Выполнен выход из аккаунта на сервере');
+				store.set('user', undefined);
+				router.go('/');
+			},50);
+
+		} catch (e) {
 			const error = e as IResponse;
-			console.error('Ошибка при выходе из системы', error.reason);
+			console.log('Ошибка при выходе из системы', error.reason);
 		}
 	}
 }

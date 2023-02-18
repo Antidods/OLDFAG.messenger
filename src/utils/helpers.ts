@@ -72,7 +72,6 @@ export function isEqual(lhs: any, rhs: any) {
 	}
 
 	for (const [key, value] of Object.entries(lhs)) {
-		// @ts-ignore
 		const rightValue = rhs[key];
 		if (isArrayOrObject(value) && isArrayOrObject(rightValue)) {
 			if (isEqual(value, rightValue)) {
@@ -87,4 +86,10 @@ export function isEqual(lhs: any, rhs: any) {
 	}
 
 	return true;
+}
+
+export function sleep(ms = 200) {
+	return new Promise((r) => {
+		setTimeout(r, ms);
+	});
 }

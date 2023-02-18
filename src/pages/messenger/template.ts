@@ -23,7 +23,7 @@ export const template =
                       {{{ messenger }}}
                   </div>
                   <form class="chat-send-block" onsubmit="return false">
-                      <button class="chat-send-block__clip"></button>
+                      <button class="chat-send-block__clip" hidden></button>
                       {{{ inputMessage }}}
                       {{{ buttonSubmit }}}
                   </form>

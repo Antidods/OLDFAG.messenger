@@ -1,15 +1,14 @@
-import Block, { Props } from '../../utils/Block';
+import Block, { Props } from '../../core/Block';
 import { withSelectedChat } from '../../hocs/withSelectedChat';
 import { transformDateInChat } from '../../utils/transformDateInChat';
-
 
 class ChatBase extends Block {
 	constructor(props: Props) {
 		super({
 			...props,
 			messageLastDate: () => {
-				return transformDateInChat(props.last_message?.time );
-			}
+				return transformDateInChat(props.last_message?.time);
+			},
 		});
 	}
 

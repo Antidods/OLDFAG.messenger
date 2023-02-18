@@ -1,5 +1,5 @@
-import Block, { Props } from '../../utils/Block';
-import { checkElementValidity } from '../../utils/validator';
+import Block, { Props } from '../../core/Block';
+import { checkElementValidity, checkValueValidity } from '../../utils/validator';
 
 export default class InputValidate extends Block {
 	constructor(props: Props) {
@@ -7,21 +7,22 @@ export default class InputValidate extends Block {
 			...props,
 			events: {
 				blur: () => {
-					checkElementValidity(this.element);
+					checkElementValidity(this.element as HTMLInputElement);
 				},
 				focus: () => {
-					const input: Element | null = this.element;
+					const input: HTMLInputElement = this.element as HTMLInputElement;
 					let timeout: any;
 					input?.addEventListener('keypress', () => {
 						clearTimeout(timeout);
 						timeout = setTimeout(() => {
-							checkElementValidity(this.element);
+							checkElementValidity(input);
 						}, 800);
 					});
-				},
-			},
+				}
+			}
 		});
 	}
+
 
 	public setValue(value: string) {
 		(this.element as HTMLInputElement).value = value;
@@ -35,7 +36,15 @@ export default class InputValidate extends Block {
 		return (this.element as HTMLInputElement).value;
 	}
 
+	public getValidateStatus(): boolean {
+		const elem = this.element as HTMLInputElement;
+
+		return checkValueValidity(elem.name, elem.value).validateStatus
+	}
+
+
 	render() {
+		// TODO: добавить подстановку autocomplete
 		// language=hbs
 		return `
         <input
@@ -57,6 +66,7 @@ export default class InputValidate extends Block {
             {{#if disabled}}
                 disabled
             {{/if}}
+
         >
 		`;
 	}

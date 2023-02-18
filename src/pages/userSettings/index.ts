@@ -1,14 +1,16 @@
-import Block, { Props } from '../../utils/Block';
+import Block, { Props } from '../../core/Block';
 import Button from '../../components/button';
 import UserController from '../../controllers/UserController';
 import { withUser } from '../../hocs/withUser';
 import AuthController from '../../controllers/AuthController';
+import authController from '../../controllers/AuthController';
 import { checkFormValidity } from '../../utils/validator';
 import { IUser } from '../../types';
-import router from '../../utils/Router';
+import router from '../../core/Router';
 import ErrorModal from '../modal/error';
 import LoadAvatar from '../modal/loadAvatar';
-import store from '../../utils/Store';
+import store from '../../core/Store';
+import ChangePassword from '../modal/changePassword';
 
 class UserSettings extends Block {
 	constructor(props: Props) {
@@ -18,9 +20,8 @@ class UserSettings extends Block {
 	}
 
 	init() {
-		AuthController.fetchUser();
-
 		UserController.lockEditProfile(true);
+		AuthController.fetchUser();
 		store.emit('updated');
 		this.children.editProfileButton = <Block>new Button({
 			class: 'button user-settings__button',
@@ -45,6 +46,7 @@ class UserSettings extends Block {
 							error_message: `${e.reason}`,
 						});
 					} finally {
+						authController.selectChats(this.props.selectedChat);
 						router.go('/messenger');
 					}
 				}
@@ -59,10 +61,20 @@ class UserSettings extends Block {
 			},
 		});
 
+		this.children.changePassword = <Block>new Button({
+			class: 'button user-settings__button',
+			label: 'Изменить пароль',
+			onclick: () => {
+				router.setModal(ChangePassword, {});
+			},
+		});
+
 		this.children.cancelButton = <Block>new Button({
 			class: 'button',
 			label: 'Назад',
 			onclick: () => {
+				// store.emit('updated');
+				authController.selectChats(this.props.selectedChat);
 				router.go('/messenger');
 			},
 		});
@@ -85,14 +97,14 @@ class UserSettings extends Block {
                          alt="avatar" class="user-settings__avatar"
                     >
                 {{else}}
-                    <img src="avatar-substitute.svg"
+                    <img src="#"
                          alt="avatar" class="user-settings__avatar"
                     >
                 {{/if}}
                 <div class="container_row_between" style="width: 300px">
-                    {{{editProfileButton}}}
-                    <button class="button user-settings__button">изменить пароль</button>
-                    {{{updateAvatarButton}}}
+                    {{{ editProfileButton }}}
+										{{{ changePassword }}}
+                    {{{ updateAvatarButton }}}
                 </div>
                 <form
                         name="updateProfileForm"

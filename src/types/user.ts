@@ -13,6 +13,8 @@ export interface IUserSearch {
 	login: string;
 }
 
+
+
 export interface IPasswordData {
 	oldPassword: string;
 	newPassword: string;

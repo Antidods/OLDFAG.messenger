@@ -1,6 +1,7 @@
-import store, { IState, StoreEvents } from '../utils/Store';
+import store, { StoreEvents } from '../core/Store';
 import { isEqual } from '../utils/helpers';
-import { Props } from '../utils/Block';
+import { Props } from '../core/Block';
+import { IState } from '../types';
 
 export default function withStore(mapSateToProps: (sate: IState) => Record<string, unknown>) {
 	return function wrap(Component: any) {
@@ -26,28 +27,3 @@ export default function withStore(mapSateToProps: (sate: IState) => Record<strin
 		};
 	};
 }
-
-// const withStore =
-// 	(mapStateToProps: (state: IState) => Record<string, unknown>) => (Component: typeof Block) => {
-// 		let state: Record<string, unknown>;
-//
-// 		return class extends Component {
-// 			constructor(props: Record<string, unknown>) {
-// 				state = mapStateToProps(store.getState());
-//
-// 				super({ ...props, ...state });
-//
-// 				store.on(StoreEvents.Updated, () => {
-// 					const newState = mapStateToProps(store.getState());
-//
-// 					if (!isEqual(state, newState)) {
-// 						this.setProps({
-// 							...newState,
-// 						});
-// 					}
-// 				});
-// 			}
-// 		};
-// 	};
-//
-// export default withStore;

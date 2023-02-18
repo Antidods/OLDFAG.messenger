@@ -1,7 +1,7 @@
-import Block, { Props } from '../../utils/Block';
+import Block, { Props } from '../../core/Block';
 import Button from '../../components/button';
 import AuthController from '../../controllers/AuthController';
-import router from '../../utils/Router';
+import router from '../../core/Router';
 import { withAllStore } from '../../hocs/withAllStore';
 import ChatsController from '../../controllers/ChatsController';
 import { template } from './template';
@@ -10,11 +10,14 @@ import { Messenger } from '../../components/messenger';
 import { SelectedChatInfo } from '../../components/selectedChatInfo';
 import MessagesController from '../../controllers/MessagesController';
 import InputValidate from '../../components/inputValidate';
+import StatusBar from '../../components/statusBar';
+import ChatSettings from '../chatSettings';
+import ErrorModal from '../modal/error/index';
 
 class ChatPage extends Block {
 	constructor(props: Props) {
 		super({
-			...props
+			...props,
 		});
 	}
 
@@ -26,15 +29,14 @@ class ChatPage extends Block {
 			class: 'chat-text-block__button chat-text-block__button_exit button-img',
 			onclick: () => {
 				AuthController.logout();
-				router.go('/');
-			}
+			},
 		});
 
 		this.children.goProfile = new Button({
 			class: 'chat-text-block__button chat-text-block__button_setting button-img',
 			onclick: () => {
 				router.go('/profile');
-			}
+			},
 		});
 
 		this.children.inputMessage = new InputValidate({
@@ -43,7 +45,7 @@ class ChatPage extends Block {
 			placeholder: 'Введите сообщение ... ',
 			name: 'message',
 			id: 'message',
-			requared: true
+			required: true,
 		});
 
 		this.children.buttonSubmit = new Button({
@@ -51,10 +53,31 @@ class ChatPage extends Block {
 			label: 'Отправить',
 			onclick: () => {
 				const input = this.children.inputMessage as InputValidate;
-				console.log(input.getValue());
 				const message = input.getValue();
-				input.setValue('');
-				MessagesController.sendMessage(this.props.selectedChat!, message);
+				if (this.props.selectedChat) {
+					if (input.getValidateStatus()) {
+						input.setValue('');
+						MessagesController.sendMessage(this.props.selectedChat!, message);
+					} else {
+						router.setModal(ErrorModal, {
+							title: 'Ошибка',
+							error_message: 'Поле ввода содержит недопустимые символы',
+						});
+					}
+				} else {
+					router.setModal(ErrorModal, {
+						title: 'Ошибка',
+						error_message: 'Для отправки сообщения выберите чат',
+					});
+				}
+			},
+		});
+
+		const inputMessage = this.children.inputMessage.element;
+		inputMessage?.addEventListener('keydown', (e) => {
+			if (e.keyCode === 13) {
+				const event = new Event('click');
+				(this.children.buttonSubmit as Block).element?.dispatchEvent(event);
 			}
 		});
 
@@ -63,7 +86,16 @@ class ChatPage extends Block {
 		// @ts-ignore
 		this.children.messenger = new Messenger({});
 		// @ts-ignore
-		this.children.selectedChatInfo = new SelectedChatInfo({});
+		this.children.selectedChatInfo = new SelectedChatInfo({
+			clickSettings: () => {
+				ChatsController.getChatUsers(this.props.selectedChat);
+				router.setModal(ChatSettings);
+			},
+		});
+		// @ts-ignore
+		this.children.statusBar = new StatusBar({
+			chatsSum: this.props.chats?.length!,
+		});
 	}
 
 	render() {

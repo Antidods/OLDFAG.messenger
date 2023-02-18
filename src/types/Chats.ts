@@ -5,6 +5,13 @@ export interface IGetChats{
 	limit: number;
 }
 
+export interface IGetChatUsers {
+	offset: number;
+	limit: number;
+	name?: string;
+	email?: string;
+}
+
 export interface IChatInfo {
 	id: number;
 	title: string;
@@ -17,7 +24,7 @@ export interface IChatInfo {
 	};
 }
 
-export interface ChatsListProps {
+export interface IChatsListProps {
 	chats: IChatInfo[];
 }
 
@@ -52,3 +59,5 @@ export interface IMessage {
 		upload_date: string;
 	};
 }
+
+

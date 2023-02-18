@@ -11,7 +11,7 @@ export const checkValueValidity = (
 		password: /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6}/,
 		second_password: /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6}/,
 		phone: /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/,
-		message: /^\s*$/,
+		message: /[^\s\t\r\n\v\f]/,
 		chatName: /^[a-zA-Z][a-zA-Z0-9-_-]{3,20}$/,
 	};
 
@@ -37,7 +37,7 @@ export const checkValueValidity = (
 	return { validateStatus, errorMessage };
 };
 
-export const checkElementValidity = (input: any) => {
+export const checkElementValidity = (input: HTMLInputElement) => {
 	const validStatus: boolean = checkValueValidity(input.name, input.value).validateStatus;
 	const { errorMessage } = checkValueValidity(input.name, input.value);
 	if (input.name !== 'message') {
@@ -51,7 +51,7 @@ export const checkElementValidity = (input: any) => {
 	}
 };
 
-export const checkFormValidity = (form: any): Record<string, unknown> => {
+export const checkFormValidity = (form:any): Record<string, unknown> => {
 	const _data: any = {};
 	const formElements = form.elements;
 

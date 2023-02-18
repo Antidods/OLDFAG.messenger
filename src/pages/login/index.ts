@@ -1,4 +1,4 @@
-import Block, { Props } from '../../utils/Block';
+import Block, { Props } from '../../core/Block';
 import { checkFormValidity } from '../../utils/validator';
 import { Link } from '../../components/link';
 import FormField from '../../components/formField';
@@ -11,7 +11,6 @@ export default class LoginPage extends Block {
 		super({
 			...props,
 			submit: () => {
-				event!.preventDefault();
 				// @ts-ignore
 				const logForm: any = document.forms.loginForm;
 				const data: unknown = checkFormValidity(logForm);
@@ -23,7 +22,6 @@ export default class LoginPage extends Block {
 	}
 
 	init() {
-
 		AuthController.loggingCheck();
 
 		this.children.linkRegistartion = <Block>new Link({
@@ -43,6 +41,13 @@ export default class LoginPage extends Block {
 			name: 'password',
 			label: 'Пароль'
 		});
+
+
+		const form = this.element;
+		form?.addEventListener('keydown', (e) => {
+			if (e.keyCode === 13) this.props.submit();
+		});
+
 	}
 
 

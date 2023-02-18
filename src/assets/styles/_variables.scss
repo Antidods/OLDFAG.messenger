@@ -1,0 +1,63 @@
+// colors
+$surface: #c0c0c0;
+$field: #fff;
+$button-face: #dfdfdf;
+$field-chat: linear-gradient(215.45deg, #74bee5 -14.25%, #fff 24.32%);
+
+// fonts
+@font-face {
+  font-family: "Press Start 2P";
+  src: url("../fonts/PressStart2P-Regular.ttf");
+}
+
+%font-for-headers {
+  font-family: "Press Start 2P", ui-serif;
+  font-style: normal;
+  font-weight: 400;
+}
+
+%font-for-inscription {
+  font-family: "Press Start 2P", ui-serif;
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Post Pixel-7";
+  src: url("../fonts/post_pixel-7.ttf");
+}
+
+%regular-font {
+  font-family: "Post Pixel-7", ui-serif;
+  font-style: normal;
+  font-weight: 400;
+}
+
+// borders
+%out-window-border {
+  border: 0;
+  box-shadow:
+    inset -1px -1px 0 #1e1e1e,
+    inset 1px 1px 0 #dfdfdf,
+    inset -2px -2px 0 #808080,
+    inset 2px 2px 0 #fff;
+}
+
+%in-window-border {
+  border: 0;
+  box-shadow:
+    inset 1px 1px 0 #1e1e1e,
+    inset -1px -1px 0 #dfdfdf,
+    inset 2px 2px 0 #808080,
+    inset -2px -2px 0 #fff;
+}
+
+%out-window-border-min {
+  border: 0;
+  box-shadow: inset 1px 1px 0 #dfdfdf, inset -1px -1px 0 #808080;
+}
+
+%in-window-border-min {
+  border: 0;
+  box-shadow: inset 1px 1px 0 #808080, inset -1px -1px 0 #f4f4f4;
+}

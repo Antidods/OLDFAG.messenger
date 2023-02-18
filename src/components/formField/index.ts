@@ -1,4 +1,4 @@
-import Block, { Props } from '../../utils/Block';
+import Block, { Props } from '../../core/Block';
 
 export default class FormField extends Block {
 	constructor(props: Props) {
@@ -8,7 +8,7 @@ export default class FormField extends Block {
 	}
 
 	public setValue(value: string) {
-		return (this.element as HTMLInputElement).value = value;
+		(this.element as HTMLInputElement).value = value;
 	}
 
 	public getName() {

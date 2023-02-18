@@ -1,10 +1,10 @@
 import Handlebars from 'handlebars';
-import Block from './Block';
+import Block from '../core/Block';
 import Button from '../components/button';
 import WindowManager from '../components/windowManager';
-import StatusBar from '../components/statusBar';
 import InputValidate from '../components/inputValidate';
 import FormField from '../components/formField';
+import Span from '../components/span';
 
 function registerComponent(name: string, Component: typeof Block): void {
 	Handlebars.registerHelper(name, ({ data, hash }) => {
@@ -22,9 +22,9 @@ function registerComponent(name: string, Component: typeof Block): void {
 export const COMPONENTS = {
 	windowManager: WindowManager,
 	button: Button,
-	statusBar: StatusBar,
 	inputValidate: InputValidate,
 	formField: FormField,
+	span: Span,
 };
 
 export default function registrationAllComponents(): void {
